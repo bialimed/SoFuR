@@ -22,7 +22,7 @@ _rule_kwargs[rule_name] = {
     "params.nb_threads": getRuleParam(locals(), rule_name, "params.nb_threads", 10),
     "params.out_type": getRuleParam(locals(), rule_name, "params.out_type", "bam"),  # BAM or SAM
     "params.sort": getRuleParam(locals(), rule_name, "params.sort", True),
-    "params.sort_ram_limit": getRuleParam(locals(), rule_name, "params.sort_ram_limit", 30),
+    "params.sort_buffer_size": getRuleParam(locals(), rule_name, "params.sort_buffer_size", 30),
 }
 _rule_kwargs[rule_name]["in.genome_dir"] = os.path.basename(_rule_kwargs[rule_name]["in.sequences"])
 
@@ -43,7 +43,7 @@ rule STAR:
         bin_path = getSoft(config, "STAR", "alignment_rule"),
         extra = _rule_kwargs[rule_name]["params.extra"],
         mapq_uniq = _rule_kwargs[rule_name]["params.mapq_uniq"],
-        sort_ram_limit = _rule_kwargs[rule_name]["params.sort_ram_limit"] * 1000000000,
+        sort_buffer_size = _rule_kwargs[rule_name]["params.sort_buffer_size"] * 1000000000,
         type_arguments = _rule_kwargs[rule_name]["params.out_type"].upper() + (" SortedByCoordinate" if _rule_kwargs[rule_name]["params.sort"] else ""),
         unmapped = "--outSAMunmapped Within" if _rule_kwargs[rule_name]["params.keep_unmapped"] else ""),
         output_suffix = "Aligned.sortedByCoord.out." + _rule_kwargs[rule_name]["params.out_type"] if _rule_kwargs[rule_name]["params.sort"] else "Aligned.sortedByCoord.out." + _rule_kwargs[rule_name]["params.out_type"]
@@ -58,7 +58,7 @@ rule STAR:
         " --outSAMattributes NH NM MD"
         " --outSAMattrRGline ID:1 SM:{wildcards.sample}"
         " --outSAMmapqUnique {params.mapq_uniq}"
-        " --limitBAMsortRAM {params.sort_ram_limit}"
+        " --limitBAMsortRAM {params.sort_buffer_size}"
         " --readFilesCommand zcat"
         " --outSAMtype {params.type_arguments}"
         " --readFilesIn {input.R1} {input.R2}"

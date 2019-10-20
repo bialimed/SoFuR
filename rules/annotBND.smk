@@ -8,9 +8,9 @@ rule_name = "AnnotBND_kwargs"
 _rule_kwargs[rule_name] = {
     # Inputs
     "in.annotations": getRuleParam(locals(), rule_name, "in.annotations", "reference/annot.gtf"),
-    "in.variants": getRuleParam(locals(), rule_name, "in.variants", "structural_variants/{variant_caller}/{sample}.vcf"),
+    "in.variants": getRuleParam(locals(), rule_name, "in.variants", "structural_variants/{variant_caller}/{sample}_sv.vcf"),
     # Outputs
-    "out.variants": getRuleParam(locals(), rule_name, "out.variants", "structural_variants/{variant_caller}/{sample}_annotated.vcf"),
+    "out.variants": getRuleParam(locals(), rule_name, "out.variants", "structural_variants/{variant_caller}/{sample}_sv_annotated.vcf"),
     "out.stderr": getRuleParam(locals(), rule_name, "out.stderr", "logs/structural_variants/{sample}_{variant_caller}_annot_stderr.txt"),
     # Parameters
     "params.annotations_field": getRuleParam(locals(), rule_name, "params.annotations_field", "ANN"),
