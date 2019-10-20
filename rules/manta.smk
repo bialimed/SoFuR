@@ -7,7 +7,7 @@ __version__ = '1.0.0'
 rule_name = "manta_kwargs"
 _rule_kwargs[rule_name] = {
     # Inputs
-    "in.alignments": getRuleParam(locals(), rule_name, "in.alignments", "aln/delDup/{sample}.bam"),
+    "in.alignments": getRuleParam(locals(), rule_name, "in.alignments", "aln/markDup/{sample}.bam"),
     "in.reference_seq": getRuleParam(locals(), rule_name, "in.reference_seq", "data/reference.fa"),
     # Outputs
     "out.small_indel": getRuleParam(locals(), rule_name, "out.small_indel", "structural_variants/manta/{sample}_smallInDel.vcf.gz"),

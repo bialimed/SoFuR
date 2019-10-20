@@ -10,9 +10,9 @@ _rule_kwargs[rule_name] = {
     "in.R1": getRuleParam(locals(), rule_name, "in.R1"),  # Required
     "in.R2": getRuleParam(locals(), rule_name, "in.R2", None),
     "in.annotations": getRuleParam(locals(), rule_name, "in.annotations", "reference/annot.gtf"),
-    "in.sequences": getRuleParam(locals(), rule_name, "in.sequences", "reference/sequences.fasta"),
+    "in.reference_seq": getRuleParam(locals(), rule_name, "in.reference_seq", "reference/sequences.fasta"),
     # Outputs
-    "out.alignments": getRuleParam(locals(), rule_name, "out.alignments", "aln/star/{sample}.bam"),
+    "out.alignments": getRuleParam(locals(), rule_name, "out.alignments", "aln/{sample}.bam"),
     "out.stderr": getRuleParam(locals(), rule_name, "out.stderr", "logs/aln/{sample}_star_stderr.txt"),
     # Parameters
     "params.extra": getRuleParam(locals(), rule_name, "params.extra", ""),
@@ -29,7 +29,7 @@ _rule_kwargs[rule_name]["in.genome_dir"] = os.path.basename(_rule_kwargs[rule_na
 ################## test correct output name when ort = False
 ################## test single-end
 
-rule STAR:
+rule star:
     input:
         R1 = _rule_kwargs[rule_name]["in.R1"],
         R2 = _rule_kwargs[rule_name]["in.R2"],

@@ -4,13 +4,13 @@ __license__ = 'GNU General Public License'
 __version__ = '1.0.0'
 
 
-rule_name = "AnnotBND_kwargs"
+rule_name = "annotBND_kwargs"
 _rule_kwargs[rule_name] = {
     # Inputs
     "in.annotations": getRuleParam(locals(), rule_name, "in.annotations", "reference/annot.gtf"),
-    "in.variants": getRuleParam(locals(), rule_name, "in.variants", "structural_variants/{variant_caller}/{sample}_sv.vcf"),
+    "in.variants": getRuleParam(locals(), rule_name, "in.variants", "structural_variants/{variant_caller}/{sample}_SV.vcf.gz"),
     # Outputs
-    "out.variants": getRuleParam(locals(), rule_name, "out.variants", "structural_variants/{variant_caller}/{sample}_sv_annotated.vcf"),
+    "out.variants": getRuleParam(locals(), rule_name, "out.variants", "structural_variants/{variant_caller}/{sample}_SV_annot.vcf"),
     "out.stderr": getRuleParam(locals(), rule_name, "out.stderr", "logs/structural_variants/{sample}_{variant_caller}_annot_stderr.txt"),
     # Parameters
     "params.annotations_field": getRuleParam(locals(), rule_name, "params.annotations_field", "ANN"),
@@ -18,7 +18,7 @@ _rule_kwargs[rule_name] = {
 }
 
 
-rule AnnotBND:
+rule annotBND:
     input:
         annotations = _rule_kwargs[rule_name]["in.annotations"],
         variants = _rule_kwargs[rule_name]["in.variants"],

@@ -11,12 +11,11 @@ _rule_kwargs[rule_name] = {
     "in.R1": getRuleParam(locals(), rule_name, "in.R1"),  # Required
     "in.R2": getRuleParam(locals(), rule_name, "in.R2", None),
     # Outputs
-    "out.info": getRuleParam(locals(), rule_name, "out.info", "structural_variants/fusionCatcher/{sample}_info.txt"),
     "out.stdout": getRuleParam(locals(), rule_name, "out.stdout", "logs/structural_variants/{sample}_{variant_caller}_stdout.txt"),
     "out.stderr": getRuleParam(locals(), rule_name, "out.stderr", "logs/structural_variants/{sample}_{variant_caller}_stderr.txt"),
     "out.summary": getRuleParam(locals(), rule_name, "out.summary", "structural_variants/fusionCatcher/{sample}_summary.tsv"),
-    "out.variants": getRuleParam(locals(), rule_name, "out.variants", "structural_variants/fusionCatcher/{sample}_sv.vcf"),
-    "out.variants_txt": getRuleParam(locals(), rule_name, "out.variants_txt", "structural_variants/fusionCatcher/{sample}_sv.txt"),
+    "out.variants": getRuleParam(locals(), rule_name, "out.variants", "structural_variants/fusionCatcher/{sample}_SV.vcf.gz"),
+    "out.variants_txt": getRuleParam(locals(), rule_name, "out.variants_txt", "structural_variants/fusionCatcher/{sample}_SV.txt"),
     # Parameters
     "params.keep_outputs": getRuleParam(locals(), rule_name, "params.keep_outputs", False),
     "params.nb_threads": getRuleParam(locals(), rule_name, "params.nb_threads", 10),
@@ -34,7 +33,6 @@ rule fusionCatcher:
         folder = tmp(directory(_rule_kwargs[rule_name]["out.folder"]))
         variants_txt = _rule_kwargs[rule_name]["out.variants_txt"] if _rule_kwargs[rule_name]["params.keep_outputs"] else tmp(_rule_kwargs[rule_name]["out.variants_txt"]),
         summary = _rule_kwargs[rule_name]["out.summary"],
-        info = _rule_kwargs[rule_name]["out.info"]),
         log:
             stderr = _rule_kwargs[rule_name]["out.stderr"],
             stdout = _rule_kwargs[rule_name]["out.stdout"]
@@ -61,8 +59,6 @@ rule fusionCatcher:
         " 2>> {log.stderr}"
         " && "
         " mv {output.raw_folder}/fusioncatcher.log {log.stdout} 2>> {log.stderr}"
-        " && "
-        " mv {output.raw_folder}/info.txt {output.info} 2>> {log.stderr}"
         " && "
         " mv {output.raw_folder}/summary_candidate_fusions.txt {output.summary} 2>> {log.stderr}"
         " && "

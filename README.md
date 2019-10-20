@@ -1,3 +1,3 @@
 # Fusion
 
-Detect fusions in RNASeq data.
+Detect fusions in RNASeq paired-end data.

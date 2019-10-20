@@ -1,0 +1,6 @@
+R1: [] ##MANDATORY##
+R2: [] ##MANDATORY##
+reference:
+    annotations: ##MANDATORY## # Homo_sapiens.GRCh38.94.chr.gtf
+    sequences: ##MANDATORY## # Homo_sapiens.GRCh38.94.dna.fa
+    fusionCatcher: ##MANDATORY## # fusionCatcher/v94
