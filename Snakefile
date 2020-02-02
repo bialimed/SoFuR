@@ -1,21 +1,4 @@
-#
-# Copyright (C) 2019 IUCT-O
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-
-__author__ = 'Frederic Escudie'
+__author__ = 'Frederic Escudie and Veronique Ivashchenko'
 __copyright__ = 'Copyright (C) 2019 IUCT-O'
 __license__ = 'GNU General Public License'
 __version__ = '0.1.0'
@@ -30,7 +13,7 @@ from lib.utils import *
 # Logging
 #
 ########################################################################
-wf_name = "fusion"
+wf_name = "SoFuR"
 wf_version = __version__
 onstart:
     print(getLogMessage(
@@ -57,9 +40,6 @@ onerror:
 # Set parameters
 #
 ########################################################################
-# Rules parameters
-_rule_kwargs = {}
-
 # Samples
 SAMPLES = None
 if config.get("samples") is not None:
@@ -69,51 +49,53 @@ else:
 R1_PATTERN = config["R1"][0].replace(SAMPLES[0], "{sample}")
 R2_PATTERN = config["R2"][0].replace(SAMPLES[0], "{sample}")
 
-# Others
-VARIANTS_CALLERS = ["manta", "fusionCatcher"]
-
 
 ########################################################################
 #
 # Process
 #
 ########################################################################
+include: "rules/all.smk"
 rule all:
     input:
-        expand("structural_variants/{variant_caller}/{sample}_SV_annot.vcf", sample=SAMPLES, variant_caller=VARIANTS_CALLERS)
+        expand("structural_variants/{caller}/{sample}_fusions.tsv", sample=SAMPLES, caller=["STAR_Fusion"]),
+        expand("structural_variants/{caller}/{sample}_sv.vcf.gz", sample=SAMPLES, caller=["manta"])
+        # expand("structural_variants/{caller}/{sample}_fusions.vcf", sample=SAMPLES, caller=["STAR_Fusion", "manta"])
 
-# Variant calling fusionCatcher
-fusionCatcher_kwargs = {
-    "in.R1": R1_PATTERN,
-    "in.R2": R2_PATTERN,
-    "in.fusion_data": config["reference"]["fusionsCatcher"]
-}
-include: "rules/fusionCatcher.smk"
+fastqc(
+    in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
+    params_is_grouped=False
+)
 
-# Variant calling manta
-# cutadapt_kwargs
-# include: "rules/cutadapt.smk"
-star_kwargs = {
-    "in.R1": R1_PATTERN,
-    "in.R2": R2_PATTERN,
-    "in.reference_seq": config["reference"]["sequences"],
-    "in.annotations": config["reference"]["annotations"],
-    "params.extra": " --outSJfilterCountUniqueMin -1 2 2 2"
-                    " --outSJfilterCountTotalMin -1 2 2 2"
-                    " --outFilterType BySJout"
-                    " --outFilterIntronMotifs RemoveNoncanonical"
-                    " --chimSegmentMin 15"
-                    " --chimJunctionOverhangMin 15"
-                    " --chimScoreDropMax 20"
-                    " --chimScoreSeparation 10"
-                    " --chimOutType WithinBAM"
-                    " --chimSegmentReadGapMax 5"
-                    " --twopassMode Basic"
-}
-include: "rules/star.smk"
-include: "rules/markDuplicates.smk"
-manta_kwargs = {"in.sequences": config["reference"]["sequences"], "params.type": "rna"}
-include: "rules/manta.smk"
+# Cleaning
+cutadapt_pe(
+    in_R1_reads=R1_PATTERN,
+    in_R2_reads=R2_PATTERN,
+    in_R1_end_adapter=config.get("cleaning")["R1_end_adapter"],
+    in_R2_end_adapter=config.get("cleaning")["R2_end_adapter"],
+    params_error_rate=config.get("cleaning")["adapter_error_rate"],
+    params_min_length=config.get("cleaning")["reads_min_length"],
+    params_min_overlap=config.get("cleaning")["adapter_min_overlap"]
+)
 
-# Annotate fusions
-include: "rules/annotBND.smk"
+# Fusions calling
+manta(
+    in_annotations=config.get("reference")["annotations"],
+    in_reference_seq=config.get("reference")["sequences"],
+    params_is_somatic=config.get("fusions_calling")["is_somatic"],
+    params_is_stranded=config.get("fusions_calling")["is_stranded"],
+    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
+    params_keep_outputs=True  # ###############################################
+)
+starFusion(
+    in_genome_dir=config.get("reference")["STAR-Fusion"],
+    in_R1="cutadapt/{sample}_R1.fastq.gz",
+    in_R2="cutadapt/{sample}_R2.fastq.gz",
+    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
+    params_keep_outputs=True  # ###############################################
+)
+# fusionsToVCF(
+#     params_keep_outputs=True  # ###############################################
+# )
+
+# Fusions annotation

@@ -4,3 +4,14 @@ reference:
     annotations: ##MANDATORY## # Homo_sapiens.GRCh38.94.chr.gtf
     sequences: ##MANDATORY## # Homo_sapiens.GRCh38.94.dna.fa
     fusionCatcher: ##MANDATORY## # fusionCatcher/v94
+    STAR-Fusion: ##MANDATORY## #
+cleaning:
+    R1_end_adapter:  ##MANDATORY##
+    R2_end_adapter:  ##MANDATORY##
+    adapter_error_rate: 0.2
+    reads_min_length: 40
+    adapter_min_overlap: 3
+fusions_calling:
+    is_somatic: True
+    is_stranded: True
+    STAR_nb_threads: 4

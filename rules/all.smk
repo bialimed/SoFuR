@@ -1,0 +1,5 @@
+include: "cutadapt_pe.smk"
+include: "fastqc.smk"
+include: "fusionsToVCF.smk"
+include: "manta.smk"
+include: "starFusion.smk"
