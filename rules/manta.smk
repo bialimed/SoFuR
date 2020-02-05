@@ -35,6 +35,7 @@ def manta(
 
     # Run STAR alignment
     star_alignments = os.path.join(os.path.dirname(out_sv), "{sample}Aligned.sortedByCoord.out.bam")
+    star_prefix = os.path.join(os.path.dirname(out_sv), "{sample}")
     rule manta_star:
         input:
             annotations = in_annotations,
@@ -42,12 +43,17 @@ def manta(
             R1 = in_R1,
             R2 = [] if in_R2 is None else in_R2
         output:
-            temp(star_alignments)
+            alignments = temp(star_alignments),
+            tmp_dir = temp(directory(star_prefix + "_STARtmp")),
+            tmp_genome = temp(directory(star_prefix + "_STARgenome")),
+            tmp_pass1 = temp(directory(star_prefix + "_STARpass1")),
+            tmp_progress = temp(directory(star_prefix + "Log.progress.out")),
+            tmp_tab = temp(directory(star_prefix + "SJ.out.tab"))
         log:
             out_stderr
         params:
             bin_path = getSoft(config, "STAR", "fusion_callers"),
-            prefix = os.path.join(os.path.dirname(out_sv), "{sample}"),
+            prefix = star_prefix,
             sort_buffer_size = params_sort_memory * 1000000000,
             stderr_redirection = "2>" if not params_stderr_append else "2>>"
         conda:
