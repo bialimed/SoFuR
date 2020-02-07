@@ -25,7 +25,6 @@ def manta(
         params_keep_outputs=False,
         params_stderr_append=False):
     """Call structural variants (SVs) and indels from paired-end sequencing reads."""
-    ################ check outputs filenames with rna + isSomatic, rna - isSomatic, exome + isSomatic, exome - isSomatic, genome - isSomatic, genome + isSomatic
     # Parameters
     opt_by_type = {"rna": "--rna", "targeted": "--exome", "genome": ""}
     if params_type not in opt_by_type:
@@ -46,9 +45,10 @@ def manta(
             alignments = temp(star_alignments),
             tmp_dir = temp(directory(star_prefix + "_STARtmp")),
             tmp_genome = temp(directory(star_prefix + "_STARgenome")),
+            tmp_log = temp(star_prefix + "Log.out"),
             tmp_pass1 = temp(directory(star_prefix + "_STARpass1")),
-            tmp_progress = temp(directory(star_prefix + "Log.progress.out")),
-            tmp_tab = temp(directory(star_prefix + "SJ.out.tab"))
+            tmp_progress = temp(star_prefix + "Log.progress.out"),
+            tmp_tab = temp(star_prefix + "SJ.out.tab")
         log:
             out_stderr
         params:
