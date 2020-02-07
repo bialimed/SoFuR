@@ -15,3 +15,6 @@ fusions_calling:
     is_somatic: True
     is_stranded: True
     STAR_nb_threads: 4
+    arriba_blacklist:  ##MANDATORY##
+software_pathes:
+  arriba:  ##MANDATORY##

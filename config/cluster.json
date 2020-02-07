@@ -5,6 +5,18 @@
     vmem: "3G",
     threads: 1
   },
+  arriba_run: {
+      queue: "normal",
+      mem: "10G",
+      vmem: "10G",
+      threads: 1
+  },
+  arriba_star: {
+      queue: "normal",
+      mem: "37G",
+      vmem: "37G",
+      threads: 4
+  },
   cutadapt_pe: {
       queue: "normal",
       mem: "3G",

@@ -1,3 +1,4 @@
+include: "arriba.smk"
 include: "cutadapt_pe.smk"
 include: "fastqc.smk"
 include: "fusionsToVCF.smk"
