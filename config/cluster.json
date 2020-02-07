@@ -37,8 +37,8 @@
   },
   manta_config: {
       queue: "normal",
-      mem: "3G",
-      vmem: "3G",
+      mem: "2G",
+      vmem: "2G",
       threads: 1
   },
   manta_markDup: {
@@ -49,8 +49,8 @@
   },
   manta_run: {
       queue: "normal",
-      mem: "21G",
-      vmem: "21G",
+      mem: "10G",
+      vmem: "10G",
       threads: 4
   },
   manta_star: {
@@ -61,8 +61,8 @@
   },
   starFusion: {
       queue: "normal",
-      mem: "37G",
-      vmem: "37G",
+      mem: "38G",
+      vmem: "38G",
       threads: 4
   }
 }
