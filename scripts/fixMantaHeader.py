@@ -39,7 +39,7 @@ if __name__ == "__main__":
     with handler(args.output_variants, mode) as writer:
         with gzip.open(args.input_variants, "rt") as reader:
             for line in reader:
-                if line.startswhith("##FORMAT"):
+                if line.startswith("##FORMAT"):
                     if "ID=SR," in line or "ID=PR," in line:
                         line = line.replace("Number=.", "Number=R")
                 writer.write(line)
