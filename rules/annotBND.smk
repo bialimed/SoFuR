@@ -4,40 +4,33 @@ __license__ = 'GNU General Public License'
 __version__ = '1.0.0'
 
 
-rule_name = "annotBND_kwargs"
-_rule_kwargs[rule_name] = {
-    # Inputs
-    "in.annotations": getRuleParam(locals(), rule_name, "in.annotations", "reference/annot.gtf"),
-    "in.variants": getRuleParam(locals(), rule_name, "in.variants", "structural_variants/{variant_caller}/{sample}_SV.vcf.gz"),
-    # Outputs
-    "out.variants": getRuleParam(locals(), rule_name, "out.variants", "structural_variants/{variant_caller}/{sample}_SV_annot.vcf"),
-    "out.stderr": getRuleParam(locals(), rule_name, "out.stderr", "logs/structural_variants/{sample}_{variant_caller}_annot_stderr.txt"),
-    # Parameters
-    "params.annotations_field": getRuleParam(locals(), rule_name, "params.annotations_field", "ANN"),
-    "params.keep_outputs": getRuleParam(locals(), rule_name, "params.keep_outputs", False)
-}
-
-
-rule annotBND:
-    input:
-        annotations = _rule_kwargs[rule_name]["in.annotations"],
-        variants = _rule_kwargs[rule_name]["in.variants"],
-    output:
-        (_rule_kwargs[rule_name]["out.variants"] if _rule_kwargs[rule_name]["params.keep_outputs"] else temp(_rule_kwargs[rule_name]["out.variants"]))
-    log:
-        stderr = _rule_kwargs[rule_name]["out.stderr"]
-    params:
-        bin_path = getSoft(config, "annotBND.py", "annotation_rule"),
-        annotations_field = _rule_kwargs[rule_name]["params.annotations_field"]
-    #conda:
-    #    "../envs/anacore_bin.yml"
-    shell:
-        "{params.bin_path}"
-        " --annotation-field {params.annotations_field}"
-        " --input-annotations {input.annotations}"
-        " --input-variants {input.variants}"
-        " --output-variants {output.variants}"
-        " 2> {log.stderr}"
-
-
-del(_rule_kwargs[rule_name])
+def annotBND(
+        in_annotations="reference/annot.gtf",
+        in_variants="structural_variants/{sample}.vcf",
+        out_variants="structural_variants/{sample}_annot.vcf",
+        out_stderr="logs/structural_variants/{sample}_annotBND_stderr.txt",
+        params_annotations_field=None,
+        params_keep_outputs=False,
+        params_stderr_append=False):
+    """Annotate BND in a VCF with content of a GTF."""
+    rule annotBND:
+        input:
+            annotations = in_annotations,
+            variants = in_variants
+        output:
+            out_variants if params_keep_outputs else temp(out_variants)
+        log:
+            out_stderr
+        params:
+            annotations_field = "" if params_annotations_field is None else "--annotation-field " + params_annotations_field,
+            bin_path = getSoft(config, "annotBND.py", "annotation_rule"),
+            stderr_redirection = "2>" if not params_stderr_append else "2>>"
+        #conda:
+        #    "envs/anacore_bin.yml"
+        shell:
+            "{params.bin_path}"
+            "  {params.annotations_field}"
+            " --input-annotations {input.annotations}"
+            " --input-variants {input.variants}"
+            " --output-variants {output.variants}"
+            " {params.stderr_redirection} {log}"
