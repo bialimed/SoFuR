@@ -1,6 +1,7 @@
 include: "arriba.smk"
 include: "cutadapt_pe.smk"
 include: "fastqc.smk"
+include: "fusionCatcher.smk"
 include: "fusionsToVCF.smk"
 include: "manta.smk"
 include: "starFusion.smk"

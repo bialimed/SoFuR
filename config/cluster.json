@@ -13,8 +13,8 @@
   },
   arriba_star: {
       queue: "normal",
-      mem: "37G",
-      vmem: "37G",
+      mem: "9G",
+      vmem: "9G",
       threads: 4
   },
   cutadapt_pe: {
@@ -28,6 +28,12 @@
       mem: "8G",
       vmem: "8G",
       threads: 1
+  },
+  fusionCatcher: {
+      queue: "normal",
+      mem: "30G",
+      vmem: "30G",
+      threads: 4
   },
   fusionsToVCF: {
       queue: "normal",
@@ -49,20 +55,20 @@
   },
   manta_run: {
       queue: "normal",
-      mem: "10G",
-      vmem: "10G",
+      mem: "3G",
+      vmem: "3G",
       threads: 4
   },
   manta_star: {
       queue: "normal",
-      mem: "37G",
-      vmem: "37G",
+      mem: "9G",
+      vmem: "9G",
       threads: 4
   },
   starFusion: {
       queue: "normal",
-      mem: "38G",
-      vmem: "38G",
+      mem: "10G",
+      vmem: "10G",
       threads: 4
   }
 }

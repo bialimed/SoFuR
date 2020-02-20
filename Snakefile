@@ -58,7 +58,7 @@ R2_PATTERN = config["R2"][0].replace(SAMPLES[0], "{sample}")
 include: "rules/all.smk"
 rule all:
     input:
-        expand("structural_variants/{caller}/{sample}_fusions.tsv", sample=SAMPLES, caller=["STAR_Fusion", "Arriba"]),
+        expand("structural_variants/{caller}/{sample}_fusions.tsv", sample=SAMPLES, caller=["STAR_Fusion", "Arriba", "FusionCatcher"]),
         expand("structural_variants/{caller}/{sample}_sv.vcf.gz", sample=SAMPLES, caller=["manta"])
         # expand("structural_variants/{caller}/{sample}_fusions.vcf", sample=SAMPLES, caller=["STAR_Fusion", "manta"])
 
@@ -79,6 +79,13 @@ cutadapt_pe(
 )
 
 # Fusions calling
+fusionCatcher(
+    in_R1=R1_PATTERN,
+    in_R2=R2_PATTERN,
+    in_fusion_resources=config.get("reference")["fusionCatcher"],
+    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
+    params_keep_outputs=True  # ###############################################
+)
 arriba(
     in_annotations=config.get("reference")["annotations"],
     in_blacklist=config.get("fusions_calling")["arriba_blacklist"],

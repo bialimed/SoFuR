@@ -1,88 +1,63 @@
-__author__ = 'Frederic Escudie'
+__author__ = 'Veronique Ivashchenko and Frederic Escudie'
 __copyright__ = 'Copyright (C) 2019 IUCT-O'
 __license__ = 'GNU General Public License'
 __version__ = '1.0.0'
 
 
-rule_name = "AnnotBND_kwargs"
-_rule_kwargs[rule_name] = {
-    # Inputs
-    "in.fusion_data": getRuleParam(locals(), rule_name, "in.fusion_data"),  # Required
-    "in.R1": getRuleParam(locals(), rule_name, "in.R1"),  # Required
-    "in.R2": getRuleParam(locals(), rule_name, "in.R2", None),
-    # Outputs
-    "out.stdout": getRuleParam(locals(), rule_name, "out.stdout", "logs/structural_variants/{sample}_{variant_caller}_stdout.txt"),
-    "out.stderr": getRuleParam(locals(), rule_name, "out.stderr", "logs/structural_variants/{sample}_{variant_caller}_stderr.txt"),
-    "out.summary": getRuleParam(locals(), rule_name, "out.summary", "structural_variants/fusionCatcher/{sample}_summary.tsv"),
-    "out.variants": getRuleParam(locals(), rule_name, "out.variants", "structural_variants/fusionCatcher/{sample}_SV.vcf.gz"),
-    "out.variants_txt": getRuleParam(locals(), rule_name, "out.variants_txt", "structural_variants/fusionCatcher/{sample}_SV.txt"),
+def fusionCatcher(
+        in_R1="data/{sample}_R1.fastq.gz",
+        in_R2="data/{sample}_R2.fastq.gz",
+        in_fusion_resources="reference/fusionCatcher/94",
+        out_summary="structural_variants/FusionCatcher/{sample}_summary.tsv",
+        out_fusions="structural_variants/FusionCatcher/{sample}_fusions.tsv",
+        out_stdout="logs/structural_variants/{sample}_fusionCatcher_stdout.txt",
+        out_stderr="logs/structural_variants/{sample}_fusionCatcher_stderr.txt",
+        params_nb_threads=1,
+        params_sort_memory=5,
+        params_keep_outputs=False,
+        params_stderr_append=False):
+    """Call fusions with FusionCatcher."""
     # Parameters
-    "params.keep_outputs": getRuleParam(locals(), rule_name, "params.keep_outputs", False),
-    "params.nb_threads": getRuleParam(locals(), rule_name, "params.nb_threads", 10),
-    "params.sort_buffer_size": getRuleParam(locals(), rule_name, "params.sort_buffer_size", 30),
-}
-_rule_kwargs[rule_name]["out.folder"] = "`basename " + _rule_kwargs[rule_name]["out.variants"] + "`/{sample}"
+    work_folder = os.path.join(os.path.dirname(out_fusions), "{sample}_work")
 
-
-rule fusionCatcher:
-    input:
-        fusion_data = _rule_kwargs[rule_name]["in.fusion_data"],
-        R1 = _rule_kwargs[rule_name]["in.R1"],
-        R2 = _rule_kwargs[rule_name]["in.R2"]
-    output:
-        folder = tmp(directory(_rule_kwargs[rule_name]["out.folder"]))
-        variants_txt = _rule_kwargs[rule_name]["out.variants_txt"] if _rule_kwargs[rule_name]["params.keep_outputs"] else tmp(_rule_kwargs[rule_name]["out.variants_txt"]),
-        summary = _rule_kwargs[rule_name]["out.summary"],
+    # Run fusionCatcher
+    rule fusionCatcher:
+        input:
+            fusion_resources = in_fusion_resources,
+            R1 = in_R1,
+            R2 = in_R2
+        output:
+            folder = temp(directory(work_folder)),
+            fusions = out_fusions if params_keep_outputs else temp(out_fusions),
+            summary = out_summary if params_keep_outputs else temp(out_summary)
         log:
-            stderr = _rule_kwargs[rule_name]["out.stderr"],
-            stdout = _rule_kwargs[rule_name]["out.stdout"]
-    params:
-        bin_path = getSoft(config, "fusioncatcher", "fusionCatcher_rule"),
-        single_end = "--single-end" if _rule_kwargs[rule_name]["in.R2"] is None else "",
-        sort_buffer_size = _rule_kwargs[rule_name]["params.sort_buffer_size"]
-    conda:
-        "../envs/fusionCatcher.yml"
-    threads: _rule_kwargs[rule_name]["params.nb_threads"],
-    shell:
-        "mkdir -p {output.folder}/raw 2> {log.stderr}"
-        " && "
-        "cp {in.R1} {in.R2} {output.folder}/raw 2>> {log.stderr}"
-        " && "
-        "{params.bin_path}"
-        " --skip-update-check"
-        " --threads {threads}"
-        " --sort-buffer-size {params.sort_buffer_size}"
-        " {params.single_end}"
-        " --data {input.fusion_data}"
-        " --input {output.folder}/raw"
-        " --output {output.folder}"
-        " 2>> {log.stderr}"
-        " && "
-        " mv {output.raw_folder}/fusioncatcher.log {log.stdout} 2>> {log.stderr}"
-        " && "
-        " mv {output.raw_folder}/summary_candidate_fusions.txt {output.summary} 2>> {log.stderr}"
-        " && "
-        " mv {output.raw_folder}/final-list_candidate_fusion_genes.txt {output.variants_txt} 2>> {log.stderr}"
-
-
-rule fusionCatcherToVCF:
-    input:
-        _rule_kwargs[rule_name]["out.variants_txt"]
-    output:
-        (_rule_kwargs[rule_name]["out.variants"] if _rule_kwargs[rule_name]["params.keep_outputs"] else temp(_rule_kwargs[rule_name]["out.variants"]))
-    log:
-        stderr = _rule_kwargs[rule_name]["out.stderr"]
-    params:
-        bin_path = getSoft(config, "fusionCatcherToVCF.py", "fusionCatcher_rule"),
-        annotations_field = _rule_kwargs[rule_name]["params.annotations_field"]
-    #conda:
-    #    "../envs/anacore_bin.yml"
-    shell:
-        "{params.bin_path}"
-        " --sample-name {wildcards.sample}"
-        " --input-fusions {input}"
-        " --output-fusions {output}"
-        " 2> {log.stderr}"
-
-
-del(_rule_kwargs[rule_name])
+            stderr = out_stderr,
+            stdout = out_stdout
+        params:
+            bin_path = getSoft(config, "fusioncatcher.py", "fusionCatcher_rule"),
+            single_end = "--single-end" if in_R2 is None else "",
+            sort_memory = params_sort_memory,
+            stderr_redirection = "2>" if not params_stderr_append else "2>>"
+        conda:
+            "envs/fusionCatcher.yml"
+        threads: params_nb_threads
+        shell:
+            "mkdir -p {output.folder}/raw {params.stderr_redirection} {log.stderr}"
+            " && "
+            "cp {input.R1} {input.R2} {output.folder}/raw 2>> {log.stderr}"
+            " && "
+            "{params.bin_path}"
+            " --no-update-check"
+            " --threads {threads}"
+            " --sort-buffer-size {params.sort_memory}"
+            " {params.single_end}"
+            " --data {input.fusion_resources}"
+            " --input {output.folder}/raw"
+            " --output {output.folder}"
+            " 2>> {log.stderr}"
+            " && "
+            " mv {output.folder}/fusioncatcher.log {log.stdout} 2>> {log.stderr}"
+            " && "
+            " mv {output.folder}/summary_candidate_fusions.txt {output.summary} 2>> {log.stderr}"
+            " && "
+            " mv {output.folder}/final-list_candidate-fusion-genes.txt {output.fusions} 2>> {log.stderr}"

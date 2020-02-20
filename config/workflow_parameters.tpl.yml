@@ -3,7 +3,7 @@ R2: [] ##MANDATORY##
 reference:
     annotations: ##MANDATORY## # Homo_sapiens.GRCh38.94.chr.gtf
     sequences: ##MANDATORY## # Homo_sapiens.GRCh38.94.dna.fa
-    fusionCatcher: ##MANDATORY## # fusionCatcher/v94
+    fusionCatcher: ##MANDATORY## # fusionCatcher/v98
     STAR-Fusion: ##MANDATORY## #
 cleaning:
     R1_end_adapter:  ##MANDATORY##
@@ -17,4 +17,4 @@ fusions_calling:
     STAR_nb_threads: 4
     arriba_blacklist:  ##MANDATORY##
 software_pathes:
-  arriba:  ##MANDATORY##
+    arriba:  ##MANDATORY##
