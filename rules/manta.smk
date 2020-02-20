@@ -1,7 +1,7 @@
 __author__ = 'Frederic Escudie'
 __copyright__ = 'Copyright (C) 2019 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 
 def manta(
@@ -167,6 +167,7 @@ def manta(
         log:
             out_stderr
         params:
+            fix_bin = os.path.abspath(os.path.join(os.path.dirname(workflow.snakefile), "scripts", "fixMantaHeader.py")),
             manta_dir = manta_dir,
             memory = params_calling_memory,
             sv_filename = "rnaSV.vcf.gz" if params_type == "rna" else ("tumorSV.vcf.gz" if params_is_somatic else "somaticSV.vcf.gz")
@@ -180,8 +181,17 @@ def manta(
             " --jobs {threads}"
             " 2>> {log}"
             " && "
-            "mv {params.manta_dir}/results/variants/candidateSmallIndels.vcf.gz {output.small_indel} 2>> {log}"
+            "{params.fix_bin}"
+            " --input-variants {params.manta_dir}/results/variants/candidateSmallIndels.vcf.gz"
+            " --output-variants {output.small_indel}"
+            " 2>> {log}"
             " && "
-            "mv {params.manta_dir}/results/variants/candidateSV.vcf.gz {output.sv_candidate} 2>> {log}"
+            "{params.fix_bin}"
+            " --input-variants {params.manta_dir}/results/variants/candidateSV.vcf.gz"
+            " --output-variants {output.sv_candidate}"
+            " 2>> {log}"
             " && "
-            "mv {params.manta_dir}/results/variants/{params.sv_filename} {output.sv} 2>> {log}"
+            "{params.fix_bin}"
+            " --input-variants {params.manta_dir}/results/variants/{params.sv_filename}"
+            " --output-variants {output.sv}"
+            " 2>> {log}"
