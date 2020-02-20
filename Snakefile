@@ -59,6 +59,7 @@ include: "rules/all.smk"
 rule all:
     input:
         expand("structural_variants/{caller}/{sample}_fusions.tsv", sample=SAMPLES, caller=["STAR_Fusion", "Arriba", "FusionCatcher"]),
+        expand("structural_variants/{caller}/{sample}_fusions.vcf", sample=SAMPLES, caller=["STAR_Fusion", "Arriba", "FusionCatcher"]),
         expand("structural_variants/{caller}/{sample}_sv.vcf.gz", sample=SAMPLES, caller=["manta"])
         # expand("structural_variants/{caller}/{sample}_fusions.vcf", sample=SAMPLES, caller=["STAR_Fusion", "manta"])
 
@@ -109,8 +110,8 @@ starFusion(
     params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
     params_keep_outputs=True  # ###############################################
 )
-# fusionsToVCF(
-#     params_keep_outputs=True  # ###############################################
-# )
+fusionsToVCF(
+    params_keep_outputs=True  # ###############################################
+)
 
 # Fusions annotation

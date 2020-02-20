@@ -30,7 +30,7 @@ def fusionsToVCF(
         shell:
             "{params.bin_path}"
             " {params.annotation_field}"
-            " --sample-name {params.params_sample_wildcard}"
+            " --sample-name {params.sample_wildcard}"
             " --input-fusions {input}"
             " --output-fusions {output}"
             " {params.stderr_redirection} {log}"
