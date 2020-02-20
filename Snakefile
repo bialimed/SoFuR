@@ -58,10 +58,7 @@ R2_PATTERN = config["R2"][0].replace(SAMPLES[0], "{sample}")
 include: "rules/all.smk"
 rule all:
     input:
-        expand("structural_variants/{caller}/{sample}_fusions.tsv", sample=SAMPLES, caller=["STAR_Fusion", "Arriba", "FusionCatcher"]),
-        expand("structural_variants/{caller}/{sample}_fusions.vcf", sample=SAMPLES, caller=["STAR_Fusion", "Arriba", "FusionCatcher"]),
-        expand("structural_variants/{caller}/{sample}_sv.vcf.gz", sample=SAMPLES, caller=["manta"])
-        # expand("structural_variants/{caller}/{sample}_fusions.vcf", sample=SAMPLES, caller=["STAR_Fusion", "manta"])
+        expand("structural_variants/{caller}/{sample}_fusions.vcf", sample=SAMPLES, caller=["STAR_Fusion", "Arriba", "FusionCatcher", "manta"])
 
 fastqc(
     in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
@@ -98,6 +95,7 @@ arriba(
 manta(
     in_annotations=config.get("reference")["annotations"],
     in_reference_seq=config.get("reference")["sequences"],
+    out_sv="structural_variants/manta/{sample}_fusions.vcf",
     params_is_somatic=config.get("fusions_calling")["is_somatic"],
     params_is_stranded=config.get("fusions_calling")["is_stranded"],
     params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
