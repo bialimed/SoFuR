@@ -18,3 +18,4 @@ fusions_calling:
     arriba_blacklist:  ##MANDATORY##
 software_pathes:
     arriba:  ##MANDATORY##
+    mergeVCFFusionsCallers:  ##OPTIONAL##

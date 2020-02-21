@@ -65,6 +65,12 @@
       vmem: "9G",
       threads: 4
   },
+  mergeVCFFusionsCallers: {
+      queue: "normal",
+      mem: "6G",
+      vmem: "6G",
+      threads: 1
+  },
   starFusion: {
       queue: "normal",
       mem: "10G",

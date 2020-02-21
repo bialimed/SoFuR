@@ -40,7 +40,6 @@ onerror:
 # Set parameters
 #
 ########################################################################
-# Samples
 SAMPLES = None
 if config.get("samples") is not None:
     SAMPLES = config["samples"]
@@ -48,7 +47,7 @@ else:
     SAMPLES = [elt[:-2] for elt in commonSubPathes(config.get("R1"), config.get("R2"), True)]
 R1_PATTERN = config["R1"][0].replace(SAMPLES[0], "{sample}")
 R2_PATTERN = config["R2"][0].replace(SAMPLES[0], "{sample}")
-
+CALLERS = ["manta", "STAR_Fusion", "Arriba", "FusionCatcher"]
 
 ########################################################################
 #
@@ -58,7 +57,7 @@ R2_PATTERN = config["R2"][0].replace(SAMPLES[0], "{sample}")
 include: "rules/all.smk"
 rule all:
     input:
-        expand("structural_variants/{caller}/{sample}_fusions.vcf", sample=SAMPLES, caller=["STAR_Fusion", "Arriba", "FusionCatcher", "manta"])
+        expand("structural_variants/{sample}.vcf", sample=SAMPLES)
 
 fastqc(
     in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
@@ -109,6 +108,11 @@ starFusion(
     params_keep_outputs=True  # ###############################################
 )
 fusionsToVCF(
+    params_keep_outputs=True  # ###############################################
+)
+mergeVCFFusionsCallers(
+    in_variants=["structural_variants/" + curr_caller + "/{sample}_fusions.vcf", for curr_caller in CALLERS],
+    params_calling_sources=CALLERS,
     params_keep_outputs=True  # ###############################################
 )
 
