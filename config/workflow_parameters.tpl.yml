@@ -5,6 +5,7 @@ reference:
     sequences: ##MANDATORY## # Homo_sapiens.GRCh38.94.dna.fa
     fusionCatcher: ##MANDATORY## # fusionCatcher/v98
     STAR-Fusion: ##MANDATORY## #
+    without_chr: True ##MANDATORY## #
 cleaning:
     R1_end_adapter:  ##MANDATORY##
     R2_end_adapter:  ##MANDATORY##

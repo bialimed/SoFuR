@@ -71,6 +71,12 @@
       vmem: "6G",
       threads: 1
   },
+  renameChromVCF: {
+      queue: "normal",
+      mem: "4G",
+      vmem: "4G",
+      threads: 1
+  },
   starFusion: {
       queue: "normal",
       mem: "10G",
