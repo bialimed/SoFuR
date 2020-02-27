@@ -49,6 +49,7 @@ R1_PATTERN = config["R1"][0].replace(SAMPLES[0], "{sample}")
 R2_PATTERN = config["R2"][0].replace(SAMPLES[0], "{sample}")
 CALLERS = ["manta", "STAR_Fusion", "Arriba", "FusionCatcher"]
 
+
 ########################################################################
 #
 # Process
@@ -57,7 +58,7 @@ CALLERS = ["manta", "STAR_Fusion", "Arriba", "FusionCatcher"]
 include: "rules/all.smk"
 rule all:
     input:
-        expand("structural_variants/{sample}.vcf", sample=SAMPLES)
+        expand("structural_variants/{sample}_annot.vcf", sample=SAMPLES)
 
 fastqc(
     in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
@@ -80,16 +81,14 @@ fusionCatcher(
     in_R1=R1_PATTERN,
     in_R2=R2_PATTERN,
     in_fusion_resources=config.get("reference")["fusionCatcher"],
-    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
-    params_keep_outputs=True  # ###############################################
+    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"]
 )
 arriba(
     in_annotations=config.get("reference")["annotations"],
     in_blacklist=config.get("fusions_calling")["arriba_blacklist"],
     in_reference_seq=config.get("reference")["sequences"],
     params_disabled_filters=["many_spliced", "mismatches", "pcr_fusions"],
-    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
-    params_keep_outputs=True  # ###############################################
+    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"]
 )
 manta(
     in_annotations=config.get("reference")["annotations"],
@@ -97,15 +96,13 @@ manta(
     out_sv="structural_variants/manta/{sample}_fusions.vcf",
     params_is_somatic=config.get("fusions_calling")["is_somatic"],
     params_is_stranded=config.get("fusions_calling")["is_stranded"],
-    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
-    params_keep_outputs=True  # ###############################################
+    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"]
 )
 starFusion(
     in_genome_dir=config.get("reference")["STAR-Fusion"],
     in_R1="cutadapt/{sample}_R1.fastq.gz",
     in_R2="cutadapt/{sample}_R2.fastq.gz",
-    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
-    params_keep_outputs=True  # ###############################################
+    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"]
 )
 if not config.get("reference")["without_chr"]:
     fusionsToVCF()
@@ -121,8 +118,13 @@ else:
 mergeVCFFusionsCallers(
     in_variants=["structural_variants/" + curr_caller + "/{sample}_fusions.vcf" for curr_caller in CALLERS],
     params_annotation_field="FCANN",
-    params_calling_sources=CALLERS,
-    params_keep_outputs=True  # ###############################################
+    params_calling_sources=CALLERS
 )
 
 # Fusions annotation
+annotBND(
+    in_annotations=config.get("reference")["annotations"],
+    in_variants="structural_variants/{sample}.vcf",
+    out_variants="structural_variants/{sample}_annot.vcf",
+    params_keep_outputs=True  # ###############################################
+)

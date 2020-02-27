@@ -1,3 +1,4 @@
+include: "annotBND.smk"
 include: "arriba.smk"
 include: "cutadapt_pe.smk"
 include: "fastqc.smk"

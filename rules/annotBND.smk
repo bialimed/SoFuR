@@ -25,12 +25,12 @@ def annotBND(
             annotations_field = "" if params_annotations_field is None else "--annotation-field " + params_annotations_field,
             bin_path = getSoft(config, "annotBND.py", "annotation_rule"),
             stderr_redirection = "2>" if not params_stderr_append else "2>>"
-        #conda:
-        #    "envs/anacore_bin.yml"
+        # conda:
+        #     "envs/anacore-utils.yml"
         shell:
             "{params.bin_path}"
             "  {params.annotations_field}"
             " --input-annotations {input.annotations}"
             " --input-variants {input.variants}"
-            " --output-variants {output.variants}"
+            " --output-variants {output}"
             " {params.stderr_redirection} {log}"
