@@ -35,6 +35,12 @@
       vmem: "8G",
       threads: 1
   },
+  filterBND: {
+      queue: "normal",
+      mem: "12G",
+      vmem: "12G",
+      threads: 1
+  },
   fusionCatcher: {
       queue: "normal",
       mem: "30G",

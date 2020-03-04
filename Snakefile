@@ -58,7 +58,7 @@ CALLERS = ["manta", "STAR_Fusion", "Arriba", "FusionCatcher"]
 include: "rules/all.smk"
 rule all:
     input:
-        expand("structural_variants/{sample}_annot.vcf", sample=SAMPLES)
+        expand("structural_variants/{sample}_unfiltered.vcf", sample=SAMPLES)
 
 fastqc(
     in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
@@ -125,6 +125,22 @@ mergeVCFFusionsCallers(
 annotBND(
     in_annotations=config.get("reference")["annotations"],
     in_variants="structural_variants/{sample}.vcf",
-    out_variants="structural_variants/{sample}_annot.vcf",
-    params_keep_outputs=True  # ###############################################
+    out_variants="structural_variants/{sample}_annot.vcf"
 )
+
+# Fusions pathogenicity
+#########################
+
+# Filters
+bodymap = os.path.join(config.get("reference")["fusionCatcher"], "bodymap2.txt")
+babiceanu = os.path.join(config.get("reference")["fusionCatcher"], "non-cancer_tissues.txt")
+filterBND(
+    in_annotations=config.get("reference")["annotations"],
+    in_normal=[bodymap, babiceanu],
+    in_variants="structural_variants/{sample}_annot.vcf",
+    out_variants="structural_variants/{sample}_unfiltered.vcf",
+    params_normal_sources="Illumina Body Map 2 and Babiceanu et al NAR 2016",
+    params_keep_outputs=True
+)
+
+# Report
