@@ -35,6 +35,12 @@
       vmem: "8G",
       threads: 1
   },
+  filterAnnotVCF: {
+      queue: "normal",
+      mem: "4G",
+      vmem: "4G",
+      threads: 1
+  },
   filterBND: {
       queue: "normal",
       mem: "12G",
@@ -81,6 +87,12 @@
       queue: "normal",
       mem: "6G",
       vmem: "6G",
+      threads: 1
+  },
+  multiqc: {
+      queue: "normal",
+      mem: "3G",
+      vmem: "3G",
       threads: 1
   },
   renameChromVCF: {
