@@ -58,12 +58,9 @@ CALLERS = ["manta", "STAR_Fusion", "Arriba", "FusionCatcher"]
 include: "rules/all.smk"
 rule all:
     input:
-        expand("structural_variants/{sample}_unfiltered.vcf", sample=SAMPLES)
-
-fastqc(
-    in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
-    params_is_grouped=False
-)
+        expand("structural_variants/{sample}_filtered.vcf", sample=SAMPLES),
+        expand("structural_variants/{sample}_unfiltered.vcf", sample=SAMPLES),
+        "stats/multiqc/multiqc_report.html"
 
 # Cleaning
 cutadapt_pe(
@@ -118,7 +115,8 @@ else:
 mergeVCFFusionsCallers(
     in_variants=["structural_variants/" + curr_caller + "/{sample}_fusions.vcf" for curr_caller in CALLERS],
     params_annotation_field="FCANN",
-    params_calling_sources=CALLERS
+    params_calling_sources=CALLERS,
+    params_shared_filters=["Imprecise"]
 )
 
 # Fusions annotation
@@ -142,5 +140,27 @@ filterBND(
     params_normal_sources="Illumina Body Map 2 and Babiceanu et al NAR 2016",
     params_keep_outputs=True
 )
+filterAnnotVCF(
+    in_filters_variants=config.get("filters")["rules"],
+    in_variants="structural_variants/{sample}_unfiltered.vcf",
+    out_variants="structural_variants/{sample}_filtered.vcf",
+    out_stderr="logs/{sample}_filterVCF_stderr.txt",
+    params_keep_outputs=True
+)
 
 # Report
+
+
+# Quality report
+fastqc(
+    in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
+    params_is_grouped=False
+)
+FASTQC_PATTERN = "stats/fastqc/" + os.path.basename(R1_PATTERN.replace("_R1", "{suffix}").replace(".fastq.gz", "_fastqc.html").replace(".fastq", "_fastqc.html"))
+FASTQC_PATTERN = FASTQC_PATTERN[:-4] + "zip"
+multiqc(
+    in_files=(
+        expand("stats/cutadapt/{sample}.txt", sample=SAMPLES) +
+        expand(FASTQC_PATTERN, sample=SAMPLES, suffix=["_R1", "_R2"])
+    )
+)

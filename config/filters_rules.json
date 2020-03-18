@@ -1,0 +1,23 @@
+{
+    "class": "FiltersCombiner",
+    "operator": "and",
+    "filters": [
+        {
+            "class": "Filter",
+            "description": "Kept fusions detected by at least 2 fusion callers.",
+            "getter": "info.SRC",
+            "action": "select",
+            "aggregator": "nb:2",
+            "operator": "in",
+            "values": ["Arriba", "FusionCatcher", "manta", "STAR_Fusion"]
+        }, {
+            "class": "Filter",
+            "description": "Filter false positive fusions (Inner, Readthrough, on HLA and on IG).",
+            "getter": "filter",
+            "action": "select",
+            "aggregator": "ratio:1",
+            "operator": "not in",
+            "values": ["HLA", "IG", "Inner", "Readthrough"]
+        }
+    ]
+}

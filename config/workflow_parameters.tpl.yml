@@ -17,6 +17,8 @@ fusions_calling:
     is_stranded: True
     STAR_nb_threads: 4
     arriba_blacklist:  ##MANDATORY##
+filters:
+    rules:  ##MANDATORY##
 software_pathes:
     arriba:  ##MANDATORY##
     mergeVCFFusionsCallers:  ##OPTIONAL##
