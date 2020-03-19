@@ -1,7 +1,7 @@
 __author__ = 'Frederic Escudie and Veronique Ivashchenko'
 __copyright__ = 'Copyright (C) 2019 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 __email__ = 'escudie.frederic@iuct-oncopole.fr'
 __status__ = 'dev'
 
@@ -78,7 +78,7 @@ fusionCatcher(
     in_R1=R1_PATTERN,
     in_R2=R2_PATTERN,
     in_fusion_resources=config.get("reference")["fusionCatcher"],
-    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"]
+    params_nb_threads=config.get("fusions_calling")["fusionCatcher_nb_threads"]
 )
 arriba(
     in_annotations=config.get("reference")["annotations"],
@@ -92,7 +92,7 @@ manta(
     in_reference_seq=config.get("reference")["sequences"],
     out_sv="structural_variants/manta/{sample}_fusions.vcf",
     params_is_somatic=config.get("fusions_calling")["is_somatic"],
-    params_is_stranded=config.get("fusions_calling")["is_stranded"],
+    params_is_stranded=True,
     params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"]
 )
 starFusion(

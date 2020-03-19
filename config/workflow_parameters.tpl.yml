@@ -14,8 +14,8 @@ cleaning:
     adapter_min_overlap: 3
 fusions_calling:
     is_somatic: True
-    is_stranded: True
     STAR_nb_threads: 4
+    fusionCatcher_nb_threads: 8,
     arriba_blacklist:  ##MANDATORY##
 filters:
     rules:  ##MANDATORY##

@@ -49,9 +49,9 @@
   },
   fusionCatcher: {
       queue: "normal",
-      mem: "30G",
-      vmem: "30G",
-      threads: 4
+      mem: "15G",
+      vmem: "15G",
+      threads: 8
   },
   fusionsToVCF: {
       queue: "normal",
