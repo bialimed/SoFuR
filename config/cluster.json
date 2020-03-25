@@ -47,12 +47,12 @@
       vmem: "12G",
       threads: 1
   },
-  fusionCatcher: {
+  /*fusionCatcher: {
       queue: "normal",
-      mem: "15G",
-      vmem: "15G",
-      threads: 8
-  },
+      mem: "12G",
+      vmem: "12G",
+      threads: 6
+  },*/
   fusionsToVCF: {
       queue: "normal",
       mem: "3G",

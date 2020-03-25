@@ -15,7 +15,7 @@ cleaning:
 fusions_calling:
     is_somatic: True
     STAR_nb_threads: 4
-    fusionCatcher_nb_threads: 8,
+    # fusionCatcher_nb_threads: 6
     arriba_blacklist:  ##MANDATORY##
 filters:
     rules:  ##MANDATORY##

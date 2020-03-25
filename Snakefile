@@ -47,7 +47,8 @@ else:
     SAMPLES = [elt[:-2] for elt in commonSubPathes(config.get("R1"), config.get("R2"), True)]
 R1_PATTERN = config["R1"][0].replace(SAMPLES[0], "{sample}")
 R2_PATTERN = config["R2"][0].replace(SAMPLES[0], "{sample}")
-CALLERS = ["manta", "STAR_Fusion", "Arriba", "FusionCatcher"]
+# CALLERS = ["manta", "STAR_Fusion", "Arriba", "FusionCatcher"]
+CALLERS = ["manta", "STAR_Fusion", "Arriba"]
 
 
 ########################################################################
@@ -74,12 +75,12 @@ cutadapt_pe(
 )
 
 # Fusions calling
-fusionCatcher(
-    in_R1=R1_PATTERN,
-    in_R2=R2_PATTERN,
-    in_fusion_resources=config.get("reference")["fusionCatcher"],
-    params_nb_threads=config.get("fusions_calling")["fusionCatcher_nb_threads"]
-)
+# fusionCatcher(
+#     in_R1=R1_PATTERN,
+#     in_R2=R2_PATTERN,
+#     in_fusion_resources=config.get("reference")["fusionCatcher"],
+#     params_nb_threads=config.get("fusions_calling")["fusionCatcher_nb_threads"]
+# )
 arriba(
     in_annotations=config.get("reference")["annotations"],
     in_blacklist=config.get("fusions_calling")["arriba_blacklist"],
