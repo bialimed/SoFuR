@@ -96,16 +96,22 @@ starFusion(
     params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"]
 )
 if not config.get("reference")["without_chr"]:
-    fusionsToVCF()
+    fusionsToVCF(
+        out_fusions="structural_variants/{caller}/{sample}_fusions_unstd.vcf"
+    )
 else:
     fusionsToVCF(
         out_fusions="structural_variants/{caller}/{sample}_fusions.vcf.tmp"
     )
     renameChromVCF(
         in_variants="structural_variants/{caller}/{sample}_fusions.vcf.tmp",
-        out_variants="structural_variants/{caller}/{sample}_fusions.vcf",
+        out_variants="structural_variants/{caller}/{sample}_fusions_unstd.vcf",
         out_stderr="logs/{sample}_{caller}_renameChr_stderr.txt"
     )
+standardizeBND(
+    in_variants="structural_variants/{caller}/{sample}_fusions_unstd.vcf",
+    out_variants="structural_variants/{caller}/{sample}_fusions.vcf",
+)
 mergeVCFFusionsCallers(
     in_variants=["structural_variants/" + curr_caller + "/{sample}_fusions.vcf" for curr_caller in CALLERS],
     params_annotation_field="FCANN",

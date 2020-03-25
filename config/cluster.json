@@ -95,6 +95,12 @@
       vmem: "4G",
       threads: 1
   },
+  standardizeBND: {
+      queue: "normal",
+      mem: "4G",
+      vmem: "4G",
+      threads: 1
+  },
   starFusion: {
       queue: "normal",
       mem: "10G",
