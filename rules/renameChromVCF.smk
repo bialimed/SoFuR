@@ -1,7 +1,7 @@
 __author__ = 'Frederic Escudie'
 __copyright__ = 'Copyright (C) 2020 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 
 def renameChromVCF(
@@ -10,9 +10,13 @@ def renameChromVCF(
         out_variants="variants/{sample}_renamed.vcf",
         out_stderr="logs/{sample}_renameChr_stderr.txt",
         params_keep_outputs=False,
-        params_stderr_append=False):
+        params_stderr_append=False,
+        snake_wildcard_constraints=None):
     """Convert chromosome specification in STAR_Fusion VCF file into standard chromosome specification."""
+    snake_wildcard_constraints = {} if snake_wildcard_constraints is None else snake_wildcard_constraints
     rule renameChromVCF:
+        wildcard_constraints:
+            **snake_wildcard_constraints
         input:
             names = [] if in_names is None else in_names,
             variants = in_variants

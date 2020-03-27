@@ -1,7 +1,7 @@
 __author__ = 'Frederic Escudie and Veronique Ivashchenko'
 __copyright__ = 'Copyright (C) 2019 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '0.2.0'
+__version__ = '0.3.0'
 __email__ = 'escudie.frederic@iuct-oncopole.fr'
 __status__ = 'dev'
 
@@ -48,6 +48,7 @@ else:
 R1_PATTERN = config["R1"][0].replace(SAMPLES[0], "{sample}")
 R2_PATTERN = config["R2"][0].replace(SAMPLES[0], "{sample}")
 CALLERS = ["manta", "STAR_Fusion", "Arriba"]
+non_vcf_caller_constraint = {"caller": "({})".format("|".join(set(CALLERS) - {"manta"}))}
 
 
 ########################################################################
@@ -97,20 +98,25 @@ starFusion(
 )
 if not config.get("reference")["without_chr"]:
     fusionsToVCF(
-        out_fusions="structural_variants/{caller}/{sample}_fusions_unstd.vcf"
+        out_fusions="structural_variants/{caller}/{sample}_fusions_unstd.vcf",
+        snake_wildcard_constraints=non_vcf_caller_constraint
     )
 else:
     fusionsToVCF(
-        out_fusions="structural_variants/{caller}/{sample}_fusions.vcf.tmp"
+        out_fusions="structural_variants/{caller}/{sample}_fusions.vcf.tmp",
+        snake_wildcard_constraints=non_vcf_caller_constraint
     )
     renameChromVCF(
         in_variants="structural_variants/{caller}/{sample}_fusions.vcf.tmp",
         out_variants="structural_variants/{caller}/{sample}_fusions_unstd.vcf",
-        out_stderr="logs/{sample}_{caller}_renameChr_stderr.txt"
+        out_stderr="logs/{sample}_{caller}_renameChr_stderr.txt",
+        snake_wildcard_constraints=non_vcf_caller_constraint
     )
 standardizeBND(
+    in_reference_seq=config.get("reference")["sequences"],
     in_variants="structural_variants/{caller}/{sample}_fusions_unstd.vcf",
     out_variants="structural_variants/{caller}/{sample}_fusions.vcf",
+    snake_wildcard_constraints=non_vcf_caller_constraint
 )
 mergeVCFFusionsCallers(
     in_variants=["structural_variants/" + curr_caller + "/{sample}_fusions.vcf" for curr_caller in CALLERS],

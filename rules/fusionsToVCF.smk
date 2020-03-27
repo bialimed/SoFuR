@@ -1,7 +1,7 @@
 __author__ = 'Frederic Escudie'
 __copyright__ = 'Copyright (C) 2020 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 
 def fusionsToVCF(
@@ -11,9 +11,13 @@ def fusionsToVCF(
         params_annotation_field=None,
         params_sample_wildcard="{sample}",
         params_keep_outputs=False,
-        params_stderr_append=False):
+        params_stderr_append=False,
+        snake_wildcard_constraints=None):
     """Convert TSV output coming from several popular fusions callers to VCF."""
+    snake_wildcard_constraints = {} if snake_wildcard_constraints is None else snake_wildcard_constraints
     rule fusionsToVCF:
+        wildcard_constraints:
+            **snake_wildcard_constraints
         input:
             in_fusions
         output:
