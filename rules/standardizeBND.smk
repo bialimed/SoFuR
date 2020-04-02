@@ -27,7 +27,7 @@ def standardizeBND(
         log:
             out_stderr
         params:
-            bin_path = getSoft(config, "standardizeBND.py", "fusion_callers"),
+            bin_path = config.get("software_pathes", {}).get("standardizeBND", "standardizeBND.py"),
             sequence_padding = "" if params_sequence_padding is None else "--sequence-padding " + str(params_sequence_padding),
             stderr_redirection = "2>" if not params_stderr_append else "2>>",
             trace_unstandard = "--trace-unstandard" if params_trace_unstandard else "",

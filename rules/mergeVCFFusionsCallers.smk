@@ -25,9 +25,9 @@ def mergeVCFFusionsCallers(
             out_stderr
         params:
             annotation_field = "" if params_annotation_field is None else "--annotation-field " + params_annotation_field,
+            bin_path = config.get("software_pathes", {}).get("mergeVCFFusionsCallers", "mergeVCFFusionsCallers.py"),
             calling_sources = "--calling-sources " + " ".join(params_calling_sources),
             shared_filters = "" if params_shared_filters is None else "--shared-filters " + " ".join(params_shared_filters),
-            bin_path = getSoft(config, "mergeVCFFusionsCallers.py", "fusion_callers"),
             stderr_redirection = "2>" if not params_stderr_append else "2>>"
         # conda:
         #     "envs/anacore-utils.yml"

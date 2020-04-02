@@ -41,7 +41,7 @@ def fastqc(
             stdout = out_stdout
         params:
             adapters = "" if in_adapters is None else "--adapters " + in_adapters,
-            bin_path = getSoft(config, "fastqc", "fastqc_rule"),
+            bin_path = config.get("software_pathes", {}).get("fastqc", "fastqc"),
             contaminants = "" if in_contaminants is None else "--contaminants " + in_contaminants,
             dir = out_dir,
             extra = params_extra,

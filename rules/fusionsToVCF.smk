@@ -26,7 +26,7 @@ def fusionsToVCF(
             out_stderr
         params:
             annotation_field = "" if params_annotation_field is None else "--annotation-field " + params_annotation_field,
-            bin_path = getSoft(config, "fusionsToVCF.py", "fusion_callers"),
+            bin_path = config.get("software_pathes", {}).get("fusionsToVCF", "fusionsToVCF.py"),
             sample_wildcard = params_sample_wildcard,
             stderr_redirection = "2>" if not params_stderr_append else "2>>"
         # conda:

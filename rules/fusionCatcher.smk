@@ -34,7 +34,7 @@ def fusionCatcher(
             stderr = out_stderr,
             stdout = out_stdout
         params:
-            bin_path = getSoft(config, "fusioncatcher.py", "fusionCatcher_rule"),
+            bin_path = config.get("software_pathes", {}).get("fusioncather", "fusioncather.py"),
             single_end = "--single-end" if in_R2 is None else "",
             sort_memory = params_sort_memory,
             stderr_redirection = "2>" if not params_stderr_append else "2>>"

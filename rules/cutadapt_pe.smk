@@ -35,7 +35,7 @@ def cutadapt_pe(
         log:
             out_stderr
         params:
-            bin_path = getSoft(config, "cutadapt", "cleanning_rule"),
+            bin_path = config.get("software_pathes", {}).get("cutadapt", "cutadapt"),
             discard_untrimmed = "--discard-untrimmed" if params_discard_untrimmed else "",
             error_rate = params_error_rate,
             min_length = params_min_length,

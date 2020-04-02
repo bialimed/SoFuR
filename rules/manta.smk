@@ -52,7 +52,7 @@ def manta(
         log:
             out_stderr
         params:
-            bin_path = getSoft(config, "STAR", "fusion_callers"),
+            bin_path = config.get("software_pathes", {}).get("STAR", "STAR"),
             prefix = star_prefix,
             sort_buffer_size = params_sort_memory * 1000000000,
             stderr_redirection = "2>" if not params_stderr_append else "2>>"
@@ -98,7 +98,7 @@ def manta(
         log:
             out_stderr
         params:
-            bin_path = getSoft(config, "picard", "fusion_callers"),
+            bin_path = config.get("software_pathes", {}).get("picard", "picard"),
             java_memory = params_java_memory
         conda:
             "envs/picard.yml"
@@ -126,7 +126,7 @@ def manta(
         log:
             out_stderr
         params:
-            bin_path = getSoft(config, "configManta.py", "fusion_callers"),
+            bin_path = config.get("software_pathes", {}).get("configManta", "configManta.py"),
             bin_folder = os.path.dirname(getSoft(config, "configManta.py", "fusion_callers")),
             bam = "tumorBam" if params_is_somatic and params_type != "rna" else "bam",  # When RNA mode is turned on, exactly one sample must be specified as normal input only (using either the --bam or --normalBam option)
             config_tpl = os.path.join(os.path.dirname(workflow.snakefile), "envs/manta_config.ini"),

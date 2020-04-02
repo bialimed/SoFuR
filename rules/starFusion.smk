@@ -10,7 +10,7 @@ def starFusion(
         in_R2=None,
         out_abridged="structural_variants/STAR_Fusion/{sample}_abridged.tsv",
         out_fusions="structural_variants/STAR_Fusion/{sample}_fusions.tsv",
-        out_stderr="logs/{sample}_starFusion_stderr.txt",
+        out_stderr="logs/structural_variants/{sample}_starFusion_stderr.txt",
         params_nb_threads=1,
         params_tmp_dir="structural_variants/STAR_Fusion/{sample}",
         params_keep_outputs=False,
@@ -29,7 +29,7 @@ def starFusion(
             out_stderr
         params:
             arg_read2 = "" if in_R2 is None else "--right_fq",
-            bin_path = getSoft(config, "STAR-Fusion", "fusion_callers"),
+            bin_path = config.get("software_pathes", {}).get("STAR-Fusion", "STAR-Fusion"),
             stderr_redirection = "2>" if not params_stderr_append else "2>>"
         threads: params_nb_threads
         conda:

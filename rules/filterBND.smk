@@ -28,7 +28,7 @@ def filterBND(
             out_stderr
         params:
             annotations_field = "" if params_annotations_field is None else "--annotation-field " + params_annotations_field,
-            bin_path = getSoft(config, "filterBND.py", "filter_rule"),
+            bin_path = config.get("software_pathes", {}).get("filterBND", "filterBND.py"),
             input_normal = "" if in_normal is None else "--inputs-normal " + " ".join(in_normal),
             mode = "" if params_mode is None else "--mode " + params_mode,
             normal_sources = "" if params_normal_sources is None else "--normal-sources '" + params_normal_sources + "'",

@@ -12,7 +12,7 @@ def arriba(
         in_R2="cutadapt/{sample}_R2.fastq.gz",
         out_discarded="structural_variants/Arriba/{sample}_fusions_discarded.tsv",
         out_fusions="structural_variants/Arriba/{sample}_fusions.tsv",
-        out_stderr="logs/{sample}_arriba_stderr.txt",
+        out_stderr="logs/structural_variants/{sample}_arriba_stderr.txt",
         params_add_fusion_transcript=True,
         params_add_peptide_sequence=True,
         params_disabled_filters=None,
@@ -21,6 +21,7 @@ def arriba(
         params_min_anchor_length=None,  # This parameter sets the threshold in bp for what the filter considers short.
         params_min_supporting_reads=None,  # The filter min_support discards all fusions with fewer than this many supporting reads (split reads and discordant mates combined).
         params_nb_threads=1,
+        params_sort_memory=5,  # In GB
         params_strandedness="auto",
         params_keep_outputs=False,
         params_stderr_append=False):
@@ -45,8 +46,9 @@ def arriba(
         log:
             out_stderr
         params:
-            bin_path = getSoft(config, "STAR", "fusion_callers"),
+            bin_path = config.get("software_pathes", {}).get("STAR", "STAR"),
             prefix = os.path.join(os.path.dirname(out_fusions), "{sample}"),
+            sort_buffer_size = params_sort_memory * 1000000000,
             stderr_redirection = "2>" if not params_stderr_append else "2>>"
         conda:
             "envs/star.yml"
@@ -71,6 +73,7 @@ def arriba(
             " --chimSegmentReadGapMax 3"
             " --readFilesCommand zcat"
             " --outSAMattrRGline ID:1 SM:{wildcards.sample}"
+            " --limitBAMsortRAM {params.sort_buffer_size}"
             " --outSAMtype BAM SortedByCoordinate"
             " --readFilesIn {input.R1} {input.R2}"
             " --outFileNamePrefix {params.prefix}"
@@ -91,7 +94,7 @@ def arriba(
         params:
             add_fusion_transcript = "-T" if params_add_fusion_transcript else "",
             add_peptide_sequence = "-P" if params_add_peptide_sequence else "",
-            bin_path = config.get("software_pathes")["arriba"],
+            bin_path = config.get("software_pathes", {}).get("arriba", "arriba"),
             blacklist = "" if in_blacklist is None else "-b " + in_blacklist,
             discarded = "" if out_discarded is None else "-O " + out_discarded,
             disabled_filters = "" if params_disabled_filters is None or len(params_disabled_filters) == 0 else "-f " + ",".join(params_disabled_filters),
