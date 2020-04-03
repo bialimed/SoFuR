@@ -43,7 +43,6 @@ def manta(
             R2 = [] if in_R2 is None else in_R2
         output:
             alignments = temp(star_alignments),
-            tmp_dir = temp(directory(star_prefix + "_STARtmp")),
             tmp_genome = temp(directory(star_prefix + "_STARgenome")),
             tmp_log = temp(star_prefix + "Log.out"),
             tmp_pass1 = temp(directory(star_prefix + "_STARpass1")),

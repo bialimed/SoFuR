@@ -40,7 +40,6 @@ def arriba(
             R2 = [] if in_R2 is None else in_R2
         output:
             alignments = temp(star_alignments),
-            tmp_dir = temp(directory(star_prefix + "_STARtmp")),
             tmp_progress = temp(star_prefix + "Log.progress.out"),
             tmp_tab = temp(star_prefix + "SJ.out.tab")
         log:

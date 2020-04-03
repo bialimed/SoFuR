@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 __author__ = 'Veronique Ivashchenko and Frederic Escudie'
 __copyright__ = 'Copyright (C) 2020 IUCT-O'
