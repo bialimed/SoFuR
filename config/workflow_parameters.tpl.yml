@@ -2,6 +2,7 @@ R1: [] ##MANDATORY##
 R2: [] ##MANDATORY##
 reference:
     annotations: ##MANDATORY## # Homo_sapiens.GRCh38.94.chr.gtf
+    genes_bed: ##MANDATORY## # Homo_sapiens.GRCh38.94.chr.bed
     sequences: ##MANDATORY## # Homo_sapiens.GRCh38.94.dna.fa
     fusionCatcher: ##MANDATORY## # fusionCatcher/v98
     STAR-Fusion: ##MANDATORY## #

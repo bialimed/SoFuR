@@ -164,11 +164,19 @@ fastqc(
     in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
     params_is_grouped=False
 )
+rseqc_readDistribution(
+    in_annotations=config.get("reference")["genes_bed"],
+    in_alignments="structural_variants/manta/{sample}Aligned.sortedByCoord.out_markdup.bam",
+    out_metrics="stats/reseqc/read_distribution/{sample}.tsv"
+)
 FASTQC_PATTERN = "stats/fastqc/" + os.path.basename(R1_PATTERN.replace("_R1", "{suffix}").replace(".fastq.gz", "_fastqc.html").replace(".fastq", "_fastqc.html"))
 FASTQC_PATTERN = FASTQC_PATTERN[:-4] + "zip"
 multiqc(
     in_files=(
+        expand(FASTQC_PATTERN, sample=SAMPLES, suffix=["_R1", "_R2"]) +
         expand("stats/cutadapt/{sample}.txt", sample=SAMPLES) +
-        expand(FASTQC_PATTERN, sample=SAMPLES, suffix=["_R1", "_R2"])
+        expand("structural_variants/manta/{sample}Log.final.out", sample=SAMPLES) +
+        expand("structural_variants/manta/{sample}Aligned.sortedByCoord.out_markdup.bam.tsv") +
+        expand("stats/reseqc/read_distribution/{sample}.tsv", sample=SAMPLES)
     )
 )
