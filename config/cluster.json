@@ -14,7 +14,7 @@
   arriba_run: {
       queue: "normal",
       mem: "10G",
-      vmem: "10G",
+      vmem: "20G",
       threads: 1
   },
   arriba_star: {
