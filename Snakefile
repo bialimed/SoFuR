@@ -176,7 +176,7 @@ multiqc(
         expand(FASTQC_PATTERN, sample=SAMPLES, suffix=["_R1", "_R2"]) +
         expand("stats/cutadapt/{sample}.txt", sample=SAMPLES) +
         expand("structural_variants/manta/{sample}Log.final.out", sample=SAMPLES) +
-        expand("structural_variants/manta/{sample}Aligned.sortedByCoord.out_markdup.bam.tsv") +
+        expand("structural_variants/manta/{sample}Aligned.sortedByCoord.out_markdup.bam.tsv", sample=SAMPLES) +
         expand("stats/reseqc/read_distribution/{sample}.tsv", sample=SAMPLES)
     )
 )
