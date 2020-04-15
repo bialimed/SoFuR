@@ -61,6 +61,7 @@ rule all:
     input:
         expand("structural_variants/{sample}_filtered.vcf", sample=SAMPLES),
         expand("structural_variants/{sample}_unfiltered.vcf", sample=SAMPLES),
+        expand("report/data/{sample}_fusions_filtered.vcf", sample=SAMPLES), ########################
         "stats/multiqc/multiqc_report.html"
 
 # Cleaning
@@ -157,8 +158,13 @@ filterAnnotVCF(
 )
 
 # Report
-
-
+fusionsToJSON(
+    out_variants="report/data/{sample}_fusions_filtered.json",
+    params_assembly_id=config.get("reference")["assembly"],
+    params_merged_sources=True,
+    params_calling_source="",
+    params_keep_outputs=True
+)
 # Quality report
 fastqc(
     in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
