@@ -56,14 +56,12 @@ def getTemplate():
             <div class="card">
                 <h3 class="card-header">Fusions</h3>
                 <div class="card-block">
-                    <div v-if="fusions_found !== null">
-                        <fusions-table
-                            :data=fusions_found
-                            :default_source=fusion_ref_source
-                            export_title="sample_fusions"
-                            title="Fusions found">
-                        </fusions-table>
-                    </div>
+                    <fusions-table
+                        :data=fusions_found
+                        :default_source=fusion_ref_source
+                        export_title="sample_fusions"
+                        title="Fusions found">
+                    </fusions-table>
                 </div>
             </div>
             <div class="card">
@@ -78,7 +76,6 @@ def getTemplate():
             new Vue({
                 el: "nav.fixed-top",
                 data: {
-                    "fusion_ref_source": "manta"
                     "sample_name": ##sample_name##
                 }
             })
@@ -86,14 +83,15 @@ def getTemplate():
             new Vue({
                 el: ".page-content",
                 data: {
-                    "fusions_found": null
+                    "fusions_found": null,
+                    "fusion_ref_source": "manta"
                 },
                 mounted: function(){
                     this.loadData()
                 },
                 methods: {
                     loadData: function(){
-                        this.variants_found = ##fusions_data##.map(Fusion.fromJSON)
+                        this.fusions_found = ##fusions_data##.map(Fusion.fromJSON)
                     }
                 }
             })
@@ -127,8 +125,8 @@ if __name__ == "__main__":
     # Process
     report_content = getTemplate()
     report_content = report_content.replace("##sample_name##", json.dumps(args.sample_name))
-    with open(args.input_variants) as reader:
-        report_content = report_content.replace("##variants_data##", json.dumps(json.load(reader)))
+    with open(args.input_fusions) as reader:
+        report_content = report_content.replace("##fusions_data##", json.dumps(json.load(reader)))
     with open(args.output_report, "w") as writer:
         writer.write(report_content)
     log.info("End of job.")

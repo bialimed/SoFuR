@@ -59,9 +59,8 @@ non_vcf_caller_constraint = {"caller": "({})".format("|".join(set(CALLERS) - {"m
 include: "rules/all.smk"
 rule all:
     input:
-        expand("structural_variants/{sample}_filtered.vcf", sample=SAMPLES),
-        expand("structural_variants/{sample}_unfiltered.vcf", sample=SAMPLES),
-        expand("report/data/{sample}_fusions_filtered.json", sample=SAMPLES), ########################
+        expand("report/{sample}.html", sample=SAMPLES),
+        "report/run.html",
         "stats/multiqc/multiqc_report.html"
 
 # Cleaning

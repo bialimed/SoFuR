@@ -7,6 +7,7 @@ __version__ = '1.0.0'
 def wfReport(
         params_samples,
         in_fusions="report/data/{sample}_fusions_filtered.json",
+        in_resources_folder=None,
         out_run_report="report/run.html",
         out_sample_list="sample_list.txt",
         out_spl_reports="report/{sample}.html",

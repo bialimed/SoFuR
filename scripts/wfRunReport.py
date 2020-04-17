@@ -21,8 +21,8 @@ import argparse
 ########################################################################
 def getTemplate():
     return """<html>
-	<head>
-		<title>Run</title>
+    <head>
+        <title>Run</title>
         <meta charset="UTF-8">
         <meta name="author" content="Escudie Frederic">
         <meta name="version" content="1.0.0">
@@ -31,33 +31,39 @@ def getTemplate():
         <link type="text/css" charset="utf8" rel="stylesheet" href="resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
         <script type="text/javascript" charset="utf8" src="resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
         <!-- WebComponents -->
+        <link type="text/css" charset="utf8" rel="stylesheet" href="resources/webCmpt.min.css"></script>
         <script type="text/javascript" charset="utf8" src="resources/vue_2.6.10.min.js"></script>
-	</head>
-	<body>
-		<nav class="navbar fixed-top justify-content-center">
-			<span class="align-middle">Run metrics</span>
-		</nav>
-		<div class="page-content">
-			<div class="card">
-				<h3 class="card-header">Samples</h3>
-				<div class="card-block">
-					<ul class="list-group">
-						<div class="row" v-for="curr_spl in samples">
-							<div class="col-sm-0 col-md-2"></div>
-							<a :href="splToUrl(curr_spl)" class="list-group-item app-spl-link col-sm-12 col-md-8">
-								{{curr_spl}}
-							</a>
-							<div class="col-sm-0 col-md-2"></div>
-						</div>
-					</ul>
-				</div>
-			</div>
+    </head>
+    <body>
+        <nav class="navbar fixed-top justify-content-center">
+            <span class="align-middle">Run</span>
+        </nav>
+        <div class="page-content">
+            <div class="card">
+                <h3 class="card-header">Samples</h3>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <div class="row" v-for="curr_spl in samples">
+                            <div class="col-sm-0 col-md-2"></div>
+                            <a :href="splToUrl(curr_spl)" class="list-group-item app-spl-link col-sm-12 col-md-8">
+                                {{curr_spl}}
+                            </a>
+                            <div class="col-sm-0 col-md-2"></div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
         </div>
         <script>
             new Vue({
                 el: ".page-content",
                 data: {
-					"samples": ##samples##,
+                    "samples": ##samples##,
+                },
+                methods: {
+                    splToUrl: function(spl){
+                        return spl + ".html"
+                    }
                 }
             })
         </script>
