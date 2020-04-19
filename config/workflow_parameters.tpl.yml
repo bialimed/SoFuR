@@ -15,10 +15,11 @@ cleaning:
     reads_min_length: 40
     adapter_min_overlap: 3
 fusions_calling:
+    arriba_blacklist:  ##MANDATORY##
     is_somatic: True
     STAR_nb_threads: 4
-    arriba_blacklist:  ##MANDATORY##
 filters:
+    low_support: 3
     rules:  ##MANDATORY##
 software_pathes:
     arriba:  ##MANDATORY##

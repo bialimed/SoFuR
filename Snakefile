@@ -145,6 +145,7 @@ filterBND(
     in_normal=[bodymap, babiceanu],
     in_variants="structural_variants/{sample}_annot.vcf",
     out_variants="structural_variants/{sample}_unfiltered.vcf",
+    params_min_support=config.get("filters")["low_support"],
     params_normal_sources="Illumina Body Map 2 and Babiceanu et al NAR 2016",
     params_keep_outputs=True
 )
