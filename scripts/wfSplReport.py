@@ -57,6 +57,7 @@ def getTemplate():
                 <h3 class="card-header">Fusions</h3>
                 <div class="card-block">
                     <fusions-table
+                        @see-detail="callDetails"
                         :data=fusions_found
                         :default_source=fusion_ref_source
                         export_title="sample_fusions"
@@ -64,10 +65,14 @@ def getTemplate():
                     </fusions-table>
                 </div>
             </div>
-            <div class="card">
-                <h3 class="card-header">Fusion detail</h3>
+            <div id="fusion-details" class="card" v-if="selected_fusion !== null">
+                <h3 class="card-header">Fusion {{selected_fusion.getSymbolsName()}}</h3>
                 <div class="card-block">
-                    Select fusion in table above
+                    <fusion-details-table
+                        :data=selected_fusion
+                        export_title="fusion_detail"
+                        title="Transcripts">
+                    </fusion-details-table>
                 </div>
             </div>
         </div>
@@ -76,7 +81,8 @@ def getTemplate():
             new Vue({
                 el: "nav.fixed-top",
                 data: {
-                    "sample_name": ##sample_name##
+                    "sample_name": ##sample_name##,
+                    "selected_fusion": null
                 }
             })
             // Page content
@@ -90,6 +96,14 @@ def getTemplate():
                     this.loadData()
                 },
                 methods: {
+                    callDetails: function(fusion){
+                        this.selected_fusion = fusion
+                        this.$nextTick(function () {  // after re-rendering
+                            document.querySelector('#fusion-details').scrollIntoView({
+                                behavior: 'smooth'
+                            })
+                        })
+                    },
                     loadData: function(){
                         this.fusions_found = ##fusions_data##.map(Fusion.fromJSON)
                     }
