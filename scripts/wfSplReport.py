@@ -40,6 +40,8 @@ def getTemplate():
         <!-- Bootstrap -->
         <link type="text/css" charset="utf8" rel="stylesheet" href="resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
         <script type="text/javascript" charset="utf8" src="resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+        <!-- FontAwesome -->
+        <link type="text/css" charset="utf8" rel="stylesheet" href="resources/fontawesome-free-5.13.0-dist/css/all.min.css">
         <!-- WebComponents -->
         <link type="text/css" charset="utf8" rel="stylesheet" href="resources/webCmpt.min.css"></script>
         <script type="text/javascript" charset="utf8" src="resources/vue_2.6.10.min.js"></script>
@@ -60,6 +62,7 @@ def getTemplate():
                         @see-detail="callDetails"
                         :data=fusions_found
                         :default_source=fusion_ref_source
+                        :details_button=true
                         export_title="sample_fusions"
                         title="Fusions found">
                     </fusions-table>
@@ -81,8 +84,7 @@ def getTemplate():
             new Vue({
                 el: "nav.fixed-top",
                 data: {
-                    "sample_name": ##sample_name##,
-                    "selected_fusion": null
+                    "sample_name": ##sample_name##
                 }
             })
             // Page content
@@ -90,7 +92,8 @@ def getTemplate():
                 el: ".page-content",
                 data: {
                     "fusions_found": null,
-                    "fusion_ref_source": "manta"
+                    "fusion_ref_source": "manta",
+                    "selected_fusion": null
                 },
                 mounted: function(){
                     this.loadData()
