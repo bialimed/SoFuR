@@ -15,14 +15,14 @@ assessment_dir=`dirname ${assessment_bin_dir}`
 export PATH=${assessment_bin_dir}:$PATH
 
 # Evaluate datasets
-declare -a datasets=('Heyer_2019', 'Tembe_2014')
-for dataset_name in "${datasets[@]}"
+declare -a datasets=('Heyer_2019', 'Tembe_2014', 'simulated')
+for dataset in "${datasets[@]}"
 do
 	echo "Process "${dataset_name}
 	evalVCFRes.py \
 	 -d ${dataset} \
 	 -m genes \
-	 -e datasets/litterature_expected_fusion_list.tsv \
+	 -e datasets/${dataset}_fusions_list.tsv \
 	 -a results/${wf_version}/${dataset}/vcf/*_unfiltered.vcf \
 	 -o results/${wf_version}/${dataset}/results_genes.tsv
 	evalVCFRes.py \

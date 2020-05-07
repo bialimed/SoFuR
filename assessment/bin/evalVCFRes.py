@@ -149,7 +149,7 @@ if __name__ == "__main__":
                             "breakpoint2": "NA",
                             "support_span": "NA",
                             "support_split": "NA",
-                            "filters": "NA",
+                            "filters": "",
                             "source": caller,
                             "nb_sources": 0
                         })
