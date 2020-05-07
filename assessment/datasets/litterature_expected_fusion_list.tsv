@@ -1,249 +1,30 @@
-PMID	technique	sample_ID	sample_name	gene1	gene2	chr1	breakpoint1	chr2	breakpoint2
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380691	V1-6	JAZF1	SUZ12	7	27895220	17	31940286
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380690	V1-6	JAZF1	SUZ12	7	27895220	17	31940286
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796292	V1-11	RUNX1	RUNX1T1	21	34859474	8	92017363
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796293	V1-11	RUNX1	RUNX1T1	21	34859474	8	92017363
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380693	V1-12	EWSR1	FLI1	22	29287134	11	128781958
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380692	V1-12	EWSR1	FLI1	22	29287134	11	128781958
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380694	V1-24	FUS	DDIT3	16	31182664	12	57517753
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380695	V1-24	FUS	DDIT3	16	31182664	12	57517753
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796329	V1-26	PML	RARA	15	74023408	17	40348316
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796328	V1-26	PML	RARA	15	74023408	17	40348316
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380701	V1-31	SS18	SSX1	18	26032399	X	48263782
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380700	V1-31	SS18	SSX1	18	26032399	X	48263782
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380702	V1-33	HMGA2	LPP	12	65838569	3	188866200
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380703	V1-33	HMGA2	LPP	12	65838569	3	188866200
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380704	V1-34	EWSR1	NR4A3	22	29296368	9	99826730
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380705	V1-34	EWSR1	NR4A3	22	29296368	9	99826730
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796334	V3-42	PML	RARA	15	74023408	17	40348316
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796334	V3-42	RARA	PML	17	40331396	15	74024857
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796335	V3-42	PML	RARA	15	74023408	17	40348316
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796335	V3-42	RARA	PML	17	40331396	15	74024857
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796352	V6-83	BCR	ABL1	22	23290413	9	130854064
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796352	V6-83	NUP214	XKR3	9	131199015	22	16808083
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796353	V6-83	BCR	ABL1	22	23290413	9	130854064
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796353	V6-83	NUP214	XKR3	9	131199015	22	16808083
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796358	V6-89	NPM1	ALK	5	171391799	2	29223528
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796359	V6-89	NPM1	ALK	5	171391799	2	29223528
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796361	V7-93	MDM2	TMPO	12	68824648	12	98537472
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796360	V7-93	MDM2	TMPO	12	68824648	12	98537472
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796362	V7-95	ZFP36L1	FNBP1	14	68792882	9	129994958
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796363	V7-95	ZFP36L1	FNBP1	14	68792882	9	129994958
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796365	V7-96	STXBP6	BRAF	14	24855936	7	140783157
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796365	V7-96	BRAF	STXBP6	7	140787548	14	24819194
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796364	V7-96	STXBP6	BRAF	14	24855936	7	140783157
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796364	V7-96	BRAF	STXBP6	7	140787548	14	24819194
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796367	V8-105	CDC27	ERBB2	17	47189146	17	39708321
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796366	V8-105	CDC27	ERBB2	17	47189146	17	39708321
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796368	V8-106	NUP107	GRIP1	12	68692112	12	66465422
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796369	V8-106	NUP107	GRIP1	12	68692112	12	66465422
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796370	V8-107	LPP	PRKCZ	3	188708393	1	2135262
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796370	V8-107	CAMK2D	TOP1	4	113500463	20	41061394
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796371	V8-107	LPP	PRKCZ	3	188708393	1	2135262
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796371	V8-107	CAMK2D	TOP1	4	113500463	20	41061394
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796380	V9-123	SS18	SSX1	18	26032399	X	48263782
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796380	V9-123	PIEZO1	CBFA2T3	16	88749384	16	88892485
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796381	V9-123	SS18	SSX1	18	26032399	X	48263782
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796381	V9-123	PIEZO1	CBFA2T3	16	88749384	16	88892485
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796286	V10-140	ASH1L	RSPO3	1	155562153	6	127148648
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796286	V10-140	BCL7A	ACSS3	12	122035427	12	81216901
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796287	V10-140	ASH1L	RSPO3	1	155562153	6	127148648
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796287	V10-140	BCL7A	ACSS3	12	122035427	12	81216901
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796296	V11-149	KIAA1244	TMPRSS2	6	138335188	21	41498189
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796296	V11-149	TMPRSS2	ERG	21	41508081	21	38445621
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796297	V11-149	KIAA1244	TMPRSS2	6	138335188	21	41498189
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796297	V11-149	TMPRSS2	ERG	21	41508081	21	38445621
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796298	V11-150	TMPRSS2	ERG	21	41508081	21	38445621
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796299	V11-150	TMPRSS2	ERG	21	41508081	21	38445621
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796300	V11-151	BRD4	C15orf55	19	15242900	15	34347969
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796300	V11-151	GTF2IRD1	CLIP2	19	15242900	15	34347969
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796301	V11-151	BRD4	C15orf55	19	15242900	15	34347969
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796301	V11-151	GTF2IRD1	CLIP2	19	15242900	15	34347969
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796302	V11-152	MRC2	MAP3K3	17	62627920	17	63632681
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796302	V11-152	SV2B	CRTC3	15	91100363	15	90593636
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796302	V11-152	SPECC1	RAI1	17	20096798	17	20096798
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796303	V11-152	MRC2	MAP3K3	17	62627920	17	63632681
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796303	V11-152	SV2B	CRTC3	15	91100363	15	90593636
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796303	V11-152	SPECC1	RAI1	17	20096798	17	20096798
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796310	V12-157	TMPRSS2	ERG	21	41498119	21	38445621
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796311	V12-157	TMPRSS2	ERG	21	41498119	21	38445621
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796316	V12-160	SS18	SSX1	18	26032399	X	48263782
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796317	V12-160	SS18	SSX1	18	26032399	X	48263782
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796324	V12-164	PSIP1	FAM167A	9	15510117	8	11424636
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796325	V12-164	PSIP1	FAM167A	9	15510117	8	11424636
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796330	V23-231	PTCH1	LINC00476	9	95516469	9	95813922
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796331	V23-231	PTCH1	LINC00476	9	95516469	9	95813922
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796295	V1-1	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796294	V1-1	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380714	V3-43	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380713	V3-43	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380716	V3-44	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380715	V3-44	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380717	V3-45	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380718	V3-45	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796338	V3-58	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796339	V3-58	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380720	V3-59	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380719	V3-59	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380721	V3-60	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380722	V3-60	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380723	V3-61	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR3380724	V3-61	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796280	V10-133	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796281	V10-133	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796285	V10-136	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796284	V10-136	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796312	V12-158	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796313	V12-158	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796315	V12-159	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796314	V12-159	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796322	V12-163	Normal_tissue					
-29929942	polyA selection on total RNA and filtering on 571 genes of interest	SRR6796323	V12-163	Normal_tissue					
-21247443	polyA selection on total RNA	SRR064438	BT-474	ACACA	STAC2	17		17	
-21247443	polyA selection on total RNA	SRR064438	BT-474	RPS6KB1	SNF8	17		17	
-21247443	polyA selection on total RNA	SRR064438	BT-474	VAPB	IKZF3	20		17	
-21247443	polyA selection on total RNA	SRR064438	BT-474	ZMYND8	CEP250	20		20	
-21247443	polyA selection on total RNA	SRR064438	BT-474	RAB22A	MYO9B	20		19	
-21247443	polyA selection on total RNA	SRR064438	BT-474	SKA2	MYO19	17		17	
-21247443	polyA selection on total RNA	SRR064438	BT-474	DIDO1	KIAA0406	20		20	
-21247443	polyA selection on total RNA	SRR064438	BT-474	STARD3	DOK5	17		20	
-21247443	polyA selection on total RNA	SRR064438	BT-474	LAMP1	MCF2L	13		13	
-21247443	polyA selection on total RNA	SRR064438	BT-474	GLB1	CMTM7	3		3	
-21247443	polyA selection on total RNA	SRR064438	BT-474	CPNE1	PI3	20		20	
-21247443	polyA selection on total RNA	SRR064439	BT-474	ACACA	STAC2	17		17	
-21247443	polyA selection on total RNA	SRR064439	BT-474	RPS6KB1	SNF8	17		17	
-21247443	polyA selection on total RNA	SRR064439	BT-474	VAPB	IKZF3	20		17	
-21247443	polyA selection on total RNA	SRR064439	BT-474	ZMYND8	CEP250	20		20	
-21247443	polyA selection on total RNA	SRR064439	BT-474	RAB22A	MYO9B	20		19	
-21247443	polyA selection on total RNA	SRR064439	BT-474	SKA2	MYO19	17		17	
-21247443	polyA selection on total RNA	SRR064439	BT-474	DIDO1	KIAA0406	20		20	
-21247443	polyA selection on total RNA	SRR064439	BT-474	STARD3	DOK5	17		20	
-21247443	polyA selection on total RNA	SRR064439	BT-474	LAMP1	MCF2L	13		13	
-21247443	polyA selection on total RNA	SRR064439	BT-474	GLB1	CMTM7	3		3	
-21247443	polyA selection on total RNA	SRR064439	BT-474	CPNE1	PI3	20		20	
-23119097	polyA selection on total RNA	SRR064438	BT-474	THRA	AC090627.1	17		17	
-23119097	polyA selection on total RNA	SRR064438	BT-474	TOB1	SYNRG	17		17	
-23119097	polyA selection on total RNA	SRR064438	BT-474	AHCTF1	NAAA	1		4	
-23119097	polyA selection on total RNA	SRR064438	BT-474	MED1	STXBP4	17		17	
-23119097	polyA selection on total RNA	SRR064438	BT-474	MED13	BCAS3	17		17	
-23119097	polyA selection on total RNA	SRR064438	BT-474	MED1	ACSF2	17		17	
-23119097	polyA selection on total RNA	SRR064438	BT-474	TRPC4AP	MRPL45	20		17	
-23119097	polyA selection on total RNA	SRR064438	BT-474	STX16	RAE1	20		20	
-23119097	polyA selection on total RNA	SRR064438	BT-474	USP32	MED1	17		17	
-23119097	polyA selection on total RNA	SRR064438	BT-474	PIP4K2B	RAD51C	17		17	
-23119097	polyA selection on total RNA	SRR064439	BT-474	THRA	AC090627.1	17		17	
-23119097	polyA selection on total RNA	SRR064439	BT-474	TOB1	SYNRG	17		17	
-23119097	polyA selection on total RNA	SRR064439	BT-474	AHCTF1	NAAA	1		4	
-23119097	polyA selection on total RNA	SRR064439	BT-474	MED1	STXBP4	17		17	
-23119097	polyA selection on total RNA	SRR064439	BT-474	MED13	BCAS3	17		17	
-23119097	polyA selection on total RNA	SRR064439	BT-474	MED1	ACSF2	17		17	
-23119097	polyA selection on total RNA	SRR064439	BT-474	TRPC4AP	MRPL45	20		17	
-23119097	polyA selection on total RNA	SRR064439	BT-474	STX16	RAE1	20		20	
-23119097	polyA selection on total RNA	SRR064439	BT-474	USP32	MED1	17		17	
-23119097	polyA selection on total RNA	SRR064439	BT-474	PIP4K2B	RAD51C	17		17	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	TATDN1	GSDMB	8		17	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	CSE1L	ENSG00000236127	20		20	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	RARA	PKIA	17		8	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	ANKHD1	PCDH1	5		5	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	CCDC85C	SETD3	14		14	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	SUMF1	LRRFIP2	3		3	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	WDR67	ZNF704	8		8	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	CYTH1	EIF3H	17		8	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	DHX35	ITCH	20		20	
-21247443	polyA selection on total RNA	SRR064440	SK-BR-3	NFS1	PREX1	20		20	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	TATDN1	GSDMB	8		17	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	CSE1L	ENSG00000236127	20		20	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	RARA	PKIA	17		8	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	ANKHD1	PCDH1	5		5	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	CCDC85C	SETD3	14		14	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	SUMF1	LRRFIP2	3		3	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	WDR67	ZNF704	8		8	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	CYTH1	EIF3H	17		8	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	DHX35	ITCH	20		20	
-21247443	polyA selection on total RNA	SRR064441	SK-BR-3	NFS1	PREX1	20		20	
-21247443	polyA selection on total RNA	SRR064287	KPL-4	BSG	NFIX	19		19	
-21247443	polyA selection on total RNA	SRR064287	KPL-4	PPP1R12A	sept-10	12		2	
-21247443	polyA selection on total RNA	SRR064287	KPL-4	NOTCH1	NUP214	9		9	
-21247443	polyA selection on total RNA	SRR064286	MCF-7	BCAS4	BCAS3	20		17	
-21247443	polyA selection on total RNA	SRR064286	MCF-7	ARFGEF2	SULF2	20		20	
-21247443	polyA selection on total RNA	SRR064286	MCF-7	RPS6KB1	TMEM49	17		17	
-23119097	polyA selection on total RNA	SRR064286	MCF-7	GCN1L1	MSI1	12		12	
-23119097	polyA selection on total RNA	SRR064286	MCF-7	AC099850.1	TMEM49	17		17	
-23119097	polyA selection on total RNA	SRR064286	MCF-7	SMARCA4	CARM1	19		19	
-20179022	polyA selection on total RNA	SRR018266	501 Mel	CCT3	C1orf61	1		1	
-20179022	polyA selection on total RNA	SRR018266	501 Mel	GNA12 	SHANK2	7		11	
-20179022	polyA selection on total RNA	SRR018266	501 Mel	SLC12A7	C11orf67	5		11	
-20179022	polyA selection on total RNA	SRR018266	501 Mel	PARP1	MIXL1	1		1	
-20179022	polyA selection on total RNA	SRR018259	M000216	KCTD2	ARHGEF12	17		11	
-20179022	polyA selection on total RNA	SRR018267	M000921	C9orf127	TLN1	9		9	
-20179022	polyA selection on total RNA	SRR018267	M000921	RECK	ALX3	9		1	
-20179022	polyA selection on total RNA	SRR018265	M010403	SCAMP2	WDR72	15		15	
-20179022	polyA selection on total RNA	SRR018261	M980409	GCN1L1	PLA2G1B	12		12	
-20179022	polyA selection on total RNA	SRR018260	M990802	ANKHD1	C5orf32	5		5	
-20179022	polyA selection on total RNA	SRR018260	M990802	RB1	ITM2B	13		13	
-30918253	capture enrichment	SRR7646928	MO-16-000393	EZR	ROS1	6	158770764	6	117321394
-30918253	capture enrichment	SRR7646928	MO-16-000393	EZR	ROS1	6	158770764	6	117324415
-30918253	capture enrichment	SRR7646928	MO-16-000393	EZR	ROS1	6	158770764	6	117328813
-30918253	capture enrichment	SRR7646929	SP-15-11000	EML4	ALK	2	42325554	2	29223528
-30918253	capture enrichment	SRR7646934	5060	TMPRSS2	ERG	21	41507950	21	38445621
-30918253	capture enrichment	SRR7646934	5060	TMPRSS2	ERG	21	41508081	21	38445621
-30918253	capture enrichment	SRR7646934	5060	TMPRSS2	ERG	21	41508081	21	38474121
-30918253	capture enrichment	SRR7646935	5287-2	TMPRSS2	ERG	21	41507950	21	38584945
-30918253	capture enrichment	SRR7646935	5287-2	TMPRSS2	ERG	21	41508081	21	38584945
-30918253	capture enrichment	SRR7646935	5287-2	TMPRSS2	ERG	21	41508081	21	38575747
-30918253	capture enrichment	SRR7646932	5401	TMPRSS2	ERG	21	41494356	21	38445621
-30918253	capture enrichment	SRR7646932	5401	TMPRSS2	ERG	21	41506445	21	38445621
-30918253	capture enrichment	SRR7646932	5401	TMPRSS2	ERG	21	41508081	21	38445621
-30918253	capture enrichment	SRR7646933	5494-2	TMPRSS2	ERG	21	41506445	21	38584945
-30918253	capture enrichment	SRR7646933	5494-2	TMPRSS2	ERG	21	41507950	21	38584945
-30918253	capture enrichment	SRR7646933	5494-2	TMPRSS2	ERG	21	41508081	21	38584945
-30918253	capture enrichment	SRR7646936	5545	WT					
-30918253	capture enrichment	SRR7646937	5656	TMPRSS2	ERG	21	41506445	21	38445621
-30918253	capture enrichment	SRR7646937	5656	TMPRSS2	ERG	21	41507950	21	38445621
-30918253	capture enrichment	SRR7646937	5656	TMPRSS2	ERG	21	41508081	21	38445621
-30918253	capture enrichment	SRR7646890	6053	TMPRSS2	ERG	21	41507950	21	38445621
-30918253	capture enrichment	SRR7646890	6053	TMPRSS2	ERG	21	41508081	21	38445621
-30918253	capture enrichment	SRR7646890	6053	TMPRSS2	ERG	21	41508081	21	38474121
-30918253	capture enrichment	SRR7646896	10651	TMPRSS2	ERG	21	41506445	21	38584945
-30918253	capture enrichment	SRR7646896	10651	TMPRSS2	ERG	21	41507950	21	38584945
-30918253	capture enrichment	SRR7646902	13179	TMPRSS2	ERG	21	41506445	21	38445621
-30918253	capture enrichment	SRR7646902	13179	TMPRSS2	ERG	21	41507950	21	38445621
-30918253	capture enrichment	SRR7646902	13179	TMPRSS2	ERG	21	41508081	21	38445621
-30918253	capture enrichment	SRR7646898	SP-14-002291	SS18	SSX1	18	26032399	X	48263782
-30918253	capture enrichment	SRR7646901	SP-15-004573	SS18	SSX1	18	26032399	X	48263782
-30918253	capture enrichment	SRR7646906	SP-15-005675	SS18	SSX1	18	26032399	X	48263782
-30918253	capture enrichment	SRR7646907	SP-16-012119	SS18	SSX2/2B	18	26032399	X	52700578
-30918253	capture enrichment	SRR7646907	SP-16-012119	SS18	SSX2/2B	18	26032399	X	52757854
-30918253	capture enrichment	SRR7646952	012.182.1	EWSR1	ERG	22	29292169	21	38391042
-30918253	capture enrichment	SRR7646955	012.487.1	EWSR1	FLI1	22	29287134	11	128781958
-30918253	capture enrichment	SRR7646948	012.75.1	EWSR1	FLI1	22	29292169	11	128805366
-30918253	capture enrichment	SRR7646951	012.791.1	SS18	SSX2B	18	26032399	X	52789696
-30918253	capture enrichment	SRR7646951	012.791.1	SS18	SSX2B	18	26032399	X	52757854
-30918253	capture enrichment	SRR7646885	03JW	RUNX1	RUNX1T1	21	34859474	8	92017363
-30918253	capture enrichment	SRR7646882	07KM	TCF3	PBX1	19	1619111	1	164792494
-30918253	capture enrichment	SRR7646883	30RN	AFF1	MYC	4	87047594	8	127738248
-30918253	capture enrichment	SRR7646883	30RN	AFF1	MYC	4	87047594	8	127738251
-30918253	capture enrichment	SRR7646883	30RN	KMT2A	AFF1	11	118484314	4	87084120
-30918253	capture enrichment	SRR7646883	30RN	KMT2A	AFF1	11	118484314	4	87084123
-30918253	capture enrichment	SRR7646942	21ME	MN1	ETV6	22	27796763	12	11839140
-30918253	capture enrichment	SRR7646942	21ME	MN1	ETV6	22	27796763	12	11826402
-30918253	capture enrichment	SRR7646942	21ME	MN1	ETV6	22	27796763	12	11826407
-30918253	capture enrichment	SRR7646942	21ME	MN1	ETV6	22	27796763	12	11825644
-30918253	capture enrichment	SRR7646942	21ME	ETV6	MN1	12	11752579	22	27751096
-30918253	capture enrichment	SRR7646959	36EW	PML	RARA	15	74033414	17	40348316
-30918253	capture enrichment	SRR7646959	36EW	RARA	PML	17	40331396	15	40342867
-30918253	capture enrichment	SRR7646959	36EW	RARA	PML	17	40342867	15	40342867
-30918253	capture enrichment	SRR7646961	18BP	BCR	ABL1	22	23289621	9	130854064
-30918253	capture enrichment	SRR7646961	18BP	ABL1	BCR	9	130714455	22	23292541
-30918253	capture enrichment	SRR7646962	37BR	BCR	ABL1	22	23290413	9	130854064
-30918253	capture enrichment	SRR7646962	37BR	ABL1	BCR	9	130714455	22	23292541
-30918253	capture enrichment	SRR7646962	37BR	ABL1	BCR	9	130835525	22	23292541
-30918253	capture enrichment	SRR7646963	08JM	BCR	ABL1	22	23290413	9	130854064
-30918253	capture enrichment	SRR7646963	08JM	ABL1	BCR	9	130714455	22	23292541
-30918253	capture enrichment	SRR7646965	30PG	BCR	ABL1	22	23289621	9	130854064
-30918253	capture enrichment	SRR7646966	1-10524	MYC	IGH	8	127735820	14	105859657
-30918253	capture enrichment	SRR7646967	2-13565	MYC	IGH	8	127736068	14	105859401
-30918253	capture enrichment	SRR7646967	2-13565	MYC	IGH	8	127736068	14	105858960
-30918253	capture enrichment	SRR7646967	2-13565	MYC	IGH	8	127736068	14	105859350
-30918253	capture enrichment	SRR7646967	2-13565	MYC	IGH	8	127740634	14	105927772
-30918253	capture enrichment	SRR7646919	3-17744	IGH	BCL6	14	105864587	3	187734907
+PMID	enrichment	sample_ID	sample_name	genes_1	genes_2	chr1	breakpoint1	chr2	breakpoint2	confirmation
+30918253	capture	SRR7646928	MO-16-000393	EZR	ROS1					FISH ROS1 (break-apart probes)
+30918253	capture	SRR7646929	SP-15-11000	EML4	ALK					FISH ALK (break-apart probes)
+30918253	capture	SRR7646934	5060	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
+30918253	capture	SRR7646935	5287-2	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
+30918253	capture	SRR7646932	5401	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
+30918253	capture	SRR7646933	5494-2	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
+30918253	capture	SRR7646936	5545	WT						
+30918253	capture	SRR7646937	5656	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
+30918253	capture	SRR7646890	6053	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
+30918253	capture	SRR7646896	10651	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
+30918253	capture	SRR7646902	13179	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
+30918253	capture	SRR7646898	SP-14-002291	SS18	SSX1					FISH SS18 (break-apart probes)
+30918253	capture	SRR7646906	SP-15-005675	SS18	SSX1					FISH SS18 (break-apart probes)
+30918253	capture	SRR7646907	SP-16-012119	SS18	SSX2					FISH SS18 (break-apart probes)
+30918253	capture	SRR7646952	012.182.1	EWSR1	ERG					FISH EWSR1 (break-apart probes)
+30918253	capture	SRR7646955	012.487.1	EWSR1	FLI1					FISH EWSR1 (break-apart probes)          IHC FLI1
+30918253	capture	SRR7646948	012.75.1	EWSR1	FLI1					FISH EWSR1 (break-apart probes)
+30918253	capture	SRR7646951	012.791.1	SS18	SSX2					FISH SS18 (break-apart probes)
+30918253	capture	SRR7646882	07KM	TCF3	PBX1					RT-PCR TCF3-PXB1 (primers location not known)
+30918253	capture	SRR7646883	30RN	AFF1	MYC	4	87047594	8	127738248	RT-PCR AFF1-MYC
+30918253	capture	SRR7646883	30RN	KMT2A	AFF1					RT-PCR KMT2A-AFF1 (primers location not known)
+30918253	capture	SRR7646942	21ME	MN1	ETV6	22	27796763	12	11839140	RT-PCR MN1-ETV6
+30918253	capture	SRR7646961	18BP	BCR	ABL1	22	23289621	9	130854064	RT-PCR BCR-ABL
+30918253	capture	SRR7646962	37BR	BCR	ABL1	22	23290413	9	130854064	RT-PCR BCR-ABL
+30918253	capture	SRR7646963	08JM	BCR	ABL1					RT-PCR BCR-ABL (primers location not known)
+30918253	capture	SRR7646965	30PG	BCR	ABL1					RT-PCR BCR-ABL (primers location not known)
+30918253	capture	SRR7646966	1-10524	MYC	IGH					FISH MYC-IGH
+30918253	capture	SRR7646967	2-13565	MYC	IGH					FISH MYC-IGH
+30918253	capture	SRR7646919	3-17744	IGHJ3	BCL6	14	105864587	3	187734907	RT-PCR IGHJ3-BCL6
