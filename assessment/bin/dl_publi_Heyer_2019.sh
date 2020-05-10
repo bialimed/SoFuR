@@ -1,43 +1,82 @@
 #!/bin/bash
+set -e # exit when any command fails
 
-# Download SRA samples litterature tumour dataset Heyer et al.,2019
+
+################################################################################
+#
+# FUNCTIONS
+#
+################################################################################
+# Download from SRA
 download () {
-	fastq-dump --split-files --gzip --outdir /Anapath/veronique/SRA $1
+	fastq-dump --split-files --gzip --outdir $2 $1
 	if [ $? -ne 0 ]; then
 		>&2 echo "Error on $1"
 		exit 1
 	fi
 }
 
-#~ download "SRR7646937" ; rename.sh SRR7646937 ##################### Problem in file download (more reads in file 2 than in file 1)
-#~ download "SRR7646901" ; rename.sh SRR7646901 ##################### Fusion not verified by other method
-#~ download "SRR7646885" ; rename.sh SRR7646885 ##################### Fusion not verified by other method
-#~ download "SRR7646959" ; rename.sh SRR7646959 ##################### Problem in file download (more reads in file 1 than in file 2)
-download "SRR7646928" ; rename.sh SRR7646928
-download "SRR7646929" ; rename.sh SRR7646929
-download "SRR7646934" ; rename.sh SRR7646934
-download "SRR7646935" ; rename.sh SRR7646935
-download "SRR7646932" ; rename.sh SRR7646932
-download "SRR7646933" ; rename.sh SRR7646933
-download "SRR7646936" ; rename.sh SRR7646936
-download "SRR7646890" ; rename.sh SRR7646890
-download "SRR7646896" ; rename.sh SRR7646896
-download "SRR7646902" ; rename.sh SRR7646902
-download "SRR7646898" ; rename.sh SRR7646898
-download "SRR7646906" ; rename.sh SRR7646906
-download "SRR7646907" ; rename.sh SRR7646907
-download "SRR7646952" ; rename.sh SRR7646952
-download "SRR7646955" ; rename.sh SRR7646955
-download "SRR7646948" ; rename.sh SRR7646948
-download "SRR7646951" ; rename.sh SRR7646951
-download "SRR7646882" ; rename.sh SRR7646882
-download "SRR7646883" ; rename.sh SRR7646883
-download "SRR7646942" ; rename.sh SRR7646942
-download "SRR7646961" ; rename.sh SRR7646961
-download "SRR7646962" ; rename.sh SRR7646962
-download "SRR7646963" ; rename.sh SRR7646963
-download "SRR7646965" ; rename.sh SRR7646965
-download "SRR7646966" ; rename.sh SRR7646966
-download "SRR7646967" ; rename.sh SRR7646967
-download "SRR7646919" ; rename.sh SRR7646919
+# Rename fastq
+rename () {
+	mv $1_1.fastq.gz $2_R1.fastq.gz && mv $1_2.fastq.gz $2_R2.fastq.gz
+	if [ $? -ne 0 ]; then
+		>&2 echo "Error on $1"
+		exit 1
+	fi
+}
+
+
+################################################################################
+#
+# MAIN
+#
+################################################################################
+# Parameters
+out_dir="."
+if [ $# -eq 1 ]
+then
+	out_dir=$1
+fi
+
+# Download
+declare samples=(
+	#~ 	"SRR7646937"  # Problem in file
+	#~ 	"SRR7646901"  # Fusion not verified by other method
+	#~ 	"SRR7646885"  # Fusion not verified by other method
+	#~ 	"SRR7646959"  # Problem in file
+	"SRR7646928"
+	"SRR7646929"
+	"SRR7646934"
+	"SRR7646935"
+	"SRR7646932"
+	"SRR7646933"
+	"SRR7646936"
+	"SRR7646890"
+	"SRR7646896"
+	"SRR7646902"
+	"SRR7646898"
+	"SRR7646906"
+	"SRR7646907"
+	"SRR7646952"
+	"SRR7646955"
+	"SRR7646948"
+	"SRR7646951"
+	"SRR7646882"
+	"SRR7646883"
+	"SRR7646942"
+	"SRR7646961"
+	"SRR7646962"
+	"SRR7646963"
+	"SRR7646965"
+	"SRR7646966"
+	"SRR7646967"
+	"SRR7646919"
+)
+
+for curr_spl in ${samples}
+do
+	echo "Download ${curr_spl} in ${out_dir}"
+	download ${curr_spl} ${out_dir} && rename ${curr_spl}
+done
+
 echo "End of job"
