@@ -48,8 +48,8 @@ done
 
 # Concatenate all datasets
 egrep --no-filename "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_genes.tsv | uniq > ${assessment_dir}/results/${wf_version}/results_details_genes.tsv && \
-egrep -v "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_genes.tsv >> ${assessment_dir}/results/${wf_version}/results_details_genes.tsv && \
-egrep --no-filename "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_breakpoints.tsv | uniq > ${assessment_dir}/results/${wf_version}/results_details_breakpoints.tsv && \
+egrep --no-filename -v "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_genes.tsv >> ${assessment_dir}/results/${wf_version}/results_details_genes.tsv && \
+egrep --no-filename --no-filename "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_breakpoints.tsv | uniq > ${assessment_dir}/results/${wf_version}/results_details_breakpoints.tsv && \
 egrep -v "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_breakpoints.tsv >> ${assessment_dir}/results/${wf_version}/results_details_breakpoints.tsv
 if [ $? -ne 0 ]; then
     >&2 echo "Error in merge results"
