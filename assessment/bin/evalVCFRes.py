@@ -14,7 +14,7 @@ import argparse
 import logging
 from itertools import product
 from anacore.sv import HashedSVIO
-from anacore.fusion import BreakendVCFIO
+from anacore.fusion import BreakendVCFIO, getStrand
 
 
 ################################################################################
@@ -22,6 +22,31 @@ from anacore.fusion import BreakendVCFIO
 # FUNCTIONS
 #
 ################################################################################
+def hasSameCoordinates(fusion, first, second):
+    has_same_coord = False
+    if first.chrom == fusion["chr1"] and second.chrom == fusion["chr2"]:
+        if first.info["ANNOT_POS"] == fusion["pos1"] and second.info["ANNOT_POS"] == fusion["pos2"]:
+            has_same_coord = True
+        elif "CIPOS" in first.info and "CIPOS" in second.info:
+            first_bnd_limit_left = first.pos - abs(first.info["CIPOS"][0])
+            first_bnd_limit_right = first.pos + first.info["CIPOS"][1]
+            second_bnd_limit_left = second.pos - abs(second.info["CIPOS"][0])
+            second_bnd_limit_right = second.pos + second.info["CIPOS"][1]
+            if fusion["pos1"] >= first_bnd_limit_left and fusion["pos1"] <= first_bnd_limit_right:
+                has_same_coord = False
+                if "IMPRECISE" in first.info:
+                    if fusion["pos2"] >= second_bnd_limit_left and fusion["pos2"] <= second_bnd_limit_right:
+                        has_same_coord = True
+                else:
+                    offset_from_left = fusion["pos1"] - first_bnd_limit_left
+                    if getStrand(first, True) == getStrand(second, False):
+                        if second_bnd_limit_left + offset_from_left == fusion["pos2"]:
+                            has_same_coord = True
+                    else:
+                        if second_bnd_limit_right - offset_from_left == fusion["pos2"]:
+                            has_same_coord = True
+    return has_same_coord
+
 def getExpected(input_expected):
     expected_by_spl = {}
     with HashedSVIO(input_expected, "r") as reader:
@@ -42,6 +67,101 @@ def getExpected(input_expected):
                             "pos2": int(record["breakpoint2"])
                         }
     return expected_by_spl
+
+
+def loadResByCallers(inputs_variants, expected_by_spl, status_mode="genes", annotation_field="ANN"):
+    res_by_caller = {}
+    for curr_vcf in inputs_variants:
+        with BreakendVCFIO(curr_vcf, "r", annot_field=annotation_field) as reader:
+            curr_spl = reader.samples[0]
+            callers_id_desc = reader.info["SRC"].description.split("Possible values: ")[1].replace("'", '"')
+            callers = json.loads(callers_id_desc).keys()
+            # Init with expected
+            for curr_src in callers:
+                if curr_src not in res_by_caller:
+                    res_by_caller[curr_src] = dict()
+                if curr_spl in expected_by_spl:
+                    res_by_caller[curr_src][curr_spl] = {fusion: list() for fusion in expected_by_spl[curr_spl]}  # init expected in res_by_caller
+            # True positives and False positives
+            tp_by_callers = {curr_caller: set() for curr_caller in callers}
+            na_by_callers = {curr_caller: set() for curr_caller in callers}
+            for first, second in reader:
+                status = "FP"
+                first_genes = {annot["SYMBOL"] for annot in first.info[annotation_field]}
+                if len(first_genes) == 0:
+                    first_genes = {"intergenic"}
+                second_genes = {annot["SYMBOL"] for annot in second.info[annotation_field]}
+                if len(second_genes) == 0:
+                    second_genes = {"intergenic"}
+                selected_fusion = "unexpected"
+                for curr_first_gene, curr_second_gene in product(first_genes, second_genes):
+                    curr_fusion = curr_first_gene + "\t" + curr_second_gene
+                    if curr_fusion in expected_by_spl[curr_spl]:
+                        selected_fusion = curr_fusion
+                        if status_mode == "genes":
+                            status = "TP"
+                        else:
+                            expected = expected_by_spl[curr_spl][curr_fusion]
+                            if expected is None:  # Fusion is only known by partner and breakpoints are unknown
+                                status = "NA"
+                                for curr_src in first.info["SRC"]:
+                                    na_by_callers[curr_src].add(curr_fusion)
+                            else:  # Fusion is known by partner and breakpoints
+                                if hasSameCoordinates(expected, first, second):
+                                    status = "TP"
+                            if status == "FP":
+                                rna_types_first = {annot["RNA_ELT_TYPE"] for annot in first.info[annotation_field] if annot["SYMBOL"] == curr_first_gene}
+                                rna_types_second = {annot["RNA_ELT_TYPE"] for annot in second.info[annotation_field] if annot["SYMBOL"] == curr_second_gene}
+                                for elt in rna_types_first:
+                                    if "spliceDonor" in elt or "transcriptEnd" in elt:
+                                        for elt in rna_types_second:
+                                            if "spliceAcceptor" in elt or "transcriptStart" in elt:
+                                                status = "TP_ISOFORM"
+                        if status == "TP":
+                            selected_fusion = curr_fusion
+                            for curr_src in first.info["SRC"]:
+                                tp_by_callers[curr_src].add(curr_fusion)
+                # Store fusion
+                for curr_src in first.info["SRC"]:
+                    res_by_fusion = res_by_caller[curr_src][curr_spl]
+                    if selected_fusion not in res_by_fusion:
+                        res_by_fusion[selected_fusion] = list()
+                    res_by_fusion[selected_fusion].append({
+                        "genes_1": ";".join(first_genes),
+                        "genes_2": ";".join(second_genes),
+                        "status": status,
+                        "breakpoint1": "{}:{}".format(first.chrom, first.info["ANNOT_POS"]),
+                        "breakpoint2": "{}:{}".format(second.chrom, second.info["ANNOT_POS"]),
+                        "support_span": first.samples[curr_spl]["PR"],
+                        "support_split": first.samples[curr_spl]["SR"],
+                        "filters": ";".join(first.filter),
+                        "source": curr_src,
+                        "nb_sources": len(first.info["SRC"])
+                    })
+    return res_by_caller
+
+
+def writeAggregate(writer, observed_fusions, selected_status, dataset_name, curr_spl):
+    selected = [curr for curr in observed_fusions if curr["status"] in selected_status]
+    selected = sorted(selected, key=lambda elt: (-elt["support_split"], -elt["support_span"], elt["status"]))
+    if len(selected) != 0:
+        tmp_best = selected[0].copy()
+        tmp_duplcates = []
+        for duplicate in selected[1:]:
+            tmp_duplcates.append(
+                "{}->{}".format(
+                    duplicate["breakpoint1"],
+                    duplicate["breakpoint2"]
+                )
+            )
+        tmp_best.update({
+            "dataset": dataset_name,
+            "sample_ID": curr_spl,
+            "duplicates": ",".join(tmp_duplcates)
+        })
+        if tmp_best["status"] == "TP_ISOFORM":
+            tmp_best["status"] = "TP"
+        writer.write(tmp_best)
 
 
 ################################################################################
@@ -69,87 +189,49 @@ if __name__ == "__main__":
     log.setLevel(logging.INFO)
     log.info("Command: " + " ".join(sys.argv))
 
-    # Process
+    # Load expected
+    expected_by_spl = getExpected(args.input_expected)
+    res_by_caller = loadResByCallers(args.inputs_variants, expected_by_spl, args.status_mode, args.annotation_field)
+    # writeRes(res_by_caller, expected_by_spl)
     with HashedSVIO(args.output_comparison, "w") as writer:
         writer.titles = [
             "dataset", "sample_ID", "genes_1", "genes_2", "breakpoint1",
-            "breakpoint2", "status", "support_split", "support_span", "filters",
-            "source", "nb_sources"
+            "breakpoint2", "status", "support_split", "support_span",
+            "filters", "source", "duplicates", "nb_sources"
         ]
-        # Load expected
-        expected_by_spl = getExpected(args.input_expected)
-        # Process comparison
-        for curr_vcf in args.inputs_variants:
-            with BreakendVCFIO(curr_vcf, "r", annot_field=args.annotation_field) as reader:
-                curr_spl = reader.samples[0]
-                callers_id_desc = reader.info["SRC"].description.split("Possible values: ")[1].replace("'", '"')
-                callers = json.loads(callers_id_desc).keys()
-                # True positives and False negatives
-                tp_by_callers = {curr_caller: set() for curr_caller in callers}
-                na_by_callers = {curr_caller: set() for curr_caller in callers}
-                for first, second in reader:
-                    status = "FP"
-                    first_genes = {annot["SYMBOL"] for annot in first.info[args.annotation_field]}
-                    second_genes = {annot["SYMBOL"] for annot in second.info[args.annotation_field]}
-                    for curr_first_gene, curr_second_gene in product(first_genes, second_genes):
-                        curr_fusion = curr_first_gene + "\t" + curr_second_gene
-                        if curr_fusion in expected_by_spl[curr_spl]:
-                            if args.status_mode == "genes":
-                                status = "TP"
-                            else:
-                                expected = expected_by_spl[curr_spl][curr_fusion]
-                                if expected is None:  # Fusion is only known by partner and breakpoints are unknown
-                                    status = "NA"
-                                    for curr_src in first.info["SRC"]:
-                                        na_by_callers[curr_src].add(curr_fusion)
-                                else:  # Fusion is known by partner and breakpoints
-                                    if first.info["ANNOT_POS"] == expected["pos1"] and second.info["ANNOT_POS"] == expected["pos2"]:
-                                        status = "TP"
-                                    else:
-                                        if "CIPOS" in first.info and "CIPOS" in second.info:
-                                            first_bnd_limit_left = first.pos - abs(first.info["CIPOS"][0])
-                                            first_bnd_limit_right = first.pos + first.info["CIPOS"][1]
-                                            second_bnd_limit_left = second.pos - abs(second.info["CIPOS"][0])
-                                            second_bnd_limit_right = second.pos + second.info["CIPOS"][1]
-                                            if expected["pos1"] >= first_bnd_limit_left and expected["pos1"] <= first_bnd_limit_right:
-                                                if expected["pos2"] >= second_bnd_limit_left and expected["pos2"] <= second_bnd_limit_right:
-                                                    status = "TP"
-                            if status == "TP":
-                                for curr_src in first.info["SRC"]:
-                                    tp_by_callers[curr_src].add(curr_fusion)
-                    for curr_src in first.info["SRC"]:
-                        writer.write({
-                            "dataset": args.dataset_name,
-                            "sample_ID": curr_spl,
-                            "genes_1": ";".join(first_genes),
-                            "genes_2": ";".join(second_genes),
-                            "status": status,
-                            "breakpoint1": "{}:{}".format(first.chrom, first.info["ANNOT_POS"]),
-                            "breakpoint2": "{}:{}".format(second.chrom, second.info["ANNOT_POS"]),
-                            "support_span": first.samples[curr_spl]["PR"],
-                            "support_split": first.samples[curr_spl]["SR"],
-                            "filters": ";".join(first.filter),
-                            "source": curr_src,
-                            "nb_sources": len(first.info["SRC"])
-                        })
-                # False negatives
-                expected_set = set(expected_by_spl[curr_spl].keys()) ######################### pb when several fusions with same partners
-                for caller, true_positives_set in tp_by_callers.items():
-                    false_negative_set = expected_set - true_positives_set
-                    false_negative_set = false_negative_set - na_by_callers[caller]
-                    for curr_fusion in sorted(false_negative_set):
-                        expected = expected_by_spl[curr_spl][curr_fusion]
-                        writer.write({
-                            "dataset": args.dataset_name,
-                            "sample_ID": curr_spl,
-                            "genes_1": curr_fusion.split("\t")[0],
-                            "genes_2": curr_fusion.split("\t")[1],
-                            "status": "FN",
-                            "breakpoint1": "NA",
-                            "breakpoint2": "NA",
-                            "support_span": "NA",
-                            "support_split": "NA",
-                            "filters": "",
-                            "source": caller,
-                            "nb_sources": 0
-                        })
+        for curr_caller, res_by_spl in res_by_caller.items():
+            for curr_spl, res_by_partners in res_by_spl.items():
+                expected_by_partners = expected_by_spl[curr_spl]
+                for curr_partners, observed_fusions in res_by_partners.items():
+                    if curr_partners == "unexpected":
+                        obs_by_partners = {}
+                        for curr_fusion in observed_fusions:
+                            real_partners = curr_fusion["genes_1"] + "\t" + curr_fusion["genes_2"]
+                            if real_partners not in obs_by_partners:
+                                obs_by_partners[real_partners] = []
+                            obs_by_partners[real_partners].append(curr_fusion)
+                        for real_partners, observed_sub_gp in obs_by_partners.items():
+                            for selected_status in [{"TP", "TP_ISOFORM"}, {"NA"}, {"FP"}]:
+                                writeAggregate(writer, observed_sub_gp, selected_status, args.dataset_name, curr_spl)
+                    else:
+                        nb_TP = len([1 for curr_fusion in observed_fusions if curr_fusion["status"] in {"TP", "TP_ISOFORM"}])
+                        if curr_partners in expected_by_partners and nb_TP == 0:  # FN
+                            writer.write({
+                                "dataset": args.dataset_name,
+                                "sample_ID": curr_spl,
+                                "genes_1": curr_partners.split("\t")[0],
+                                "genes_2": curr_partners.split("\t")[1],
+                                "status": "FN",
+                                "duplicates": "",
+                                "breakpoint1": "NA",
+                                "breakpoint2": "NA",
+                                "support_span": "NA",
+                                "support_split": "NA",
+                                "filters": "",
+                                "source": curr_caller,
+                                "nb_sources": 0
+                            })
+                        for selected_status in [{"TP", "TP_ISOFORM"}, {"NA"}, {"FP"}]:
+                            writeAggregate(writer, observed_fusions, selected_status, args.dataset_name, curr_spl)
+
+    log.info("End of job")
