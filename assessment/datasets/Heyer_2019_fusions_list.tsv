@@ -5,8 +5,7 @@ PMID	enrichment	sample_ID	sample_name	genes_1	genes_2	chr1	breakpoint1	chr2	brea
 30918253	capture	SRR7646935	5287-2	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
 30918253	capture	SRR7646932	5401	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
 30918253	capture	SRR7646933	5494-2	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
-30918253	capture	SRR7646936	5545	WT						
-30918253	capture	SRR7646937	5656	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
+30918253	capture	SRR7646936	5545	WT
 30918253	capture	SRR7646890	6053	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
 30918253	capture	SRR7646896	10651	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
 30918253	capture	SRR7646902	13179	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
