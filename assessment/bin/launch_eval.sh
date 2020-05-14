@@ -1,5 +1,8 @@
 #!/bin/bash
-set -e # exit when any command fails
+# author = Frederic Escudie
+# copyright = Copyright (C) 2020 IUCT-O
+# license = GNU General Public License
+# version = 1.1.0
 
 # Parameters and environment
 if [ $# -eq 0 ]
@@ -15,39 +18,58 @@ assessment_dir=`dirname ${assessment_bin_dir}`
 export PATH=${assessment_bin_dir}:$PATH
 
 # Evaluate datasets
-declare -a datasets=('Heyer_2019', 'Tembe_2014', 'simulated')
+declare -a datasets=('Heyer_2019' 'Tembe_2014' 'simulated')
 for dataset in "${datasets[@]}"
 do
 	echo "Process "${dataset_name}
 	evalVCFRes.py \
 	 -d ${dataset} \
 	 -m genes \
-     -i ../../config/filters_rules.json \
-	 -e datasets/${dataset}_fusions_list.tsv \
-	 -a results/${wf_version}/${dataset}/vcf/*_unfiltered.vcf \
-	 -o results/${wf_version}/${dataset}/results_genes.tsv
+     -i ${assessment_dir}/../config/filters_rules.json \
+	 -e ${assessment_dir}/datasets/${dataset}_fusions_list.tsv \
+	 -a ${assessment_dir}/results/${wf_version}/${dataset}/vcf/*_unfiltered.vcf \
+	 -o ${assessment_dir}/results/${wf_version}/${dataset}/results_genes.tsv
+    if [ $? -ne 0 ]; then
+ 		>&2 echo "Error in evalVCFRes genes"
+ 		exit 1
+ 	fi
 	evalVCFRes.py \
 	 -d ${dataset} \
 	 -m breakpoints \
-     -i ../../config/filters_rules.json \
-	 -e datasets/litterature_expected_fusion_list.tsv \
-	 -a results/${wf_version}/${dataset}/vcf/*_unfiltered.vcf \
-	 -o results/${wf_version}/${dataset}/results_breakpoints.tsv
+     -i ${assessment_dir}/../config/filters_rules.json \
+	 -e ${assessment_dir}/datasets/${dataset}_fusions_list.tsv \
+	 -a ${assessment_dir}/results/${wf_version}/${dataset}/vcf/*_unfiltered.vcf \
+	 -o ${assessment_dir}/results/${wf_version}/${dataset}/results_breakpoints.tsv
+    if [ $? -ne 0 ]; then
+  		>&2 echo "Error in evalVCFRes breakpoints"
+  		exit 1
+  	fi
 done
 
 # Concatenate all datasets
-grep "dataset\tsample_ID" results/${wf_version}/Heyer_2019/results_genes.tsv > results/${wf_version}/results_details_genes.tsv
-grep -v "dataset\tsample_ID" results/${wf_version}/*/results_genes.tsv >> results/${wf_version}/results_details_genes.tsv
-
-grep "dataset\tsample_ID" results/${wf_version}/Heyer_2019/results_breakpoints.tsv > results/${wf_version}/results_details_breakpoints.tsv
-grep -v "dataset\tsample_ID" results/${wf_version}/*/results_breakpoints.tsv >> results/${wf_version}/results_details_breakpoints.tsv
+egrep --no-filename "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_genes.tsv | uniq > ${assessment_dir}/results/${wf_version}/results_details_genes.tsv && \
+egrep -v "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_genes.tsv >> ${assessment_dir}/results/${wf_version}/results_details_genes.tsv && \
+egrep --no-filename "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_breakpoints.tsv | uniq > ${assessment_dir}/results/${wf_version}/results_details_breakpoints.tsv && \
+egrep -v "^dataset\ssample_ID" ${assessment_dir}/results/${wf_version}/*/results_breakpoints.tsv >> ${assessment_dir}/results/${wf_version}/results_details_breakpoints.tsv
+if [ $? -ne 0 ]; then
+    >&2 echo "Error in merge results"
+    exit 1
+fi
 
 # Process performance metrics
 evalVCFMetrics.py \
- -i results/${wf_version}/results_details_genes.tsv \
- -o results/${wf_version}/results_metrics_genes.tsv
+ -i ${assessment_dir}/results/${wf_version}/results_details_genes.tsv \
+ -o ${assessment_dir}/results/${wf_version}/results_metrics_genes.tsv
+if [ $? -ne 0 ]; then
+    >&2 echo "Error in evalVCFMetrics genes"
+    exit 1
+fi
 evalVCFMetrics.py \
- -i results/${wf_version}/results_details_breakpoints.tsv \
- -o results/${wf_version}/results_metrics_breakpoints.tsv
+ -i ${assessment_dir}/results/${wf_version}/results_details_breakpoints.tsv \
+ -o ${assessment_dir}/results/${wf_version}/results_metrics_breakpoints.tsv
+if [ $? -ne 0 ]; then
+    >&2 echo "Error in evalVCFMetrics breakpoints"
+    exit 1
+fi
 
 echo "End of job"
