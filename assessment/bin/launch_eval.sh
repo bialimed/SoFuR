@@ -22,12 +22,14 @@ do
 	evalVCFRes.py \
 	 -d ${dataset} \
 	 -m genes \
+     -i ../../config/filters_rules.json \
 	 -e datasets/${dataset}_fusions_list.tsv \
 	 -a results/${wf_version}/${dataset}/vcf/*_unfiltered.vcf \
 	 -o results/${wf_version}/${dataset}/results_genes.tsv
 	evalVCFRes.py \
 	 -d ${dataset} \
 	 -m breakpoints \
+     -i ../../config/filters_rules.json \
 	 -e datasets/litterature_expected_fusion_list.tsv \
 	 -a results/${wf_version}/${dataset}/vcf/*_unfiltered.vcf \
 	 -o results/${wf_version}/${dataset}/results_breakpoints.tsv
