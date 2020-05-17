@@ -111,9 +111,9 @@ def loadResByCallers(inputs_variants, expected_by_spl, sofur_filters, status_mod
                                 rna_types_first = {annot["RNA_ELT_TYPE"] for annot in first.info[annotation_field] if annot["SYMBOL"] == curr_first_gene}
                                 rna_types_second = {annot["RNA_ELT_TYPE"] for annot in second.info[annotation_field] if annot["SYMBOL"] == curr_second_gene}
                                 for elt in rna_types_first:
-                                    if "spliceDonor" in elt or "transcriptEnd" in elt:
+                                    if "spliceDonor" in elt or "exonEnd" in elt or "transcriptEnd" in elt:
                                         for elt in rna_types_second:
-                                            if "spliceAcceptor" in elt or "transcriptStart" in elt:
+                                            if "spliceAcceptor" in elt or "exonStart" in elt or "transcriptStart" in elt:
                                                 status = "TP_ISOFORM"
                         if status == "TP":
                             selected_fusion = curr_fusion
