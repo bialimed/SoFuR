@@ -3,7 +3,7 @@
 __author__ = 'Veronique Ivashchenko and Frederic Escudie'
 __copyright__ = 'Copyright (C) 2020 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '1.1.0'
+__version__ = '1.2.0'
 __email__ = 'escudie.frederic@iuct-oncopole.fr'
 __status__ = 'prod'
 
@@ -103,7 +103,7 @@ def loadResByCallers(inputs_variants, expected_by_spl, sofur_filters, status_mod
                         else:
                             expected = expected_by_spl[curr_spl][curr_fusion]
                             if expected is None:  # Fusion is only known by partner and breakpoints are unknown
-                                status = "NA"
+                                status = "-"
                             else:  # Fusion is known by partner and breakpoints
                                 if hasSameCoordinates(expected, first, second):
                                     status = "TP"
@@ -182,7 +182,7 @@ def writeResults(output_comparison, res_by_caller, expected_by_spl, dataset_name
                                 obs_by_partners[real_partners] = []
                             obs_by_partners[real_partners].append(curr_fusion)
                         for real_partners, observed_sub_gp in obs_by_partners.items():
-                            for selected_status in [{"TP", "TP_ISOFORM"}, {"NA"}, {"FP"}]:
+                            for selected_status in [{"TP", "TP_ISOFORM"}, {"-"}, {"FP"}]:
                                 writeAggregate(writer, observed_sub_gp, selected_status, dataset_name, curr_spl)
                     else:
                         nb_TP = len([1 for curr_fusion in observed_fusions if curr_fusion["status"] in {"TP", "TP_ISOFORM"}])
@@ -202,7 +202,7 @@ def writeResults(output_comparison, res_by_caller, expected_by_spl, dataset_name
                                 "source": curr_caller,
                                 "nb_sources": 0
                             })
-                        for selected_status in [{"TP", "TP_ISOFORM"}, {"NA"}, {"FP"}]:
+                        for selected_status in [{"TP", "TP_ISOFORM"}, {"-"}, {"FP"}]:
                             writeAggregate(writer, observed_fusions, selected_status, dataset_name, curr_spl)
 
 

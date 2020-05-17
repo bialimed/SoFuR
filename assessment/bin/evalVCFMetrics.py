@@ -3,7 +3,7 @@
 __author__ = 'Veronique Ivashchenko and Frederic Escudie'
 __copyright__ = 'Copyright (C) 2020 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 __email__ = 'escudie.frederic@iuct-oncopole.fr'
 __status__ = 'prod'
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
                 results_by_dataset[dataset] = {}
             src = record["source"]
             if src not in results_by_dataset[dataset]:
-                results_by_dataset[dataset][src] = {"TP": 0, "FP": 0, "FN": 0, "NA": 0}
+                results_by_dataset[dataset][src] = {"TP": 0, "FP": 0, "FN": 0, "-": 0}
             results_by_dataset[dataset][src][record["status"]] += 1
 
     # Write results
@@ -59,7 +59,7 @@ if __name__ == "__main__":
                     "TP": res["TP"],
                     "FP": res["FP"],
                     "FN": res["FN"],
-                    "NA": res["NA"],
+                    "NA": res["-"],
                     "precision": "{:.4f}".format(res["TP"] / (res["TP"] + res["FP"])),
                     "recall": "{:.4f}".format(res["TP"] / (res["TP"] + res["FN"]))
                 })
