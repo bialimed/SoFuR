@@ -12,12 +12,12 @@
             "values": ["Arriba", "FusionCatcher", "manta", "STAR_Fusion"]
         }, {
             "class": "Filter",
-            "description": "Filter false positive fusions (Inner, Readthrough, on HLA and on IG).",
+            "description": "Filter false positive fusions (Inner, Readthrough, and on HLA).",
             "getter": "filter",
             "action": "select",
             "aggregator": "ratio:1",
             "operator": "not in",
-            "values": ["HLA", "IG", "Inner", "Readthrough"]
+            "values": ["HLA", "Inner", "Readthrough"]
         }
     ]
 }
