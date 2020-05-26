@@ -3,6 +3,7 @@ R2: [] ##MANDATORY##
 reference:
     assembly: GRCh38.p12
     annotations: ##MANDATORY## # Homo_sapiens.GRCh38.94.chr.gtf
+    known_partners: ##MANDATORY## # Homo_sapiens_knownFusions.tsv
     genes_bed: ##MANDATORY## # Homo_sapiens.GRCh38.94.chr.bed
     sequences: ##MANDATORY## # Homo_sapiens.GRCh38.94.dna.fa
     fusionCatcher: ##MANDATORY## # fusionCatcher/v98

@@ -1,7 +1,7 @@
 __author__ = 'Frederic Escudie and Veronique Ivashchenko'
 __copyright__ = 'Copyright (C) 2019 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '0.3.0'
+__version__ = '0.4.0'
 __email__ = 'escudie.frederic@iuct-oncopole.fr'
 __status__ = 'dev'
 
@@ -133,6 +133,11 @@ annotBND(
     in_variants="structural_variants/{sample}.vcf",
     out_variants="structural_variants/{sample}_annot.vcf"
 )
+annotKnownBND(
+    in_known_partners=config.get("reference")["known_partners"],
+    in_variants="structural_variants/{sample}_annot.vcf",
+    out_variants="structural_variants/{sample}_annot_known.vcf"
+)
 
 # Fusions pathogenicity
 #########################
@@ -143,7 +148,7 @@ babiceanu = os.path.join(config.get("reference")["fusionCatcher"], "non-cancer_t
 filterBND(
     in_annotations=config.get("reference")["annotations"],
     in_normal=[bodymap, babiceanu],
-    in_variants="structural_variants/{sample}_annot.vcf",
+    in_variants="structural_variants/{sample}_annot_known.vcf",
     out_variants="structural_variants/{sample}_unfiltered.vcf",
     params_min_support=config.get("filters")["low_support"],
     params_normal_sources="Illumina Body Map 2 and Babiceanu et al NAR 2016",

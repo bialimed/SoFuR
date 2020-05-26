@@ -11,6 +11,12 @@
       vmem: "10G",
       threads: 1
   },
+  annotKnownBND: {
+      queue: "normal",
+      mem: "10G",
+      vmem: "10G",
+      threads: 1
+  },
   arriba_run: {
       queue: "normal",
       mem: "10G",
