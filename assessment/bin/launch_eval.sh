@@ -21,7 +21,7 @@ export PATH=${assessment_bin_dir}:$PATH
 declare -a datasets=('Heyer_2019' 'Tembe_2014' 'simulated')
 for dataset in "${datasets[@]}"
 do
-	echo "Process "${dataset_name}
+	echo "Process "${dataset}
 	evalVCFRes.py \
 	 -d ${dataset} \
 	 -m genes \
