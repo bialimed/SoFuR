@@ -1,27 +1,81 @@
-R1: [] ##MANDATORY##
-R2: [] ##MANDATORY##
+R1: []
+# MANDATORY: yes
+# DESCRIPTION: Pathes to R1 files in fastq format.
+R2: []
+# MANDATORY: yes
+# DESCRIPTION: Pathes to R2 files in fastq format.
 reference:
     assembly: GRCh38.p12
-    annotations: ##MANDATORY## # Homo_sapiens.GRCh38.94.chr.gtf
-    known_partners: ##MANDATORY## # Homo_sapiens_knownFusions.tsv
-    genes_bed: ##MANDATORY## # Homo_sapiens.GRCh38.94.chr.bed
-    sequences: ##MANDATORY## # Homo_sapiens.GRCh38.94.dna.fa
-    fusionCatcher: ##MANDATORY## # fusionCatcher/v98
-    STAR-Fusion: ##MANDATORY## #
-    without_chr: True ##MANDATORY## #
+    annotations:  # Homo_sapiens.GRCh38.94.chr.gtf
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the annotations file containing genes,
+    # transcripts and proteins coordinates (format: GTF)
+    sequences:  # Homo_sapiens.GRCh38.94.dna.fa
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the sequences file. This file must be indexed with
+    # samtools faidx.
+    known_partners:  # Homo_sapiens_knownFusions.tsv
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the file conyaining known fusions (format: TSV). This
+    # file contains 3 columns: 5prim_gene, 3_prim_gene and sources. 5prim_gene
+    # and 3prim_gene are symbol with the same master name of the name in GTF
+    # (reference.annotations) used for the annotation of breakends. sources is a
+    # string containing db1name:entryId,entryId|db2name:entryId (example:
+    # cosmic_91:1743,1745|chimerdb_pub-V4:3427,3428). This file can be build
+    # with anacore-utils/bin/buildFusionsDb.py (https://github.com/bialimed/AnaCore-utils).
+    genes_bed:  # Homo_sapiens.GRCh38.94.chr.bed
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the annotations file containing genes (format: BED).
+    without_chr: True
+    # MANDATORY: yes
+    # DESCRIPTION: True if chromosome in reference.sequence does not start with
+    # "chr" as prefix.
+    fusionCatcher: ##MANDATORY## # fusionCatcher/v98 #####################################
+    STAR-Fusion: ##MANDATORY## #####################################
 cleaning:
-    R1_end_adapter:  ##MANDATORY##
-    R2_end_adapter:  ##MANDATORY##
+    R1_end_adapter:  # Illumina_3prim_adapter.fasta
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the fasta containing the sequence of the 3 prime
+    # adapter.
+    R2_end_adapter:   # Illumina_5prim_adapter_rvc.fasta
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the fasta containing the reverse complemented
+    # sequence of the 5 prime adapter.
     adapter_error_rate: 0.2
+    # MANDATORY: yes
+    # DESCRIPTION: Maximum error rate in adapter recognition for trimming.
     reads_min_length: 40
+    # MANDATORY: yes
+    # DESCRIPTION: Discard processed reads pairs with at least one read shorter
+    # than this value after adapter trimming.
     adapter_min_overlap: 3
+    # MANDATORY: yes
+    # DESCRIPTION: Minimum overlap between adapter sequence and reads for
+    # adapter recognition.
 fusions_calling:
-    arriba_blacklist:  ##MANDATORY##
+    arriba_blacklist:
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the blacklist used in arriba. The blacklists are
+    # contained in the release tarballs of Arriba and are used to remove
+    # recurrent alignment artifacts and transcripts which are present in healthy
+    # tissue.
     is_somatic: True
+    # MANDATORY: yes
+    # DESCRIPTION: If True fusions caller with somatic mode use this mode.
     STAR_nb_threads: 4
+    # MANDATORY: yes
+    # DESCRIPTION: Number of threads used by STAR in fusions callers. If you
+    # change this value keep in mind to update config/cluster.json.
 filters:
     low_support: 3
-    rules:  ##MANDATORY##
+    # MANDATORY: yes
+    # DESCRIPTION: Fusions with a number of supporting reads lower than this
+    # value will be tagged as "lowSupport".
+    rules:  # filters_rules.json
+    # MANDATORY: yes
+    # DESCRIPTION: filters applied on unfiltered.vcf to produce filtered.vcf and
+    # variants in report (format: JSON). See example in config/filters_rules.json
 software_pathes:
-    arriba:  ##MANDATORY##
-    mergeVCFFusionsCallers:  ##OPTIONAL##
+    arriba:  # arriba
+    # MANDATORY: yes
+    # DESCRIPTION: Path to call arriba.
