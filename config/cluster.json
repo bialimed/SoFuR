@@ -112,7 +112,7 @@
       mem: "3G",
       vmem: "3G",
       threads: 1
-  }
+  },
   rseqc_readDistribution: {
       queue: "normal",
       mem: "4G",
