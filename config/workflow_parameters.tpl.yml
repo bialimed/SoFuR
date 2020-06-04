@@ -6,32 +6,44 @@ R2: []
 # DESCRIPTION: Pathes to R2 files in fastq format.
 reference:
     assembly: GRCh38.p12
-    annotations:  # Homo_sapiens.GRCh38.94.chr.gtf
-    # MANDATORY: yes
-    # DESCRIPTION: Path to the annotations file containing genes,
-    # transcripts and proteins coordinates (format: GTF)
-    sequences:  # Homo_sapiens.GRCh38.94.dna.fa
-    # MANDATORY: yes
-    # DESCRIPTION: Path to the sequences file. This file must be indexed with
-    # samtools faidx.
-    known_partners:  # Homo_sapiens_knownFusions.tsv
-    # MANDATORY: yes
-    # DESCRIPTION: Path to the file conyaining known fusions (format: TSV). This
-    # file contains 3 columns: 5prim_gene, 3_prim_gene and sources. 5prim_gene
-    # and 3prim_gene are symbol with the same master name of the name in GTF
-    # (reference.annotations) used for the annotation of breakends. sources is a
-    # string containing db1name:entryId,entryId|db2name:entryId (example:
-    # cosmic_91:1743,1745|chimerdb_pub-V4:3427,3428). This file can be build
-    # with anacore-utils/bin/buildFusionsDb.py (https://github.com/bialimed/AnaCore-utils).
-    genes_bed:  # Homo_sapiens.GRCh38.94.chr.bed
-    # MANDATORY: yes
-    # DESCRIPTION: Path to the annotations file containing genes (format: BED).
     without_chr: True
     # MANDATORY: yes
     # DESCRIPTION: True if chromosome in reference.sequence does not start with
     # "chr" as prefix.
-    fusionCatcher: ##MANDATORY## # fusionCatcher/v98 #####################################
-    STAR-Fusion: ##MANDATORY## #####################################
+    sequences:  # Homo_sapiens.GRCh38.94.dna.fa
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the sequences file. This file must be indexed with
+    # samtools faidx.
+    annotations:  # Homo_sapiens.GRCh38.94.chr.gtf
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the annotations file containing genes,
+    # transcripts and proteins coordinates (format: GTF)
+    genes_bed:  # Homo_sapiens.GRCh38.94.chr.bed
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the annotations file containing genes (format: BED).
+    known_partners:  # Homo_sapiens_knownFusions.tsv
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the file containing known fusions (format: TSV). This
+    # file contains 3 columns: 5prim_gene, 3_prim_gene and sources. 5prim_gene
+    # and 3prim_gene are symbols with the same master name of the name in GTF
+    # (reference.annotations) used for the annotation of breakends. sources is a
+    # string containing db1name:entryId,entryId|db2name:entryId (example:
+    # cosmic_91:1743,1745|chimerdb_pub-V4:3427,3428). This file can be build
+    # with anacore-utils/bin/buildFusionsDb.py (https://github.com/bialimed/AnaCore-utils).
+    healthy_partners:
+        pathes:  # Homo_sapiens_BodyMap2.tsv, Homo_sapiens_Babiceanu-2016.tsv
+        # MANDATORY: no
+        # DESCRIPTION: Pathes to the file containing fusions reported in healthy
+        # samples (format: TSV). This file contains 2 columns: 5prim_gene and
+        # 3_prim_gene. The symbols must be the same as used in GTF provided by
+        # reference.annotations.
+        description:  # Illumina Body Map 2 and Babiceanu et al NAR 2016
+        # MANDATORY: no
+        # DESCRIPTION: The description of the healthy fusions sources. This
+        # description will be added in VCF file.
+    STAR-Fusion:  # GRCh38_gencode_v32_CTAT_lib_Dec062019
+    # MANDATORY: yes
+    # DESCRIPTION: Path to the CTAT resource folder.
 cleaning:
     R1_end_adapter:  # Illumina_3prim_adapter.fasta
     # MANDATORY: yes
