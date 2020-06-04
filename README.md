@@ -7,19 +7,62 @@ This workflow detects, annotates and filters somatic fusions from stranded
 paired-end RNA-seq from Illumina's instruments.
 
 ## Workflow steps
-![Missing image](doc/img/workflow.png)
+![workflow](doc/img/workflow.png)
 
 ## Installation
+### 1. Download code
+Use one of the following:
+
+* [user way] Downloads the latest released versions from
+`https://bitbucket.org/fescudie/sofur/downloads/?tab=tags`.
+* [developper way] Clones the repository from the latest unreleased version:
+
+      git clone https://bitbucket.org/fescudie/sofur.git
+
+### 2. Install dependencies
+* conda (>=4.6.8):
+
+      wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+      sh Miniconda3-latest-Linux-x86_64.sh
+
+  More details on miniconda install [here](https://docs.conda.io/en/latest/miniconda.html).
+
+* snakemake (>=5.4.2):
+
+      conda install snakemake
+
+  More details on snakemake install [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
+
+* arriba (>=1.2.0):
+
+      wget https://github.com/suhrig/arriba/releases/download/v1.2.0/arriba_v1.2.0.tar.gz
+      tar -xzf arriba_v1.2.0.tar.gz
+      cd arriba_v1.2.0 && make # or use precompiled binaries
+
+  More details on arriba install [here](https://arriba.readthedocs.io/en/latest/quickstart).
+
+The others dependencies (cutadapt, bwa, ...) will be automatically installed by
+snakemake at the first execution. This first execution required an access to
+internet.
+
+### 4. Download and prepare resources
+TODO
+
+### 3. Test install
+TODO
 
 ## Usage
+Copy `${application_dir}/config/workflow_parameters.tpl.yml` in your current
+directory and change values before launching the following command:
+
     snakemake \
       --use-conda \
-      --conda-prefix ${application_env} \
+      --conda-prefix ${application_env_dir} \
       --jobs ${nb_jobs} \
       --latency-wait 100 \
       --snakefile ${application_dir}/Snakefile \
       --cluster-config ${application_dir}/config/cluster.json \
-      --configfile cfg.yml \ # See template ${application_dir}/config/workflow_parameters.yml
+      --configfile workflow_parameters.yml \
       --directory ${out_dir} \
       > ${out_dir}/wf_log.txt \
       2> ${out_dir}/wf_stderr.txt
@@ -53,6 +96,10 @@ resumes qualities of reads, distribution of alignments (between exon, intron,
 `*_filtered.vcf` contain all the fusions, their annotations and their tags after
 filtering by rules provided by file declarated in configfile by `filters.rules`.
 
+## Performances
+The performances are evaluated on real, synthetic and simulated datasets. The
+commands used in evaluation are stored in `assessment`. The results summarized
+in [assessment/report.html](assessment/report.html).
 
 ## Copyright
 2019 Laboratoire d'Anatomo-Cytopathologie de l'Institut Universitaire du Cancer
