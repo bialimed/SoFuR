@@ -7,6 +7,7 @@ __version__ = '1.0.0'
 def wfReport(
         params_samples,
         in_fusions="report/data/{sample}_fusions_filtered.json",
+        in_inpects="report/data/{sample}_fusions_inspect.json",
         in_resources_folder=None,
         out_run_report="report/run.html",
         out_sample_list="sample_list.txt",
@@ -39,6 +40,7 @@ def wfReport(
         input:
             lib = out_resources_folder,  # Not input but necessary to output
             fusions = in_fusions,
+            inspect = in_inpects
         output:
             out_spl_reports
         log:
@@ -50,6 +52,7 @@ def wfReport(
             "{params.bin_path}"
             " {params.sample}"
             " --input-fusions {input.fusions}"
+            " --input-inspect {input.inspect}"
             " --output-report {output}"
             " 2> {log}"
     # Create run report

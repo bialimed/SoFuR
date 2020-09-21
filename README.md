@@ -87,7 +87,8 @@ The main elements of the outputs directory are the following:
         └── sample-A_filtered.vcf
 
 * The [reports](doc/img/example_EWSR1_FLI1.png) files containing filtered fusions
-list and annotations are in `out_dir/report/{sample}.html`.
+list, annotations and [viewers](doc/img/example_breakend_viewer.png) are in
+`out_dir/report/{sample}.html`.
 * The quality reports is in `out_dir/stats/multiqc/multiqc_report.html`. It
 resumes qualities of reads, distribution of alignments (between exon, intron,
 ...) and strandness analysis.

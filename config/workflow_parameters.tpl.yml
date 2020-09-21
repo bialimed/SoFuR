@@ -18,6 +18,14 @@ reference:
     # MANDATORY: yes
     # DESCRIPTION: Path to the annotations file containing genes,
     # transcripts and proteins coordinates (format: GTF)
+    dromains_annotations:  # Homo_sapiens_protDomains.GRCh38.94.chr.gff3
+    # MANDATORY: no
+    # DESCRIPTION: Path to the domains annotations file (format: GFF3). Each
+    # entry in file is one proteic domain. Required attributes are "Note"
+    # (long name) and "target_protein" (ID of the protein present in
+    # "reference.annotations"). This file can be build with anacore-utils/bin/ensemblInterProToGFF.py
+    # (https://github.com/bialimed/AnaCore-utils).
+    healthy_partners:
     genes_bed:  # Homo_sapiens.GRCh38.94.chr.bed
     # MANDATORY: yes
     # DESCRIPTION: Path to the annotations file containing genes (format: BED).
@@ -44,6 +52,11 @@ reference:
     STAR-Fusion:  # GRCh38_gencode_v32_CTAT_lib_Dec062019
     # MANDATORY: yes
     # DESCRIPTION: Path to the CTAT resource folder.
+protocol:
+    targets:  # enrichment_target.bed
+    # MANDATORY: no
+    # DESCRIPTION: Path to the targets file (format: BED). If your protocol is
+    # targeted.
 cleaning:
     R1_end_adapter:  # Illumina_3prim_adapter.fasta
     # MANDATORY: yes
@@ -79,7 +92,7 @@ fusions_calling:
     # DESCRIPTION: Number of threads used by STAR in fusions callers. If you
     # change this value keep in mind to update config/cluster.json.
 filters:
-    low_support: 3
+    low_support: 5
     # MANDATORY: yes
     # DESCRIPTION: Fusions with a number of supporting reads lower than this
     # value will be tagged as "lowSupport".

@@ -65,6 +65,12 @@
       vmem: "3G",
       threads: 1
   },
+  inspectBND: {
+      queue: "normal",
+      mem: "20G",
+      vmem: "20G",
+      threads: 1
+  },
   manta_config: {
       queue: "normal",
       mem: "2G",

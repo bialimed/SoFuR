@@ -32,6 +32,8 @@ def getTemplate():
         <!-- HighCharts -->
         <script type="text/javascript" charset="utf8" src="resources/highcharts_7.1.0.min.js"></script>
         <script type="text/javascript" charset="utf8" src="resources/highcharts-more_7.1.0.min.js"></script>
+        <!-- D3 -->
+        <script type="text/javascript" charset="utf8" src="resources/d3_5.16.0.min.js"></script>
         <!-- DataTables -->
         <link type="text/css" charset="utf8" rel="stylesheet" href="resources/datatables_1.10.18.min.css"/>
         <script type="text/javascript" charset="utf8" src="resources/pdfmake_0.1.36.min.js"></script>
@@ -76,6 +78,22 @@ def getTemplate():
                         export_title="fusion_detail"
                         title="Transcripts">
                     </fusion-details-table>
+                    <div>
+                        <h4>First breakend<h4>
+                        <breakend-viewer-acc
+                            :analysis="breakend_annotations"
+                            :breakend="selected_fusion.breakends[0]"
+                            order="first"
+                            :width="browser_width">
+                        </breakend-viewer-acc>
+                        <h4>Second breakend<h4>
+                        <breakend-viewer-acc
+                            :analysis="breakend_annotations"
+                            :breakend="selected_fusion.breakends[1]"
+                            order="second"
+                            :width="browser_width">
+                        </breakend-viewer-acc>
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,12 +109,15 @@ def getTemplate():
             new Vue({
                 el: ".page-content",
                 data: {
+                    "breakend_annotations": null,
+                    "browser_width": null,
                     "fusions_found": null,
                     "fusion_ref_source": "manta",
                     "selected_fusion": null
                 },
                 mounted: function(){
                     this.loadData()
+                    this.browser_width = document.getElementByClassName("card-block")[0].clientWidth - 4
                 },
                 methods: {
                     callDetails: function(fusion){
@@ -109,6 +130,7 @@ def getTemplate():
                     },
                     loadData: function(){
                         this.fusions_found = ##fusions_data##.map(Fusion.fromJSON)
+                        this.breakend_annotations = FusionInspectAnalysis.fromJSON(##inspect_data##)
                     }
                 }
             })
@@ -128,7 +150,8 @@ if __name__ == "__main__":
     parser.add_argument('-n', '--sample-name', help='The sample name.')
     parser.add_argument('-v', '--version', action='version', version=__version__)
     group_input = parser.add_argument_group('Inputs')
-    group_input.add_argument('-i', '--input-fusions', required=True, help='Path to the fusions file (format: JSON).')
+    group_input.add_argument('-f', '--input-fusions', required=True, help='Path to the fusions file (format: JSON).')
+    group_input.add_argument('-i', '--input-inspect', required=True, help='Path to the fusions browser data file (format: JSON).')
     group_output = parser.add_argument_group('Outputs')
     group_output.add_argument('-o', '--output-report', help='Path to the outputted report file (format: HTML).')
     args = parser.parse_args()
@@ -144,6 +167,8 @@ if __name__ == "__main__":
     report_content = report_content.replace("##sample_name##", json.dumps(args.sample_name))
     with open(args.input_fusions) as reader:
         report_content = report_content.replace("##fusions_data##", json.dumps(json.load(reader)))
+    with open(args.input_inspect) as reader:
+        report_content = report_content.replace("##inspect_data##", json.dumps(json.load(reader)))
     with open(args.output_report, "w") as writer:
         writer.write(report_content)
     log.info("End of job.")
