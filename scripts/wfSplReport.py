@@ -79,20 +79,24 @@ def getTemplate():
                         title="Transcripts">
                     </fusion-details-table>
                     <div>
-                        <h4>First breakend<h4>
-                        <breakend-viewer-acc
-                            :analysis="breakend_annotations"
-                            :breakend="selected_fusion.breakends[0]"
-                            order="first"
-                            :width="browser_width">
-                        </breakend-viewer-acc>
-                        <h4>Second breakend<h4>
-                        <breakend-viewer-acc
-                            :analysis="breakend_annotations"
-                            :breakend="selected_fusion.breakends[1]"
-                            order="second"
-                            :width="browser_width">
-                        </breakend-viewer-acc>
+                        <div class="viewer-block">
+                            <h4>First breakend {{selected_fusion.breakends[0].}}</h4>
+                            <breakend-viewer-acc
+                                :analysis="breakend_annotations"
+                                :breakend="selected_fusion.breakends[0]"
+                                order="first"
+                                :width="browser_width">
+                            </breakend-viewer-acc>
+                        </div>
+                        <div class="viewer-block">
+                            <h4>Second breakend</h4>
+                            <breakend-viewer-ac
+                                :analysis="breakend_annotations"
+                                :breakend="selected_fusion.breakends[1]"
+                                order="second"
+                                :width="browser_width">
+                            </breakend-viewer-ac>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,7 +121,7 @@ def getTemplate():
                 },
                 mounted: function(){
                     this.loadData()
-                    this.browser_width = document.getElementByClassName("card-block")[0].clientWidth - 4
+                    this.browser_width = document.getElementsByClassName("card-block")[0].clientWidth - 60
                 },
                 methods: {
                     callDetails: function(fusion){

@@ -18,7 +18,7 @@ reference:
     # MANDATORY: yes
     # DESCRIPTION: Path to the annotations file containing genes,
     # transcripts and proteins coordinates (format: GTF)
-    dromains_annotations:  # Homo_sapiens_protDomains.GRCh38.94.chr.gff3
+    domains_annotations:  # Homo_sapiens_protDomains.GRCh38.94.chr.gff3
     # MANDATORY: no
     # DESCRIPTION: Path to the domains annotations file (format: GFF3). Each
     # entry in file is one proteic domain. Required attributes are "Note"
