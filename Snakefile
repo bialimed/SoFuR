@@ -168,7 +168,8 @@ inspectBND(
     in_domains=config.get("reference")["domains_annotations"],
     in_targets=config.get("protocol", {}).get("targets"),
     in_variants="structural_variants/{sample}_filtered.vcf",
-    out_annotations="report/data/{sample}_fusions_inspect.json"
+    out_annotations="report/data/{sample}_fusions_inspect.json",
+    params_keep_outputs=True
 )
 fusionsToJSON(
     out_variants="report/data/{sample}_fusions_filtered.json",

@@ -29,9 +29,6 @@ def getTemplate():
         <meta name="copyright" content="2020 IUCT-O">
         <!-- jQuery -->
         <script type="text/javascript" charset="utf8" src="resources/jquery_3.3.1.min.js"></script>
-        <!-- HighCharts -->
-        <script type="text/javascript" charset="utf8" src="resources/highcharts_7.1.0.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="resources/highcharts-more_7.1.0.min.js"></script>
         <!-- D3 -->
         <script type="text/javascript" charset="utf8" src="resources/d3_5.16.0.min.js"></script>
         <!-- DataTables -->
@@ -80,16 +77,16 @@ def getTemplate():
                     </fusion-details-table>
                     <div>
                         <div class="viewer-block">
-                            <h4>First breakend {{selected_fusion.breakends[0].}}</h4>
-                            <breakend-viewer-acc
+                            <h4>First breakend: {{selected_fusion.getSymbols(0).join(" and ")}}</h4>
+                            <breakend-viewer-ac
                                 :analysis="breakend_annotations"
                                 :breakend="selected_fusion.breakends[0]"
                                 order="first"
                                 :width="browser_width">
-                            </breakend-viewer-acc>
+                            </breakend-viewer-ac>
                         </div>
                         <div class="viewer-block">
-                            <h4>Second breakend</h4>
+                            <h4>Second breakend: {{selected_fusion.getSymbols(1).join(" and ")}}</h4>
                             <breakend-viewer-ac
                                 :analysis="breakend_annotations"
                                 :breakend="selected_fusion.breakends[1]"
@@ -121,7 +118,7 @@ def getTemplate():
                 },
                 mounted: function(){
                     this.loadData()
-                    this.browser_width = document.getElementsByClassName("card-block")[0].clientWidth - 60
+                    this.browser_width = d3.select(".card-block").node().clientWidth - 60
                 },
                 methods: {
                     callDetails: function(fusion){
