@@ -12,14 +12,14 @@ import os
 from time import strftime, gmtime
 
 
-def commonSubPathes(pathes_a, pathes_b, use_basename=False):
+def commonSubPaths(paths_a, paths_b, use_basename=False):
     """
     Return the longer common substring from the left of the two strings.
 
-    :param pathes_a: The first string to process.
-    :type pathes_a: list
-    :param pathes_b: The second string to process.
-    :type pathes_b: list
+    :param paths_a: The first string to process.
+    :type paths_a: list
+    :param paths_b: The second string to process.
+    :type paths_b: list
     :param use_basename: With true the substrings are extracted from the
     basenames. Otherwise they are extracted from all the path.
     :type use_basename: bool
@@ -27,7 +27,7 @@ def commonSubPathes(pathes_a, pathes_b, use_basename=False):
     :rtype: list
     """
     out_list = list()
-    for path_a, path_b in zip(pathes_a, pathes_b):
+    for path_a, path_b in zip(paths_a, paths_b):
         if use_basename:
             path_a = os.path.basename(path_a)
             path_b = os.path.basename(path_b)
@@ -121,20 +121,20 @@ def getParamFromConf(config, param_name, rule_name, missing_val=None):
 
 def getSoft(config, soft_name, sub_section=None):
     """
-    Return software callable name from configuration file in section software_pathes or from environment.
+    Return software callable name from configuration file in section software_paths or from environment.
 
     :param config: Workflow configuration.
     :type config: OrderedDict
     :param soft_name: Software name.
     :type soft_name: str
-    :param sub_section: Section name in subsection software_pathes.
+    :param sub_section: Section name in subsection software_paths.
     :type sub_section: str
     :return: Software callable name.
     :rtype: str
     """
     soft_path = soft_name
     # Config file overwrite environment or container
-    soft_config = config.get("software_pathes")
+    soft_config = config.get("software_paths")
     if sub_section is not None:
         subsection_config = soft_config[sub_section]
         if soft_name in subsection_config and subsection_config[soft_name] is not None:

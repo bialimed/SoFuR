@@ -1,9 +1,9 @@
 R1: []
 # MANDATORY: yes
-# DESCRIPTION: Pathes to R1 files in fastq format.
+# DESCRIPTION: Paths to R1 files in fastq format.
 R2: []
 # MANDATORY: yes
-# DESCRIPTION: Pathes to R2 files in fastq format.
+# DESCRIPTION: Paths to R2 files in fastq format.
 reference:
     assembly: GRCh38.p12
     without_chr: True
@@ -39,9 +39,9 @@ reference:
     # cosmic_91:1743,1745|chimerdb_pub-V4:3427,3428). This file can be build
     # with anacore-utils/bin/buildFusionsDb.py (https://github.com/bialimed/AnaCore-utils).
     healthy_partners:
-        pathes:  # Homo_sapiens_BodyMap2.tsv, Homo_sapiens_Babiceanu-2016.tsv
+        paths:  # Homo_sapiens_BodyMap2.tsv, Homo_sapiens_Babiceanu-2016.tsv
         # MANDATORY: no
-        # DESCRIPTION: Pathes to the file containing fusions reported in healthy
+        # DESCRIPTION: Paths to the file containing fusions reported in healthy
         # samples (format: TSV). This file contains 2 columns: 5prim_gene and
         # 3_prim_gene. The symbols must be the same as used in GTF provided by
         # reference.annotations.
@@ -100,7 +100,7 @@ filters:
     # MANDATORY: yes
     # DESCRIPTION: filters applied on unfiltered.vcf to produce filtered.vcf and
     # variants in report (format: JSON). See example in config/filters_rules.json
-software_pathes:
+software_paths:
     arriba:  # arriba
     # MANDATORY: yes
     # DESCRIPTION: Path to call arriba.

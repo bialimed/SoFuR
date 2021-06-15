@@ -44,7 +44,7 @@ SAMPLES = None
 if config.get("samples") is not None:
     SAMPLES = config["samples"]
 else:
-    SAMPLES = [elt[:-2] for elt in commonSubPathes(config.get("R1"), config.get("R2"), True)]
+    SAMPLES = [elt[:-2] for elt in commonSubPaths(config.get("R1"), config.get("R2"), True)]
 R1_PATTERN = config["R1"][0].replace(SAMPLES[0], "{sample}")
 R2_PATTERN = config["R2"][0].replace(SAMPLES[0], "{sample}")
 CALLERS = ["manta", "STAR_Fusion", "Arriba"]
@@ -145,7 +145,7 @@ annotKnownBND(
 # Filters
 filterBND(
     in_annotations=config.get("reference")["annotations"],
-    in_normal=config.get("reference")["healthy_partners"].get("pathes", None),
+    in_normal=config.get("reference")["healthy_partners"].get("paths", None),
     in_variants="structural_variants/{sample}_annot_known.vcf",
     out_variants="structural_variants/{sample}_unfiltered.vcf",
     params_min_support=config.get("filters")["low_support"],
