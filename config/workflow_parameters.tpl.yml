@@ -25,7 +25,6 @@ reference:
     # (long name) and "target_protein" (ID of the protein present in
     # "reference.annotations"). This file can be build with anacore-utils/bin/ensemblInterProToGFF.py
     # (https://github.com/bialimed/AnaCore-utils).
-    healthy_partners:
     genes_bed:  # Homo_sapiens.GRCh38.94.chr.bed
     # MANDATORY: yes
     # DESCRIPTION: Path to the annotations file containing genes (format: BED).
@@ -37,7 +36,7 @@ reference:
     # (reference.annotations) used for the annotation of breakends. sources is a
     # string containing db1name:entryId,entryId|db2name:entryId (example:
     # cosmic_91:1743,1745|chimerdb_pub-V4:3427,3428). This file can be build
-    # with anacore-utils/bin/buildFusionsDb.py (https://github.com/bialimed/AnaCore-utils).
+    # with anacore-utils/bin/buildKnownBNDDb.py (https://github.com/bialimed/AnaCore-utils).
     healthy_partners:
         paths:  # Homo_sapiens_BodyMap2.tsv, Homo_sapiens_Babiceanu-2016.tsv
         # MANDATORY: no
@@ -100,7 +99,4 @@ filters:
     # MANDATORY: yes
     # DESCRIPTION: filters applied on unfiltered.vcf to produce filtered.vcf and
     # variants in report (format: JSON). See example in config/filters_rules.json
-software_paths:
-    arriba:  # arriba
-    # MANDATORY: yes
-    # DESCRIPTION: Path to call arriba.
+software_paths: {}

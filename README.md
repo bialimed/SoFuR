@@ -33,14 +33,6 @@ Use one of the following:
 
   More details on snakemake install [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
 
-* arriba (>=1.2.0):
-
-      wget https://github.com/suhrig/arriba/releases/download/v1.2.0/arriba_v1.2.0.tar.gz
-      tar -xzf arriba_v1.2.0.tar.gz
-      cd arriba_v1.2.0 && make # or use precompiled binaries
-
-  More details on arriba install [here](https://arriba.readthedocs.io/en/latest/quickstart).
-
 The others dependencies (cutadapt, bwa, ...) will be automatically installed by
 snakemake at the first execution. This first execution required an access to
 internet.
