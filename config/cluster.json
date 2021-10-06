@@ -154,7 +154,7 @@
       mem: "10G",
       vmem: "10G",
       threads: 4
-  }
+  },
   wfRunReport: {
       queue: "normal",
       mem: "8G",

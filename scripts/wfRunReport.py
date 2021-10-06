@@ -90,13 +90,13 @@ def getTemplate():
                     this.loadData()
                 },
                 methods: {
+                    loadData: function(){
+                        this.run_info = ##run_data##
+                        this.interop_summary = ##interop_data##
+                    },
                     splToUrl: function(spl){
                         return spl + ".html"
                     }
-                },
-                loadData: function(){
-                    this.run_info = ##run_data##
-                    this.interop_summary = ##interop_data##
                 }
             })
         </script>
