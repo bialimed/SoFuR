@@ -1,3 +1,7 @@
+run_folder:
+# MANDATORY: no
+# DESCRIPTION: Path to the run folder written by sequencer. It is used to
+# produce metrics on run.
 R1: []
 # MANDATORY: yes
 # DESCRIPTION: Paths to R1 files in fastq format.

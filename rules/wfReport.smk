@@ -1,14 +1,16 @@
 __author__ = 'Frederic Escudie'
 __copyright__ = 'Copyright (C) 2020 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 
 def wfReport(
         params_samples,
         in_fusions="report/data/{sample}_fusions_filtered.json",
-        in_inpects="report/data/{sample}_fusions_inspect.json",
+        in_inspects="report/data/{sample}_fusions_inspect.json",
+        in_interop_summary=None,
         in_resources_folder=None,
+        in_run_summary=None,
         out_run_report="report/run.html",
         out_sample_list="sample_list.txt",
         out_spl_reports="report/{sample}.html",
@@ -40,7 +42,7 @@ def wfReport(
         input:
             lib = out_resources_folder,  # Not input but necessary to output
             fusions = in_fusions,
-            inspect = in_inpects
+            inspect = in_inspects
         output:
             out_spl_reports
         log:
@@ -62,6 +64,8 @@ def wfReport(
     rule wfRunReport:
         input:
             lib = out_resources_folder,  # Not input but necessary to output
+            interop_summary = ([] if in_interop_summary is None else in_interop_summary),
+            run_summary = ([] if in_run_summary is None else in_run_summary),
             samples = out_sample_list
         output:
             out_run_report
@@ -69,8 +73,12 @@ def wfReport(
             out_stderr_run
         params:
             bin_path = os.path.abspath(os.path.join(os.path.dirname(workflow.snakefile), "scripts/wfRunReport.py")),
+            interop_summary = "" if in_interop_summary is None else "--input-interop " + in_interop_summary,
+            run_summary = "" if in_run_summary is None else "--input-run " + in_run_summary
         shell:
             "{params.bin_path}"
             " --input-samples {input.samples}"
+            " {params.interop_summary}"
+            " {params.run_summary}"
             " --output-report {output}"
             " 2> {log}"

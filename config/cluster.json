@@ -65,11 +65,29 @@
       vmem: "3G",
       threads: 1
   },
+  illuRunInfoToJSON: {
+      queue: "normal",
+      mem: "3G",
+      vmem: "3G",
+      threads: 1,
+  },
   inspectBND: {
       queue: "normal",
       mem: "20G",
       vmem: "20G",
       threads: 1
+  },
+  interopDump: {
+      queue: "normal",
+      mem: "8G",
+      vmem: "8G",
+      threads: 1,
+  },
+  interopSummary: {
+      queue: "normal",
+      mem: "6G",
+      vmem: "8G",
+      threads: 1,
   },
   manta_config: {
       queue: "normal",
@@ -136,5 +154,17 @@
       mem: "10G",
       vmem: "10G",
       threads: 4
+  }
+  wfRunReport: {
+      queue: "normal",
+      mem: "8G",
+      vmem: "8G",
+      threads: 1,
+  },
+  wfSplReport: {
+      queue: "normal",
+      mem: "4G",
+      vmem: "4G",
+      threads: 1,
   }
 }

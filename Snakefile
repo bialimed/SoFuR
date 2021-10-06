@@ -1,7 +1,7 @@
 __author__ = 'Frederic Escudie and Veronique Ivashchenko'
 __copyright__ = 'Copyright (C) 2019 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '0.5.0'
+__version__ = '0.6.0'
 __email__ = 'escudie.frederic@iuct-oncopole.fr'
 __status__ = 'dev'
 
@@ -62,6 +62,22 @@ rule all:
         expand("report/{sample}.html", sample=SAMPLES),
         "report/run.html",
         "stats/multiqc/multiqc_report.html"
+
+# Run info
+if config.get("run_folder") is not None:
+    run_folder = config.get("run_folder")
+    interopSummary(
+        in_interop_folder=os.path.join(run_folder, "InterOp"),
+        out_summary="report/data/interopSummary.json",
+        out_stderr="logs/interop/interopSummary_stderr.txt",
+        params_keep_outputs=True
+    )
+    illuRunInfoToJSON(
+        in_run_folder=run_folder,
+        out_summary="report/data/runSummary.json",
+        out_stderr="logs/interop/runSummary_stderr.txt",
+        params_keep_outputs=True
+    )
 
 # Cleaning
 cutadapt_pe(
@@ -178,7 +194,11 @@ fusionsToJSON(
     params_calling_source="",
     params_keep_outputs=True
 )
-wfReport(params_samples=SAMPLES)
+wfReport(
+    in_interop_summary=("report/data/interopSummary.json" if config.get("run_folder") else None),
+    in_run_summary=("report/data/runSummary.json" if config.get("run_folder") else None),
+    params_samples=SAMPLES
+)
 # Quality report
 fastqc(
     in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
