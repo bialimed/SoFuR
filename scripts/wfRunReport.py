@@ -147,7 +147,7 @@ if __name__ == "__main__":
     if args.input_run is not None:
         with open(args.input_run) as reader_run:
             run_data = json.dumps(json.load(reader_run))
-    report_content = report_content.replace("##run_data##", interop_data)
+    report_content = report_content.replace("##run_data##", run_data)
 
     # Write output
     with open(args.output_report, "w") as writer:
