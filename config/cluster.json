@@ -73,8 +73,8 @@
   },
   insertSize: {
       queue: "normal",
-      mem: "3G",
-      vmem: "3G",
+      mem: "6G",
+      vmem: "6G",
       threads: 1
   },
   inspectBND: {
