@@ -2,6 +2,16 @@
 
 ![license](https://img.shields.io/badge/license-GPLv3-blue)
 
+## Table of Contents
+* [Description](#description)
+* [Workflow steps](#workflow-steps)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Outputs directory](#outputs-directory)
+* [Performances](#performances)
+* [Copyright](#copyright)
+* [Contact](#contact)
+
 ## Description
 This workflow detects, annotates and filters somatic fusions from stranded
 paired-end RNA-seq from Illumina's instruments.
@@ -33,19 +43,47 @@ Use one of the following:
 
   More details on snakemake install [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
 
-The others dependencies (cutadapt, bwa, ...) will be automatically installed by
-snakemake at the first execution. This first execution required an access to
-internet.
+* Install rules dependencies (cutadapt, bwa, ...):
+
+    snakemake \
+      --use-conda \
+      --conda-prefix ${application_env_dir} \
+      --conda-create-envs-only
+      --snakefile ${APP_DIR}/Snakefile \
+      --configfile workflow_parameters.yml
 
 ### 4. Download and prepare resources
-TODO
+SoFuR uses genome sequences, genes annotations, known fusions databanks (artifacts
+and pathogenics) and others standard resources. These files must be provided in
+your config.yml (see [template](config/workflow_parameters.tpl.yml)).
+An detailed example for the creation process of these resources is available
+[here](doc/prepare_databanks.md).
 
-### 3. Test install
-TODO
+### 5. Test install
+* From `${APP_DIR}/test/config/wf_config.yml` set variables corresponding to
+databanks (see `## ${BANK}/... ##`).
+
+* Launch test wit following command:
+
+      ${APP_DIR}/test/launch_wf.sh \
+        ${CONDA_ENVS_DIR} \
+        ${WORK_DIR} \
+        ${DRMAA_PARAMS}
+
+  Example with scheduler SGE:
+
+      export DRMAA_LIBRARY_PATH=${SGE_ROOT}/lib/linux-rhel7-x64/libdrmaa.so
+
+      ~/soft/sofur/test/launch_wf.sh \
+        /work/$USER/conda_envs/envs \
+        /work/$USER/test_sofur \
+        ' -V -q {cluster.queue} -l mem={cluster.vmem} -l h_vmem={cluster.vmem} -pe smp {cluster.threads} -l pri_{cluster.queue}=1'
+
+* See results in `${WORK_DIR}/report/run.html`.
 
 ## Usage
-Copy `${application_dir}/config/workflow_parameters.tpl.yml` in your current
-directory and change values before launching the following command:
+Copy `${APP_DIR}/config/workflow_parameters.tpl.yml` in your current directory
+and change values before launching the following command:
 
     snakemake \
       --use-conda \

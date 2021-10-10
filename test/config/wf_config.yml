@@ -1,0 +1,31 @@
+run_folder:
+R1: ["raw/splA_R1.fastq.gz"]
+R2: ["raw/splA_R2.fastq.gz"]
+reference:
+    assembly: GRCh38.p12
+    without_chr: True
+    sequences:  ## ${BANK}/${CURR_DATE}/sequences/Homo_sapiens_GRCh38_ensembl-v${ENSEMBL_VERSION}_chrOnly.fa.gz ##
+    annotations:  ## ${BANK}/${CURR_DATE}/annotations_ensembl.gtf ##
+    domains_annotations:  ## ${BANK}/${CURR_DATE}/interpro_ensembl.gff3 ##
+    genes_bed:  ## ${BANK}/reseqc/genes_RefSeq_ReSeQC_hg38_Gencode_V28.bed ##
+    known_partners:  ## ${BANK}/${CURR_DATE}/known_bnd_${CURR_DATE}.tsv ##
+    healthy_partners:
+        paths: []  ## ${BANK}/${CURR_DATE}/healthy_bnd_${CURR_DATE}.tsv ##
+        description:  Illumina Body Map 2 and Babiceanu et al NAR 2016
+    STAR-Fusion:  ##  ${BANK}/starfusion/GRCh38_gencode_v37_CTAT_lib_Mar012021 ##
+protocol:
+    targets:
+cleaning:
+    R1_end_adapter: config/adapters/Illumina_3prim_adapter.fasta
+    R2_end_adapter: config/adapters/Illumina_5prim_adapter_rvc.fasta
+    adapter_error_rate: 0.2
+    reads_min_length: 40
+    adapter_min_overlap: 3
+fusions_calling:
+    arriba_blacklist:  ## ${BANK}/arriba/blacklist_hg38_GRCh38_2018-11-04.tsv.gz ##
+    is_somatic: True
+    STAR_nb_threads: 2
+filters:
+    low_support: 5
+    rules: config/filters_rules.json
+software_paths: {}
