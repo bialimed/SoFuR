@@ -71,6 +71,12 @@
       vmem: "3G",
       threads: 1,
   },
+  insertSize: {
+      queue: "normal",
+      mem: "3G",
+      vmem: "3G",
+      threads: 1
+  },
   inspectBND: {
       queue: "normal",
       mem: "20G",

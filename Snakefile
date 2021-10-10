@@ -1,7 +1,7 @@
 __author__ = 'Frederic Escudie and Veronique Ivashchenko'
 __copyright__ = 'Copyright (C) 2019 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '0.6.0'
+__version__ = '0.7.0'
 __email__ = 'escudie.frederic@iuct-oncopole.fr'
 __status__ = 'dev'
 
@@ -204,6 +204,13 @@ fastqc(
     in_fastq=R1_PATTERN.replace("_R1", "{suffix}"),
     params_is_grouped=False
 )
+insertSize(
+    in_alignments="structural_variants/manta/{sample}Aligned.sortedByCoord.out_markdup.bam",
+    out_metrics="stats/insert_size/{sample}.tsv",
+    out_report="stats/insert_size/{sample}.pdf",
+    out_stdout="logs/picard/{sample}_insertSize_stdout.txt",
+    out_stderr="logs/picard/{sample}_insertSize_stderr.txt",
+)
 rseqc_readDistribution(
     in_annotations=config.get("reference")["genes_bed"],
     in_alignments="structural_variants/manta/{sample}Aligned.sortedByCoord.out_markdup.bam",
@@ -222,6 +229,7 @@ multiqc(
         expand("stats/cutadapt/{sample}.txt", sample=SAMPLES) +
         expand("structural_variants/manta/{sample}Log.final.out", sample=SAMPLES) +
         expand("structural_variants/manta/{sample}Aligned.sortedByCoord.out_markdup.bam.tsv", sample=SAMPLES) +
+        expand("stats/insert_size/{sample}.tsv", sample=SAMPLES) +
         expand("stats/reseqc/read_distribution/{sample}.tsv", sample=SAMPLES) +
         expand("stats/reseqc/infer_experiment/{sample}.tsv", sample=SAMPLES)
     )
