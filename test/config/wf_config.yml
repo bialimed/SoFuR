@@ -10,7 +10,8 @@ reference:
     genes_bed:  ## ${BANK}/reseqc/genes_RefSeq_ReSeQC_hg38_Gencode_V28.bed ##
     known_partners:  ## ${BANK}/${CURR_DATE}/known_bnd_${CURR_DATE}.tsv ##
     healthy_partners:
-        paths: []  ## ${BANK}/${CURR_DATE}/healthy_bnd_${CURR_DATE}.tsv ##
+        paths:
+            - ## ${BANK}/${CURR_DATE}/healthy_bnd_${CURR_DATE}.tsv ##
         description:  Illumina Body Map 2 and Babiceanu et al NAR 2016
     STAR-Fusion:  ##  ${BANK}/starfusion/GRCh38_gencode_v37_CTAT_lib_Mar012021 ##
 protocol:
