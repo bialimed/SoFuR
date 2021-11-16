@@ -1,175 +1,147 @@
 {
   __default__ : {
-    queue: "normal",
-    mem: "3G",
-    vmem: "3G",
-    threads: 1
+      queue: "normal",
+      mem: 3000,
+      vmem: "3G",
+      threads: 1
   },
   annotBND: {
-      queue: "normal",
-      mem: "10G",
+      mem: 10000,
       vmem: "10G",
       threads: 1
   },
   annotKnownBND: {
-      queue: "normal",
-      mem: "10G",
+      mem: 10000,
       vmem: "10G",
       threads: 1
   },
   arriba_run: {
-      queue: "normal",
-      mem: "10G",
+      mem: 10000,
       vmem: "20G",
       threads: 1
   },
   arriba_star: {
-      queue: "normal",
-      mem: "9G",
+      mem: 9000,
       vmem: "9G",
       threads: 4
   },
   cutadapt_pe: {
-      queue: "normal",
-      mem: "3G",
+      mem: 3000,
       vmem: "3G",
       threads: 1
   },
   fastqc: {
-      queue: "normal",
-      mem: "8G",
+      mem: 8000,
       vmem: "8G",
       threads: 1
   },
   filterAnnotVCF: {
-      queue: "normal",
-      mem: "4G",
+      mem: 4000,
       vmem: "4G",
       threads: 1
   },
   filterBND: {
-      queue: "normal",
-      mem: "12G",
+      mem: 12000,
       vmem: "12G",
       threads: 1
   },
   fusionsToJSON: {
-      queue: "normal",
-      mem: "10G",
+      mem: 10000,
       vmem: "10G",
       threads: 1
   },
   fusionsToVCF: {
-      queue: "normal",
-      mem: "3G",
+      mem: 3000,
       vmem: "3G",
       threads: 1
   },
   illuRunInfoToJSON: {
-      queue: "normal",
-      mem: "3G",
+      mem: 3000,
       vmem: "3G",
       threads: 1,
   },
   insertSize: {
-      queue: "normal",
-      mem: "6G",
+      mem: 6000,
       vmem: "6G",
       threads: 1
   },
   inspectBND: {
-      queue: "normal",
-      mem: "20G",
+      mem: 20000,
       vmem: "20G",
       threads: 1
   },
   interopDump: {
-      queue: "normal",
-      mem: "8G",
+      mem: 8000,
       vmem: "8G",
       threads: 1,
   },
   interopSummary: {
-      queue: "normal",
-      mem: "6G",
+      mem: 6000,
       vmem: "8G",
       threads: 1,
   },
   manta_config: {
-      queue: "normal",
-      mem: "2G",
+      mem: 2000,
       vmem: "2G",
       threads: 1
   },
   manta_markDup: {
-      queue: "normal",
-      mem: "12G",
+      mem: 12000,
       vmem: "18G",
       threads: 1
   },
   manta_run: {
-      queue: "normal",
-      mem: "3G",
+      mem: 3000,
       vmem: "3G",
       threads: 4
   },
   manta_star: {
-      queue: "normal",
-      mem: "9G",
+      mem: 9000,
       vmem: "9G",
       threads: 4
   },
   mergeVCFFusionsCallers: {
-      queue: "normal",
-      mem: "6G",
+      mem: 6000,
       vmem: "6G",
       threads: 1
   },
   multiqc: {
-      queue: "normal",
-      mem: "3G",
+      mem: 3000,
       vmem: "3G",
       threads: 1
   },
   renameChromVCF: {
-      queue: "normal",
-      mem: "4G",
+      mem: 4000,
       vmem: "4G",
       threads: 1
   },
   rseqc_inferExperiment: {
-      queue: "normal",
-      mem: "3G",
+      mem: 3000,
       vmem: "3G",
       threads: 1
   },
   rseqc_readDistribution: {
-      queue: "normal",
-      mem: "4G",
+      mem: 4000,
       vmem: "4G",
       threads: 1
   },
   standardizeBND: {
-      queue: "normal",
-      mem: "4G",
+      mem: 4000,
       vmem: "4G",
       threads: 1
   },
   starFusion: {
-      queue: "normal",
-      mem: "10G",
+      mem: 10000,
       vmem: "10G",
       threads: 4
   },
   wfRunReport: {
-      queue: "normal",
-      mem: "8G",
+      mem: 8000,
       vmem: "8G",
       threads: 1,
   },
   wfSplReport: {
-      queue: "normal",
-      mem: "4G",
+      mem: 4000,
       vmem: "4G",
       threads: 1,
   }

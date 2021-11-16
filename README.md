@@ -79,6 +79,15 @@ databanks (see `## ${BANK}/... ##`).
         /work/$USER/test_sofur \
         ' -V -q {cluster.queue} -l mem={cluster.vmem} -l h_vmem={cluster.vmem} -pe smp {cluster.threads} -l pri_{cluster.queue}=1'
 
+  Example with scheduler slurm:
+
+      export DRMAA_LIBRARY_PATH=$SGE_ROOT/lib/linux-rhel7-x64/libdrmaa.so
+
+      ~/soft/sofur/test/launch_wf.sh \
+        /work/$USER/conda_envs/envs \
+        /work/$USER/test_sofur \
+        ' --partition={cluster.queue} --mem={cluster.mem} --cpus-per-task={cluster.threads}'
+
 * See results in `${WORK_DIR}/report/run.html`.
 
 ## Usage

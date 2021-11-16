@@ -21,8 +21,7 @@ def wfReport(
     """Write samples and run reports."""
     # Copy web resources
     if in_resources_folder is None:
-        app_folder = os.path.dirname(workflow.snakefile)
-        in_resources_folder = os.path.join(app_folder, "report_resources")
+        in_resources_folder = os.path.join(workflow.basedir, "report_resources")
     out_report_folder = os.path.dirname(out_spl_reports)
     out_resources_folder = os.path.join(out_report_folder, "resources")
     rule cpReportResources:
@@ -48,7 +47,7 @@ def wfReport(
         log:
             out_stderr_spl
         params:
-            bin_path = os.path.abspath(os.path.join(os.path.dirname(workflow.snakefile), "scripts/wfSplReport.py")),
+            bin_path = os.path.abspath(os.path.join(workflow.basedir, "scripts/wfSplReport.py")),
             sample = "--sample-name {" + params_sample_wildcard + "}" if params_sample_wildcard != "" else ""
         shell:
             "{params.bin_path}"
@@ -72,7 +71,7 @@ def wfReport(
         log:
             out_stderr_run
         params:
-            bin_path = os.path.abspath(os.path.join(os.path.dirname(workflow.snakefile), "scripts/wfRunReport.py")),
+            bin_path = os.path.abspath(os.path.join(workflow.basedir, "scripts/wfRunReport.py")),
             interop_summary = "" if in_interop_summary is None else "--input-interop " + in_interop_summary,
             run_summary = "" if in_run_summary is None else "--input-run " + in_run_summary
         shell:
