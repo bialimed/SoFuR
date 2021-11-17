@@ -21,7 +21,7 @@
       threads: 1
   },
   arriba_star: {
-      mem: 9000,
+      mem: 35000,
       vmem: "9G",
       threads: 4
   },
@@ -91,12 +91,12 @@
       threads: 1
   },
   manta_run: {
-      mem: 3000,
+      mem: 10000,
       vmem: "3G",
       threads: 4
   },
   manta_star: {
-      mem: 9000,
+      mem: 35000,
       vmem: "9G",
       threads: 4
   },
@@ -131,7 +131,7 @@
       threads: 1
   },
   starFusion: {
-      mem: 10000,
+      mem: 40000,
       vmem: "10G",
       threads: 4
   },
