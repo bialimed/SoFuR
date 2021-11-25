@@ -32,19 +32,27 @@ Use one of the following:
 ### 2. Install dependencies
 * conda (>=4.6.8):
 
+      # Install conda
       wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
       sh Miniconda3-latest-Linux-x86_64.sh
+
+      # Install mamba
+      conda activate base
+      conda install -c conda-forge mamba
 
   More details on miniconda install [here](https://docs.conda.io/en/latest/miniconda.html).
 
 * snakemake (>=5.4.2):
 
-      conda install snakemake
+      mamba install -c conda-forge -c bioconda -n sofur snakemake
+      conda activate sofur
+      pip install drmaa
 
   More details on snakemake install [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
 
 * Install rules dependencies (cutadapt, bwa, ...):
 
+    conda activate sofur
     snakemake \
       --use-conda \
       --conda-prefix ${application_env_dir} \
@@ -65,6 +73,7 @@ databanks (see `## ${BANK}/... ##`).
 
 * Launch test wit following command:
 
+      conda activate sofur
       ${APP_DIR}/test/launch_wf.sh \
         ${CONDA_ENVS_DIR} \
         ${WORK_DIR} \
@@ -74,15 +83,17 @@ databanks (see `## ${BANK}/... ##`).
 
       export DRMAA_LIBRARY_PATH=${SGE_ROOT}/lib/linux-rhel7-x64/libdrmaa.so
 
+      conda activate sofur
       ~/soft/sofur/test/launch_wf.sh \
         /work/$USER/conda_envs/envs \
         /work/$USER/test_sofur \
-        ' -V -q {cluster.queue} -l mem={cluster.vmem} -l h_vmem={cluster.vmem} -pe smp {cluster.threads} -l pri_{cluster.queue}=1'
+        ' -V -q {cluster.queue} -l pri_{cluster.queue}=1 -l mem={cluster.vmem} -l h_vmem={cluster.vmem} -pe smp {cluster.threads}'
 
   Example with scheduler slurm:
 
       export DRMAA_LIBRARY_PATH=$SGE_ROOT/lib/linux-rhel7-x64/libdrmaa.so
 
+      conda activate sofur
       ~/soft/sofur/test/launch_wf.sh \
         /work/$USER/conda_envs/envs \
         /work/$USER/test_sofur \
@@ -94,10 +105,12 @@ databanks (see `## ${BANK}/... ##`).
 Copy `${APP_DIR}/config/workflow_parameters.tpl.yml` in your current directory
 and change values before launching the following command:
 
+    conda activate sofur
     snakemake \
       --use-conda \
       --conda-prefix ${application_env_dir} \
       --jobs ${nb_jobs} \
+      --jobname "sofur.{rule}" \
       --latency-wait 100 \
       --snakefile ${application_dir}/Snakefile \
       --cluster-config ${application_dir}/config/cluster.json \
