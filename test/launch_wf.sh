@@ -27,7 +27,7 @@ snakemake \
   --use-conda \
   --conda-prefix ${conda_envs_dir} \
   --jobs ${nb_threads} \
-  --jobname "sofur.{rule}" \
+  --jobname "sofur.{rule}.{jobid}" \
   --latency-wait 200 \
   --cluster-config ${application_dir}/config/cluster.json \
   --drmaa "${DRMAA_params}" \

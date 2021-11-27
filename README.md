@@ -110,7 +110,7 @@ and change values before launching the following command:
       --use-conda \
       --conda-prefix ${application_env_dir} \
       --jobs ${nb_jobs} \
-      --jobname "sofur.{rule}" \
+      --jobname "sofur.{rule}.{jobid}" \
       --latency-wait 100 \
       --snakefile ${application_dir}/Snakefile \
       --cluster-config ${application_dir}/config/cluster.json \
