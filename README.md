@@ -1,4 +1,4 @@
-# SoFuR: SOmatic FUsions from Rna | STraDA: Somatic TRAnslocation from strandeD rnA
+# SoFuR: SOmatic FUsions from Rna
 
 ![license](https://img.shields.io/badge/license-GPLv3-blue)
 
@@ -13,7 +13,7 @@
 * [Contact](#contact)
 
 ## Description
-This workflow detects, annotates and filters somatic fusions from stranded
+This workflow detects, annotates and filters somatic fusions from **stranded**
 paired-end RNA-seq from Illumina's instruments.
 
 ## Workflow steps
@@ -24,10 +24,10 @@ paired-end RNA-seq from Illumina's instruments.
 Use one of the following:
 
 * [user way] Downloads the latest released versions from
-`https://bitbucket.org/fescudie/sofur/downloads/?tab=tags`.
+`https://github.com/bialimed/sofur/archive/releases`.
 * [developper way] Clones the repository from the latest unreleased version:
 
-      git clone https://bitbucket.org/fescudie/sofur.git
+      git clone --recurse-submodules git@github.com:bialimed/sofur.git
 
 ### 2. Install dependencies
 * conda (>=4.6.8):

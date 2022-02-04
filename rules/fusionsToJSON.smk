@@ -1,0 +1,1 @@
+../lib/AnaCore-snakemake/rules/fusionsToJSON.smk
