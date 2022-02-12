@@ -22,8 +22,8 @@
   },
   arriba_star: {
       mem: 35000,
-      vmem: "9G",
-      threads: 4
+      vmem: "6G",
+      threads: 6
   },
   cutadapt_pe: {
       mem: 3000,
@@ -92,13 +92,13 @@
   },
   manta_run: {
       mem: 10000,
-      vmem: "3G",
-      threads: 4
+      vmem: "2G",
+      threads: 6
   },
   manta_star: {
       mem: 35000,
-      vmem: "9G",
-      threads: 4
+      vmem: "6G",
+      threads: 6
   },
   mergeVCFFusionsCallers: {
       mem: 6000,
@@ -132,8 +132,8 @@
   },
   starFusion: {
       mem: 40000,
-      vmem: "10G",
-      threads: 4
+      vmem: "7G",
+      threads: 6
   },
   wfRunReport: {
       mem: 8000,
