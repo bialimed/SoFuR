@@ -18,7 +18,7 @@ assessment_dir=`dirname ${assessment_bin_dir}`
 export PATH=${assessment_bin_dir}:$PATH
 
 # Evaluate datasets
-declare -a datasets=('Heyer_2019' 'Tembe_2014' 'simulated')
+declare -a datasets=('Heyer_2019' 'simulated' 'Tembe_2014')
 for dataset in "${datasets[@]}"
 do
 	echo "Process "${dataset}
