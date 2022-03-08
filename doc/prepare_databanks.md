@@ -18,6 +18,10 @@ This page details the process to download and format resources required.
     export ENSEMBL_RELEASE=104
     export COSMIC_RELEASE=94
     export APP_DIR=/soft/sofur  # !! Change !!
+    # Virtual environments
+    export CONDA_INSTALL=/Anapath/soft/conda/miniconda3  # !! Change !!
+    export ANACORE_UTILS_ENV=a1fc435972f2fb68385bbd162ca4ca38  # !! Change: name of AnaCore-utils environment created by snakemake !!
+    export STAR_ENV=6c4bdf640c78f6de187c79cc8dffc17f  # !! Change: name of STAR environment created by snakemake !!
 
 
 ## 1. Software resources
@@ -88,7 +92,7 @@ then `Human genes`.
 
 * Transform TSV to GFF3:
 
-      source ${CONDA_INSTALL}/bin/activate *******************  # Activate AnaCore-utils environment created by snakemake
+      source ${CONDA_INSTALL}/bin/activate ${ANACORE_UTILS_ENV}  # Activate AnaCore-utils environment
 
       cd ${BANK}/${CURR_DATE}
       ensemblInterProToGFF.py \
@@ -105,7 +109,7 @@ then `Human genes`.
 * Download human genome assembly from Ensembl and remove additional haplotypes
 and unmaped contigs:
 
-      source ${CONDA_INSTALL}/bin/activate *******************  # Activate AnaCore-utils environment created by snakemake
+      source ${CONDA_INSTALL}/bin/activate ${ANACORE_UTILS_ENV}  # Activate AnaCore-utils environment
 
       mkdir -p ${BANK}/${CURR_DATE}/sequences
       cd ${BANK}/${CURR_DATE}/sequences
@@ -128,7 +132,7 @@ and unmaped contigs:
 
 * Index genome with the STAR release used in SoFuR:
 
-      source ${CONDA_INSTALL}/bin/activate 24421fff  # Activate STAR environment created by snakemake
+      source ${CONDA_INSTALL}/bin/activate ${STAR_ENV}  # Activate STAR environment
 
       STAR \
         --runThreadN 8 \
@@ -144,7 +148,7 @@ and unmaped contigs:
 
 ## 4. Healthy fusions
 
-    source ${CONDA_INSTALL}/bin/activate *******************  # Activate AnaCore-utils environment created by snakemake
+    source ${CONDA_INSTALL}/bin/activate ${ANACORE_UTILS_ENV}  # Activate AnaCore-utils environment
 
     cd ${BANK}/${CURR_DATE}
     buildKnownBNDDb.py \
@@ -179,9 +183,7 @@ and unmaped contigs:
 
 Your first request needs to supply your registered email address and COSMIC password. We use HTTP Basic Auth to check your credentials, which requires you to combine your email address and password and then Base64 encode them. For example, using standard Unix command line tools:
 
-    echo "email@example.com:mycosmicpassword" | base64
-ZW1haWxAZXhhbXBsZS5jb206bXljb3NtaWNwYXNzd29yZAo=
-
+    export AUTH_STRING=`echo "email@example.com:mycosmicpassword" | base64`  # !! Change email and password !!
     curl -H "Authorization: Basic ${AUTH_STRING}" https://cancer.sanger.ac.uk/cosmic/file_download/GRCh38/cosmic/v${COSMIC_RELEASE}/CosmicFusionExport.tsv.gz
 
 That request will return a snippet of JSON containing the link that you need to use to download your file. For example:
@@ -204,7 +206,7 @@ Extract the URL from the JSON response and make another request to that URL to d
 
 ### 5.4. Create aggregated database
 
-    source ${CONDA_INSTALL}/bin/activate *******************  # Activate AnaCore-utils environment created by snakemake
+    source ${CONDA_INSTALL}/bin/activate ${ANACORE_UTILS_ENV}  # Activate AnaCore-utils environment
 
     cd ${BANK}/${CURR_DATE}
     buildKnownBNDDb.py \
