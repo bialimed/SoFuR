@@ -1,9 +1,9 @@
 __author__ = 'Frederic Escudie and Veronique Ivashchenko'
 __copyright__ = 'Copyright (C) 2019 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '0.7.0'
+__version__ = '0.8.0'
 __email__ = 'escudie.frederic@iuct-oncopole.fr'
-__status__ = 'dev'
+__status__ = 'prod'
 
 from lib.utils import *
 
