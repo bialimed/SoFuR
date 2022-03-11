@@ -1,0 +1,13 @@
+dataset	source	TP	FP	FN	NA	precision	recall
+Heyer_2019	manta	16	533	11	0	0.0291	0.5926
+Heyer_2019	STAR_Fusion	24	132	3	0	0.1538	0.8889
+Heyer_2019	Arriba	25	512	2	0	0.0466	0.9259
+Heyer_2019	sofur	24	58	3	0	0.2927	0.8889
+simulated	manta	452	6899	98	0	0.0615	0.8218
+simulated	STAR_Fusion	81	416	469	0	0.1630	0.1473
+simulated	Arriba	432	355	118	0	0.5489	0.7855
+simulated	sofur	432	284	118	0	0.6034	0.7855
+Tembe_2014	manta	151	4506	11	0	0.0324	0.9321
+Tembe_2014	STAR_Fusion	142	29	20	0	0.8304	0.8765
+Tembe_2014	Arriba	162	340	0	0	0.3227	1.0000
+Tembe_2014	sofur	158	14	4	0	0.9186	0.9753

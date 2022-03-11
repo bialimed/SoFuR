@@ -2,7 +2,7 @@
 # author = Frederic Escudie
 # copyright = Copyright (C) 2020 IUCT-O
 # license = GNU General Public License
-# version = 1.1.0
+# version = 1.2.0
 
 # Parameters and environment
 if [ $# -eq 0 ]
@@ -26,7 +26,7 @@ do
 	 -d ${dataset} \
 	 -m genes \
      -i ${assessment_dir}/../config/filters_rules.json \
-	 -e ${assessment_dir}/datasets/${dataset}_fusions_list.tsv \
+	 -e ${assessment_dir}/datasets/expected/${dataset}_fusions_list.tsv \
 	 -a ${assessment_dir}/results/${wf_version}/${dataset}/vcf/*_unfiltered.vcf \
 	 -o ${assessment_dir}/results/${wf_version}/${dataset}/results_genes.tsv
     if [ $? -ne 0 ]; then
@@ -37,7 +37,7 @@ do
 	 -d ${dataset} \
 	 -m breakpoints \
      -i ${assessment_dir}/../config/filters_rules.json \
-	 -e ${assessment_dir}/datasets/${dataset}_fusions_list.tsv \
+	 -e ${assessment_dir}/datasets/expected/${dataset}_fusions_list.tsv \
 	 -a ${assessment_dir}/results/${wf_version}/${dataset}/vcf/*_unfiltered.vcf \
 	 -o ${assessment_dir}/results/${wf_version}/${dataset}/results_breakpoints.tsv
     if [ $? -ne 0 ]; then

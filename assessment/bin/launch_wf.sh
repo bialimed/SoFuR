@@ -2,7 +2,7 @@
 # author = Frederic Escudie
 # copyright = Copyright (C) 2020 IUCT-O
 # license = GNU General Public License
-# version = 1.0.0
+# version = 1.1.0
 
 # Parameters
 if [ $# -ne 3 ]
@@ -35,11 +35,11 @@ do
       --use-conda \
       --jobs 50 \
       --latency-wait 100 \
-      --drmaa " -V -q {cluster.queue} -l mem={cluster.vmem} -l h_vmem={cluster.vmem} -pe smp {cluster.threads} -l pri_normal=1" \
+      --drmaa " -V -q normal -l pri_normal=1 -l mem={cluster.vmem} -pe smp {cluster.threads}" \
       --conda-prefix ${conda_env_dir} \
       --cluster-config ${app_dir}/config/cluster.json \
       --snakefile ${app_dir}/Snakefile \
-      --configfile ${assessment_dir}/datasets/${dataset}_wf_cfg.yml \
+      --configfile ${assessment_dir}/datasets/cfg/${wf_version}/${dataset}_wf_cfg.yml \
       --directory ${work_dir}/${dataset} \
       --printshellcmd \
      > ${work_dir}/${dataset}/wf_log.txt \
