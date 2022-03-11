@@ -44,7 +44,7 @@ Use one of the following:
 
 * snakemake (>=5.4.2):
 
-      mamba install -c conda-forge -c bioconda -n sofur snakemake
+      mamba create -c conda-forge -c bioconda -n sofur snakemake
       conda activate sofur
       pip install drmaa
 
@@ -52,13 +52,13 @@ Use one of the following:
 
 * Install rules dependencies (cutadapt, bwa, ...):
 
-    conda activate sofur
-    snakemake \
-      --use-conda \
-      --conda-prefix ${application_env_dir} \
-      --conda-create-envs-only
-      --snakefile ${APP_DIR}/Snakefile \
-      --configfile workflow_parameters.yml
+      conda activate sofur
+      snakemake \
+        --use-conda \
+        --conda-prefix ${application_env_dir} \
+        --conda-create-envs-only
+        --snakefile ${APP_DIR}/Snakefile \
+        --configfile workflow_parameters.yml
 
 ### 4. Download and prepare resources
 SoFuR uses genome sequences, genes annotations, known fusions databanks (artifacts
