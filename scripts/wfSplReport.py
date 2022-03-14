@@ -25,7 +25,7 @@ def getTemplate():
         <title>Fusions analysis</title>
         <meta charset="UTF-8">
         <meta name="author" content="Escudie Frederic">
-        <meta name="version" content="1.0.0">
+        <meta name="version" content="1.0.1">
         <meta name="copyright" content="2020 IUCT-O">
         <!-- jQuery -->
         <script type="text/javascript" charset="utf8" src="resources/jquery_3.3.1.min.js"></script>
@@ -36,6 +36,8 @@ def getTemplate():
         <script type="text/javascript" charset="utf8" src="resources/pdfmake_0.1.36.min.js"></script>
         <script type="text/javascript" charset="utf8" src="resources/vfs_fonts_0.1.36.min.js"></script>
         <script type="text/javascript" charset="utf8" src="resources/datatables_1.10.18.min.js"></script>
+        <!-- Popper -->
+        <script type="text/javascript" charset="utf8" src="resources/popper_1.16.1.min.js"></script>
         <!-- Bootstrap -->
         <link type="text/css" charset="utf8" rel="stylesheet" href="resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
         <script type="text/javascript" charset="utf8" src="resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
