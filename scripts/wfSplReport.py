@@ -3,7 +3,7 @@
 __author__ = 'Frederic Escudie'
 __copyright__ = 'Copyright (C) 2020 IUCT-O'
 __license__ = 'GNU General Public License'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 __email__ = 'escudie.frederic@iuct-oncopole.fr'
 __status__ = 'prod'
 
@@ -25,7 +25,7 @@ def getTemplate():
         <title>Fusions analysis</title>
         <meta charset="UTF-8">
         <meta name="author" content="Escudie Frederic">
-        <meta name="version" content="1.0.1">
+        <meta name="version" content="1.1.0">
         <meta name="copyright" content="2020 IUCT-O">
         <!-- jQuery -->
         <script type="text/javascript" charset="utf8" src="resources/jquery_3.3.1.min.js"></script>
@@ -70,7 +70,7 @@ def getTemplate():
                 </div>
             </div>
             <div id="fusion-details" class="card" v-if="selected_fusion !== null">
-                <h3 class="card-header">Fusion {{selected_fusion.getSymbolsName()}}</h3>
+                <h3 class="card-header">Fusion {{selected_fusion.getGenesNamesString()}}</h3>
                 <div class="card-block">
                     <fusion-details-table
                         :data=selected_fusion
@@ -79,7 +79,7 @@ def getTemplate():
                     </fusion-details-table>
                     <div>
                         <div class="viewer-block">
-                            <h4>First breakend: {{selected_fusion.getSymbols(0).join(" and ")}}</h4>
+                            <h4>First breakend: {{selected_fusion.getBNDGenesNames(0).join(" and ")}}</h4>
                             <breakend-viewer-ac
                                 :analysis="breakend_annotations"
                                 :breakend="selected_fusion.breakends[0]"
@@ -88,7 +88,7 @@ def getTemplate():
                             </breakend-viewer-ac>
                         </div>
                         <div class="viewer-block">
-                            <h4>Second breakend: {{selected_fusion.getSymbols(1).join(" and ")}}</h4>
+                            <h4>Second breakend: {{selected_fusion.getBNDGenesNames(1).join(" and ")}}</h4>
                             <breakend-viewer-ac
                                 :analysis="breakend_annotations"
                                 :breakend="selected_fusion.breakends[1]"
