@@ -35,7 +35,7 @@ do
       --jobs 50 \
       --jobname "sofur.{rule}.{jobid}" \
       --latency-wait 100 \
-      --cluster "sbatch --partition=normal --mem={cluster.mem} --cpus-per-task={cluster.threads}" \
+      --cluster "sbatch --partition=normal --mem={resources.mem} --cpus-per-task={threads}" \
       --conda-prefix ${conda_env_dir} \
       --snakefile ${app_dir}/Snakefile \
       --configfile ${assessment_dir}/datasets/cfg/${wf_version}/${dataset}_wf_cfg.yml \

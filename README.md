@@ -82,7 +82,7 @@ databanks (see `## ${BANK}/... ##`).
       ~/soft/sofur/test/launch_wf.sh \
         /work/$USER/conda_envs/envs \
         /work/$USER/test_sofur \
-        'sbatch --partition={cluster.queue} --mem={cluster.mem} --cpus-per-task={cluster.threads}'
+        'sbatch --partition={resources.queue} --mem={resources.mem} --cpus-per-task={threads}'
 
 * See results in `${WORK_DIR}/report/run.html`.
 

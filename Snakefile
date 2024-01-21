@@ -201,8 +201,7 @@ insertSize(
     in_alignments="structural_variants/manta/{sample}Aligned.sortedByCoord.out_markdup.bam",
     out_metrics="stats/insert_size/{sample}.tsv",
     out_report="stats/insert_size/{sample}.pdf",
-    out_stdout="logs/picard/{sample}_insertSize_stdout.txt",
-    out_stderr="logs/picard/{sample}_insertSize_stderr.txt",
+    out_stderr="logs/picard/{sample}_insertSize_stderr.txt"
 )
 rseqc_readDistribution(
     in_annotations=config.get("reference")["genes_bed"],
