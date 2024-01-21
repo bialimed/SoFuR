@@ -1,9 +1,7 @@
 __author__ = 'Frederic Escudie and Veronique Ivashchenko'
-__copyright__ = 'Copyright (C) 2019 IUCT-O'
+__copyright__ = 'Copyright (C) 2019 CHU Toulouse'
 __license__ = 'GNU General Public License'
-__version__ = '0.8.0'
-__email__ = 'escudie.frederic@iuct-oncopole.fr'
-__status__ = 'prod'
+__version__ = '1.0.0'
 
 from lib.utils import *
 
@@ -95,24 +93,19 @@ arriba(
     in_annotations=config.get("reference")["annotations"],
     in_blacklist=config.get("fusions_calling")["arriba_blacklist"],
     in_reference_seq=config.get("reference")["sequences"],
-    params_disabled_filters=["many_spliced", "mismatches", "pcr_fusions"],
-    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
-    params_sort_memory=8
+    params_disabled_filters=["many_spliced", "mismatches", "pcr_fusions"]
 )
 manta(
     in_annotations=config.get("reference")["annotations"],
     in_reference_seq=config.get("reference")["sequences"],
     out_sv="structural_variants/manta/{sample}_fusions.vcf",
     params_is_somatic=config.get("fusions_calling")["is_somatic"],
-    params_is_stranded=True,
-    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"],
-    params_sort_memory=8
+    params_is_stranded=True
 )
 starFusion(
     in_genome_dir=config.get("reference")["STAR-Fusion"],
     in_R1="cutadapt/{sample}_R1.fastq.gz",
-    in_R2="cutadapt/{sample}_R2.fastq.gz",
-    params_nb_threads=config.get("fusions_calling")["STAR_nb_threads"]
+    in_R2="cutadapt/{sample}_R2.fastq.gz"
 )
 if not config.get("reference")["without_chr"]:
     fusionsToVCF(

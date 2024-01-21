@@ -37,7 +37,6 @@ do
       --latency-wait 100 \
       --cluster "sbatch --partition=normal --mem={cluster.mem} --cpus-per-task={cluster.threads}" \
       --conda-prefix ${conda_env_dir} \
-      --cluster-config ${app_dir}/config/cluster.json \
       --snakefile ${app_dir}/Snakefile \
       --configfile ${assessment_dir}/datasets/cfg/${wf_version}/${dataset}_wf_cfg.yml \
       --directory ${work_dir}/${dataset} \
