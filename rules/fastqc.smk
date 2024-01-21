@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/fastqc.smk
+../lib/snake-basket/rules/fastqc.smk

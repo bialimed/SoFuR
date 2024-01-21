@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/rseqc_readDistribution.smk
+../lib/snake-basket/rules/rseqc_readDistribution.smk

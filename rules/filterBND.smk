@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/filterBND.smk
+../lib/snake-basket/rules/filterBND.smk

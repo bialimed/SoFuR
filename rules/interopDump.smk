@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/interopDump.smk
+../lib/snake-basket/rules/interopDump.smk

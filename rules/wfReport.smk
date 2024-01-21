@@ -1,7 +1,7 @@
 __author__ = 'Frederic Escudie'
-__copyright__ = 'Copyright (C) 2020 IUCT-O'
+__copyright__ = 'Copyright (C) 2020 CHU Toulouse'
 __license__ = 'GNU General Public License'
-__version__ = '1.1.0'
+__version__ = '1.2.0'
 
 
 def wfReport(
@@ -33,6 +33,10 @@ def wfReport(
             out_stderr_cpRsc
         params:
             report_dir = out_report_folder
+        resources:
+            extra = "",
+            mem = "1G",
+            partition = "normal"
         shell:
             "mkdir -p {params.report_dir} && cp -r {input} {output}"
             " 2> {log}"
@@ -49,6 +53,10 @@ def wfReport(
         params:
             bin_path = os.path.abspath(os.path.join(workflow.basedir, "scripts/wfSplReport.py")),
             sample = "--sample-name {" + params_sample_wildcard + "}" if params_sample_wildcard != "" else ""
+        resources:
+            extra = "",
+            mem = "2G",
+            partition = "normal"
         shell:
             "{params.bin_path}"
             " {params.sample}"
@@ -74,6 +82,10 @@ def wfReport(
             bin_path = os.path.abspath(os.path.join(workflow.basedir, "scripts/wfRunReport.py")),
             interop_summary = "" if in_interop_summary is None else "--input-interop " + in_interop_summary,
             run_summary = "" if in_run_summary is None else "--input-run " + in_run_summary
+        resources:
+            extra = "",
+            mem = "1G",
+            partition = "normal"
         shell:
             "{params.bin_path}"
             " --input-samples {input.samples}"

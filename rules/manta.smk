@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/manta.smk
+../lib/snake-basket/rules/manta.smk

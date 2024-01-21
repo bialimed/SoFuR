@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/multiqc.smk
+../lib/snake-basket/rules/multiqc.smk

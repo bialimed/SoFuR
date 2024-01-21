@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/cutadapt_pe.smk
+../lib/snake-basket/rules/cutadapt_pe.smk

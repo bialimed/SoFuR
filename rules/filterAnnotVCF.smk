@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/filterAnnotVCF.smk
+../lib/snake-basket/rules/filterAnnotVCF.smk

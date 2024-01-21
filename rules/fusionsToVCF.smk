@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/fusionsToVCF.smk
+../lib/snake-basket/rules/fusionsToVCF.smk

@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/standardizeBND.smk
+../lib/snake-basket/rules/standardizeBND.smk

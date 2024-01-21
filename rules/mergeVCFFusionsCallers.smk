@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/mergeVCFFusionsCallers.smk
+../lib/snake-basket/rules/mergeVCFFusionsCallers.smk

@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/rseqc_inferExperiment.smk
+../lib/snake-basket/rules/rseqc_inferExperiment.smk

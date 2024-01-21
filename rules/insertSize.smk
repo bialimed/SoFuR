@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/insertSize.smk
+../lib/snake-basket/rules/insertSize.smk

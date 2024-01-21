@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/starFusion.smk
+../lib/snake-basket/rules/starFusion.smk

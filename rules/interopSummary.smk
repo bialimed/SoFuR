@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/interopSummary.smk
+../lib/snake-basket/rules/interopSummary.smk

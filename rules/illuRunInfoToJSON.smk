@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/illuRunInfoToJSON.smk
+../lib/snake-basket/rules/illuRunInfoToJSON.smk

@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/arriba.smk
+../lib/snake-basket/rules/arriba.smk

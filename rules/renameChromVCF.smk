@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/renameChromVCF.smk
+../lib/snake-basket/rules/renameChromVCF.smk

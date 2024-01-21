@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/inspectBND.smk
+../lib/snake-basket/rules/inspectBND.smk

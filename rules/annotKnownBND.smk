@@ -1,1 +1,1 @@
-../lib/AnaCore-snakemake/rules/annotKnownBND.smk
+../lib/snake-basket/rules/annotKnownBND.smk
