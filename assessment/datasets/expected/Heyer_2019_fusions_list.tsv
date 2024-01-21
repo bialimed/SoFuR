@@ -1,29 +1,56 @@
-PMID	enrichment	sample_ID	sample_name	genes_1	genes_2	chr1	breakpoint1	chr2	breakpoint2	confirmation
-30918253	capture	SRR7646928	MO-16-000393	EZR	ROS1					FISH ROS1 (break-apart probes)
-30918253	capture	SRR7646929	SP-15-11000	EML4	ALK					FISH ALK (break-apart probes)
-30918253	capture	SRR7646934	5060	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
-30918253	capture	SRR7646935	5287-2	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
-30918253	capture	SRR7646932	5401	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
-30918253	capture	SRR7646933	5494-2	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
-30918253	capture	SRR7646936	5545	WT
-30918253	capture	SRR7646890	6053	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
-30918253	capture	SRR7646896	10651	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
-30918253	capture	SRR7646902	13179	TMPRSS2	ERG					RT-PCR TMPRSS2-ERG (primers location not known)
-30918253	capture	SRR7646898	SP-14-002291	SS18	SSX1					FISH SS18 (break-apart probes)
-30918253	capture	SRR7646906	SP-15-005675	SS18	SSX1					FISH SS18 (break-apart probes)
-30918253	capture	SRR7646907	SP-16-012119	SS18	SSX2					FISH SS18 (break-apart probes)
-30918253	capture	SRR7646952	012.182.1	EWSR1	ERG					FISH EWSR1 (break-apart probes)
-30918253	capture	SRR7646955	012.487.1	EWSR1	FLI1					FISH EWSR1 (break-apart probes)          IHC FLI1
-30918253	capture	SRR7646948	012.75.1	EWSR1	FLI1					FISH EWSR1 (break-apart probes)
-30918253	capture	SRR7646951	012.791.1	SS18	SSX2					FISH SS18 (break-apart probes)
-30918253	capture	SRR7646882	07KM	TCF3	PBX1					RT-PCR TCF3-PXB1 (primers location not known)
-30918253	capture	SRR7646883	30RN	AFF1	MYC	4	87047594	8	127738248	RT-PCR AFF1-MYC
-30918253	capture	SRR7646883	30RN	KMT2A	AFF1					RT-PCR KMT2A-AFF1 (primers location not known)
-30918253	capture	SRR7646942	21ME	MN1	ETV6	22	27796763	12	11839140	RT-PCR MN1-ETV6
-30918253	capture	SRR7646961	18BP	BCR	ABL1	22	23289621	9	130854064	RT-PCR BCR-ABL
-30918253	capture	SRR7646962	37BR	BCR	ABL1	22	23290413	9	130854064	RT-PCR BCR-ABL
-30918253	capture	SRR7646963	08JM	BCR	ABL1					RT-PCR BCR-ABL (primers location not known)
-30918253	capture	SRR7646965	30PG	BCR	ABL1					RT-PCR BCR-ABL (primers location not known)
-30918253	capture	SRR7646966	1-10524	MYC	IGH					FISH MYC-IGH
-30918253	capture	SRR7646967	2-13565	MYC	IGH					FISH MYC-IGH
-30918253	capture	SRR7646919	3-17744	IGHJ3	BCL6	14	105864587	3	187734907	RT-PCR IGHJ3-BCL6
+cancer_type	sample type	PMID	enrichment	sample_ID	sample_name	genes_1	genes_2	chr1	breakpoint1	chr2	breakpoint2	confirmation
+AML	BMA	30918253	capture	SRR7646879	08FS	PML	RARA					qRT-PCR PML-RARA
+ALL	PB	30918253	capture	SRR7646882	07KM	TCF3	PBX1					RT-PCR for BCR-ABL1, ETV6-CBFA2, AFF1-KMT2A, TCF3-PBX1 (primers locations not known)
+ALL	BMA	30918253	capture	SRR7646883	30RN	AFF1	MYC	4	87047594	8	127738248	RT-PCR AFF1-MYC
+ALL	BMA	30918253	capture	SRR7646883	30RN	KMT2A	AFF1					RT-PCR KMT2A-AFF1 (primers location not known)
+Prostate	FFT	30918253	capture	SRR7646890	6053	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+Prostate	FFT	30918253	capture	SRR7646895	10738	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+Prostate	FFT	30918253	capture	SRR7646896	10651	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+Sarcoma	FFPE	30918253	capture	SRR7646898	SP-14-002291	SS18 Rearrangement						FISH SS18 (break-apart probes)
+Sarcoma	FFPE	30918253	capture	SRR7646899	SP-14-015923	SS18 Rearrangement						FISH SS18 (break-apart probes)
+Sarcoma	FFPE	30918253	capture	SRR7646901	SP-15-004573	ROS1 rearrangement						FISH for ROS1 rearrangement with break apart probes
+Prostate	FFT	30918253	capture	SRR7646902	13179	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+Prostate	FFT	30918253	capture	SRR7646904	16599	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+Sarcoma	FFPE	30918253	capture	SRR7646906	SP-15-005675	SS18 Rearrangement						FISH SS18 (break-apart probes)
+Sarcoma	FFPE	30918253	capture	SRR7646907	SP-16-012119	SS18 Rearrangement						FISH SS18 (break-apart probes)
+Lymphoma	FFPE	30918253	capture	SRR7646919	3-17744	IGHJ3	BCL6	14	105864587	3	187734907	RT-PCR IGHJ3-BCL6
+Lymphoma	FFPE	30918253	capture	SRR7646919	3-17744	MYC rearrangement						FISH for MYC/BCL2/BCL2 rearrangment - double/triple-hit lymphoma
+Lymphoma	FFPE	30918253	capture	SRR7646919	3-17744	BCL6 rearrangement						FISH for MYC/BCL2/BCL2 rearrangment - double/triple-hit lymphoma
+Lung	FFPE	30918253	capture	SRR7646928	MO-16-000393	EZR	ROS1					FISH ROS1 (break-apart probes)
+Lung	FFPE	30918253	capture	SRR7646929	SP-15-11000	EML4	ALK					FISH ALK (break-apart probes)
+Prostate	FFT	30918253	capture	SRR7646932	5401	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+Prostate	FFT	30918253	capture	SRR7646933	5494-2	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+Prostate	FFT	30918253	capture	SRR7646934	5060	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+Prostate	FFT	30918253	capture	SRR7646935	5287-2	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+Prostate	FFT	30918253	capture	SRR7646937	5656	TMPRSS2	ERG					RT-PCR for TMPRSS2-ERG = 5' primer TMPRSS2 exon 1; 3' primers ERG exons 4 or 6
+AML	BMA	30918253	capture	SRR7646942	21ME	MN1	ETV6	22	27796763	12	11839140	RT-PCR MN1-ETV6
+Sarcoma	FFPE	30918253	capture	SRR7646948	012.75.1	EWSR1	FLI1					FISH EWSR1 (break-apart probes)
+Sarcoma	FFPE	30918253	capture	SRR7646951	012.791.1	SS18	SSX2B					FISH SS18 (break-apart probes)
+Sarcoma	FFPE	30918253	capture	SRR7646952	012.182.1	EWSR1	ERG					FISH EWSR1 (break-apart probes)
+Sarcoma	FFPE	30918253	capture	SRR7646955	012.487.1	EWSR1	FLI1					FISH EWSR1 (break-apart probes)          IHC FLI1
+CML	BP	30918253	capture	SRR7646961	18BP	BCR	ABL1	22	23289621	9	130854064	RT-PCR BCR-ABL1
+CML	BP	30918253	capture	SRR7646962	37BR	BCR	ABL1	22	23290413	9	130854064	RT-PCR BCR-ABL1
+CML	BMA	30918253	capture	SRR7646963	08JM	BCR	ABL1					RT-PCR BCR-ABL1 (primers location not known)
+CML	BMA	30918253	capture	SRR7646964	65MH	BCR	ABL1					qRT-PCR BCR-ABL1 (primers location not known)
+CML	BMA	30918253	capture	SRR7646965	30PG	BCR	ABL1					RT-PCR BCR-ABL1 (primers location not known)
+Lymphoma	FFPE	30918253	capture	SRR7646966	1-10524	MYC	IGH					FISH MYC-IGH
+Lymphoma	FFPE	30918253	capture	SRR7646967	2-13565	MYC	IGH					FISH MYC-IGH
+Bone Marrow	Cell line	30918253	whole RNA	SRR7646914	K562	BCR	ABL1					
+Bone Marrow	Cell line	30918253	whole RNA	SRR7646914	K562	NUP214	XKR3					
+Bone Marrow	Cell line	30918253	capture	SRR7646915	K562	BCR	ABL1					
+Bone Marrow	Cell line	30918253	capture	SRR7646915	K562	NUP214	XKR3					
+T-cell	Cell line	30918253	capture	SRR7646917	KARPAS45	KMT2A	FOXO4					
+Sarcoma	Cell line	30918253	capture	SRR7646926	143B	EXOC2	MET					
+Sarcoma	Cell line	30918253	capture	SRR7646926	143B	PAFAH1B2	FOXR1					
+Sarcoma	Cell line	30918253	capture	SRR7646926	143B	ERG	LINC00240					
+Sarcoma	Cell line	30918253	capture	SRR7646930	GOT3	GPC6	WIF1					
+Sarcoma	Cell line	30918253	capture	SRR7646930	GOT3	WNK1	ERC1					
+Sarcoma	Cell line	30918253	capture	SRR7646930	GOT3	PPARD	IRF2BP2					
+Sarcoma	Cell line	30918253	capture	SRR7646931	MLS1765-92	FUS	DDIT3					
+Sarcoma	Cell line	30918253	capture	SRR7646931	MLS1765-92	CREB1	METTL21A					
+Sarcoma	Cell line	30918253	whole RNA	SRR7646924	RDES	EWSR1	FLI1					
+Sarcoma	Cell line	30918253	whole RNA	SRR7646924	RDES	SMC04	EWSR1					
+Sarcoma	Cell line	30918253	whole RNA	SRR7646924	RDES	FUS	DDIT3					
+Sarcoma	Cell line	30918253	capture	SRR7646927	RDES	EWSR1	FLI1					
+Sarcoma	Cell line	30918253	capture	SRR7646927	RDES	SMC04	EWSR1					
+Sarcoma	Cell line	30918253	capture	SRR7646927	RDES	FUS	DDIT3					
