@@ -1,8 +1,8 @@
 #!/bin/bash
 # author = Frederic Escudie
-# copyright = Copyright (C) 2020 IUCT-O
+# copyright = Copyright (C) 2020 CHU Toulouse
 # license = GNU General Public License
-# version = 1.1.0
+# version = 1.2.0
 
 # Parameters
 if [ $# -ne 3 ]
@@ -21,21 +21,21 @@ app_dir=`dirname ${assessment_dir}`
 # Environment
 unset PYTHONPATH
 export PATH=${assessment_bin_dir}:$PATH
-export DRMAA_LIBRARY_PATH=$SGE_ROOT/lib/linux-rhel7-x64/libdrmaa.so
 
 # Process wf
 declare -a datasets=('Heyer_2019' 'Tembe_2014' 'simulated')
+source ${conda_env_dir}/../bin/activate sofur && \
 for dataset in "${datasets[@]}"
 do
-	echo "Process "${dataset}
+    echo "Process "${dataset}
     mkdir -p ${work_dir}/${dataset} && \
     mkdir -p ${assessment_dir}/results/${wf_version}/${dataset} && \
-    source ${conda_env_dir}/../bin/activate && \
     snakemake \
       --use-conda \
       --jobs 50 \
+      --jobname "sofur.{rule}.{jobid}" \
       --latency-wait 100 \
-      --drmaa " -V -q normal -l pri_normal=1 -l mem={cluster.vmem} -pe smp {cluster.threads}" \
+      --cluster "sbatch --partition=normal --mem={cluster.mem} --cpus-per-task={cluster.threads}" \
       --conda-prefix ${conda_env_dir} \
       --cluster-config ${app_dir}/config/cluster.json \
       --snakefile ${app_dir}/Snakefile \

@@ -10,7 +10,6 @@
 * [Outputs directory](#outputs-directory)
 * [Performances](#performances)
 * [Copyright](#copyright)
-* [Contact](#contact)
 
 ## Description
 This workflow detects, annotates and filters somatic fusions from **stranded**
@@ -44,9 +43,7 @@ Use one of the following:
 
 * snakemake (>=5.4.2):
 
-      mamba create -c conda-forge -c bioconda -n sofur snakemake
-      conda activate sofur
-      pip install drmaa
+      mamba create -c conda-forge -c bioconda -n sofur snakemake==6.15.0
 
   More details on snakemake install [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
 
@@ -77,27 +74,15 @@ databanks (see `## ${BANK}/... ##`).
       ${APP_DIR}/test/launch_wf.sh \
         ${CONDA_ENVS_DIR} \
         ${WORK_DIR} \
-        ${DRMAA_PARAMS}
-
-  Example with scheduler SGE:
-
-      export DRMAA_LIBRARY_PATH=${SGE_ROOT}/lib/linux-rhel7-x64/libdrmaa.so
-
-      conda activate sofur
-      ~/soft/sofur/test/launch_wf.sh \
-        /work/$USER/conda_envs/envs \
-        /work/$USER/test_sofur \
-        ' -V -q {cluster.queue} -l pri_{cluster.queue}=1 -l mem={cluster.vmem} -l h_vmem={cluster.vmem} -pe smp {cluster.threads}'
+        ${CLUSTER_PARAMS}
 
   Example with scheduler slurm:
 
-      export DRMAA_LIBRARY_PATH=$SGE_ROOT/lib/linux-rhel7-x64/libdrmaa.so
-
       conda activate sofur
       ~/soft/sofur/test/launch_wf.sh \
         /work/$USER/conda_envs/envs \
         /work/$USER/test_sofur \
-        ' --partition={cluster.queue} --mem={cluster.mem} --cpus-per-task={cluster.threads}'
+        'sbatch --partition={cluster.queue} --mem={cluster.mem} --cpus-per-task={cluster.threads}'
 
 * See results in `${WORK_DIR}/report/run.html`.
 
@@ -113,7 +98,7 @@ and change values before launching the following command:
       --jobname "sofur.{rule}.{jobid}" \
       --latency-wait 100 \
       --snakefile ${application_dir}/Snakefile \
-      --cluster-config ${application_dir}/config/cluster.json \
+      --cluster "sbatch --partition={resources.partition} --mem={resources.mem} --cpus-per-task={threads}" \
       --configfile workflow_parameters.yml \
       --directory ${out_dir} \
       > ${out_dir}/wf_log.txt \
@@ -157,6 +142,3 @@ in [assessment/report.html](assessment/report.html).
 ## Copyright
 2019 Laboratoire d'Anatomo-Cytopathologie de l'Institut Universitaire du Cancer
 Toulouse - Oncopole
-
-## Contact
-escudie.frederic@iuct-oncopole.fr
