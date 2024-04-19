@@ -16,7 +16,7 @@ This workflow detects, annotates and filters somatic fusions from **stranded**
 paired-end RNA-seq from Illumina's instruments.
 
 ## Workflow steps
-![workflow](doc/img/workflow.png)
+![workflow](doc/img/sofur.png)
 
 ## Installation
 ### 1. Download code
