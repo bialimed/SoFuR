@@ -44,6 +44,8 @@ Use one of the following:
 * snakemake (>=5.4.2):
 
       mamba create -c conda-forge -c bioconda -n sofur snakemake==6.15.0
+      # fix bug with snakemake conda
+      conda activate sofur && pip install tabulate==0.8.10 && conda deactivate
 
   More details on snakemake install [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
 
@@ -98,6 +100,7 @@ and change values before launching the following command:
       --jobname "sofur.{rule}.{jobid}" \
       --latency-wait 100 \
       --snakefile ${application_dir}/Snakefile \
+      --set-threads arriba_star=11 manta_star=11 starFusion=11 \
       --cluster "sbatch --partition={resources.partition} --mem={resources.mem} --cpus-per-task={threads}" \
       --configfile workflow_parameters.yml \
       --directory ${out_dir} \

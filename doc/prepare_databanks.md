@@ -14,12 +14,12 @@ This page details the process to download and format resources required.
 ## 0. Pre-set databanks folder
 
     export CURR_DATE=`date '+%Y-%m-%d'`
-    export BANK=/Anapath/bank/Homo_sapiens/fusions/GRCh38  # !! Change !!
+    export BANK=/labos/Anapath/bank/Homo_sapiens/fusions/GRCh38  # !! Change !!
     export ENSEMBL_RELEASE=104
     export COSMIC_RELEASE=94
     export APP_DIR=/soft/sofur  # !! Change !!
     # Virtual environments
-    export CONDA_INSTALL=/Anapath/soft/conda/miniconda3  # !! Change !!
+    export CONDA_INSTALL=/labos/Anapath/soft/conda/miniconda3  # !! Change !!
     export ANACORE_UTILS_ENV=a1fc435972f2fb68385bbd162ca4ca38  # !! Change: name of AnaCore-utils environment created by snakemake !!
     export STAR_ENV=6c4bdf640c78f6de187c79cc8dffc17f  # !! Change: name of STAR environment created by snakemake !!
 
@@ -166,18 +166,17 @@ and unmaped contigs:
 
 ### 5.1. ChimerDb
 
-* Download ChimerKB and ChimerPub in excel and sql format from https://www.kobic.re.kr/chimerdb_mirror/download.
-
-* Save result as:
-  * `${BANK}/${CURR_DATE}/chimerKb_4.xslx`,
-  * `${BANK}/${CURR_DATE}/chimerKb_4.sql`,
-  * `${BANK}/${CURR_DATE}/chimerPub_4.xslx`,
-  * `${BANK}/${CURR_DATE}/chimerPub_4.xslx`
-
-* Clean database:
+* Download ChimerKB and ChimerPub in sql format from https://www.kobic.re.kr/chimerdb/download:
 
       cd ${BANK}/${CURR_DATE}
-      **************************************************************
+      wget https://www.kobic.re.kr/chimerdb/downloads?name=ChimerKBV41.sql
+      wget https://www.kobic.re.kr/chimerdb/downloads?name=ChimerPubV41.sql
+
+* Convert database to parsable file:
+
+      cd ${BANK}/${CURR_DATE}
+      python3 ${APP_DIR}/scripts/chimerFromDump.py ChimerKBV41.sql > chimerKb_4.tsv
+      python3 ${APP_DIR}/scripts/chimerFromDump.py ChimerPubV41.sql > chimerPub_4.tsv
 
 ### 5.2. Cosmic
 
