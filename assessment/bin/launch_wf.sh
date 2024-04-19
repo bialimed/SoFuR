@@ -29,12 +29,16 @@ for dataset in "${datasets[@]}"
 do
     echo "Process "${dataset}
     mkdir -p ${work_dir}/${dataset} && \
-    mkdir -p ${assessment_dir}/results/${wf_version}/${dataset} && \
+    mkdir -p ${assessment_dir}/results/${wf_version}/${dataset}/vcf && \
     snakemake \
       --use-conda \
       --jobs 50 \
       --jobname "sofur.{rule}.{jobid}" \
       --latency-wait 100 \
+      --restart-times 1 \
+      --max-jobs-per-second 1 \
+      --max-status-checks-per-second 1 \
+      --set-threads arriba_star=6 manta_star=6 starFusion=6 \
       --cluster "sbatch --partition=normal --mem={resources.mem} --cpus-per-task={threads}" \
       --conda-prefix ${conda_env_dir} \
       --snakefile ${app_dir}/Snakefile \
@@ -43,7 +47,7 @@ do
       --printshellcmd \
      > ${work_dir}/${dataset}/wf_log.txt \
      2> ${work_dir}/${dataset}/wf_stderr.txt && \
-    mv ${work_dir}/${dataset}/structural_variants/*_unfiltered.vcf ${assessment_dir}/results/${wf_version}/${dataset} && \
+    mv ${work_dir}/${dataset}/structural_variants/*_unfiltered.vcf ${assessment_dir}/results/${wf_version}/${dataset}/vcf && \
     rm -r ${work_dir}/${dataset}
     if [ $? -ne 0 ]; then
         >&2 echo "Error in workflow execution for "${dataset}

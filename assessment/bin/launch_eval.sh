@@ -1,6 +1,6 @@
 #!/bin/bash
 # author = Frederic Escudie
-# copyright = Copyright (C) 2020 IUCT-O
+# copyright = Copyright (C) 2020 CHU Toulouse
 # license = GNU General Public License
 # version = 1.2.0
 
