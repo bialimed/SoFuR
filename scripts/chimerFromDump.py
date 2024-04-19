@@ -14,7 +14,7 @@ import sys
 if __name__ == "__main__":
     # Manage parameters
     parser = argparse.ArgumentParser('Convert ChimerDb dump file to TSV.')
-    parser.add_argument('-d', '--input-dump', required=True, help="Path to ChimerDb dump file (format: SQL).")
+    parser.add_argument('-i', '--input-dump', required=True, help="Path to ChimerDb dump file (format: SQL).")
     parser.add_argument('-v', '--version', action='version', version=__version__)
     args = parser.parse_args()
 
@@ -27,9 +27,10 @@ if __name__ == "__main__":
     # Process
     fields_by_table = dict()
     with open(args.input_dump) as reader:
+        selected_table = None
         for line in reader:
             line = line.strip()
-            # TABLE NAME
+            # Table name
             if line.startswith("DROP TABLE IF EXISTS "):
                 selected_table = line.split("`")[1]
             # CREATE TABLE

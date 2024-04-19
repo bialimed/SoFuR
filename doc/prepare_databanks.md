@@ -175,8 +175,8 @@ and unmaped contigs:
 * Convert database to parsable file:
 
       cd ${BANK}/${CURR_DATE}
-      python3 ${APP_DIR}/scripts/chimerFromDump.py ChimerKBV41.sql > chimerKb_4.tsv
-      python3 ${APP_DIR}/scripts/chimerFromDump.py ChimerPubV41.sql > chimerPub_4.tsv
+      python3 ${APP_DIR}/scripts/chimerFromDump.py -i ChimerKBV41.sql > chimerKb_4.tsv
+      python3 ${APP_DIR}/scripts/chimerFromDump.py -i ChimerPubV41.sql > chimerPub_4.tsv
 
 ### 5.2. Cosmic
 
