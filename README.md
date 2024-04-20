@@ -13,7 +13,7 @@
 
 ## Description
 This workflow detects, annotates and filters somatic fusions from **stranded**
-paired-end RNA-seq from Illumina's instruments.
+paired-end RNA-seq from short-reads instruments.
 
 ## Workflow steps
 ![workflow](doc/img/sofur.png)
@@ -143,5 +143,4 @@ commands used in evaluation are stored in `assessment`. The results summarized
 in [assessment/report.html](assessment/report.html).
 
 ## Copyright
-2019 Laboratoire d'Anatomo-Cytopathologie de l'Institut Universitaire du Cancer
-Toulouse - Oncopole
+2019 Laboratoire d'Anatomo-Cytopathologie du CHU de Toulouse
