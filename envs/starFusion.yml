@@ -1,1 +1,6 @@
-../lib/snake-basket/envs/starFusion.yml
+channels:
+    - bioconda
+    - conda-forge
+dependencies:
+    - samtools=1.20
+    - star-fusion=1.13.0

@@ -1,1 +1,5 @@
-../lib/snake-basket/envs/arriba.yml
+channels:
+    - bioconda
+    - conda-forge
+dependencies:
+    - arriba=2.4.0

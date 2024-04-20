@@ -15,12 +15,12 @@ This page details the process to download and format resources required.
 
     export CURR_DATE=`date '+%Y-%m-%d'`
     export BANK=/labos/Anapath/bank/Homo_sapiens/fusions/GRCh38  # !! Change !!
-    export ENSEMBL_RELEASE=104
+    export ENSEMBL_RELEASE=111
     export COSMIC_RELEASE=94
     export APP_DIR=/soft/sofur  # !! Change !!
     # Virtual environments
-    export CONDA_INSTALL=/labos/Anapath/soft/conda/miniconda3  # !! Change !!
-    export ANACORE_UTILS_ENV=a1fc435972f2fb68385bbd162ca4ca38  # !! Change: name of AnaCore-utils environment created by snakemake !!
+    export CONDA_INSTALL=/labos/Anapath/soft/conda/current  # !! Change !!
+    export ANACORE_UTILS_ENV=da4490e79900ee245a827b9c18d07aa2  # !! Change: name of AnaCore-utils environment created by snakemake !!
     export STAR_ENV=6c4bdf640c78f6de187c79cc8dffc17f  # !! Change: name of STAR environment created by snakemake !!
 
 
@@ -28,27 +28,25 @@ This page details the process to download and format resources required.
 
 ### 1.1. STAR-Fusion
 
-* Form https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/ download
-GRCh38_gencode_v37_CTAT_lib_Mar012021.source.tar.gz
-
-* Extract and move data:
-
-      tar -xvf GRCh38_gencode_v37_CTAT_lib_Mar012021.source.tar.gz
-      mkdir -p ${BANK}/starfusion
-      mv GRCh38_gencode_v37_CTAT_lib_Mar012021 ${BANK}/starfusion
-      rm GRCh38_gencode_v37_CTAT_lib_Mar012021.source.tar.gz
+    mkdir -p ${BANK}/starfusion
+    cd ${BANK}/starfusion
+    wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/GRCh38_gencode_v44_CTAT_lib_Oct292023.source.tar.gz
+    tar -xvf GRCh38_gencode_v44_CTAT_lib_Oct292023.source.tar.gz
+    mv GRCh38_gencode_v44_CTAT_lib_Oct292023.source GRCh38_gencode_v44_CTAT_lib_Oct292023
+    rm GRCh38_gencode_v44_CTAT_lib_Oct292023.source.tar.gz
 
 ### 1.2. Arriba
 
-Extract `database/blacklist_hg38_GRCh38_2018-11-04.tsv.gz` from arriba source [archive](https://github.com/suhrig/arriba/releases/tag/v1.2.0) and save as `${BANK}/arriba/blacklist_hg38_GRCh38_2018-11-04.tsv.gz`.
+Extract `database/blacklist_hg38_GRCh38_2018-11-04.tsv.gz` from arriba source [archive](https://github.com/suhrig/arriba/releases/tag/v2.4.0) and save as `${BANK}/arriba/blacklist_hg38_GRCh38_2018-11-04.tsv.gz`.
 
 ### 1.3. RESeQC
 
     mkdir -p ${BANK}/reseqc
     cd ${BANK}/reseqc
-    curl 'https://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_Gencode_V28.bed.gz/download'
-    gzip -d hg38_Gencode_V28.bed.gz
-    mv hg38_Gencode_V28.bed genes_RefSeq_ReSeQC_hg38_Gencode_V28.bed
+    wget https://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_GENCODE_V44_Basic.bed.gz/download -O hg38_GENCODE_V44_Basic.bed.gz
+    gzip -d hg38_GENCODE_V44_Basic.bed.gz
+    mv hg38_GENCODE_V44_Basic.bed genes_RefSeq_ReSeQC_hg38_GENCODE_V44_Basic.bed
+
 
 ## 2. Annotations
 
@@ -64,12 +62,13 @@ then `Human genes`.
 
 * Click on `Results` and download the TSV file.
 
-* Save result as `${BANK}/${CURR_DATE}/aliases_ensembl.tsv`.
+* Save result as `${BANK}/${CURR_DATE}/genes-alias_ensembl.tsv`.
 
 ### 2.2. Genes annotations
 
+    mkdir -p ${BANK}/${CURR_DATE}
     cd ${BANK}/${CURR_DATE}
-    wget http://ftp.ensembl.org/pub/release-${ENSEMBL_RELEASE}/gtf/homo_sapiens/Homo_sapiens.GRCh38.${ENSEMBL_RELEASE}.chr.gtf.gz -o annotations_ensembl.gtf.gz
+    wget http://ftp.ensembl.org/pub/release-${ENSEMBL_RELEASE}/gtf/homo_sapiens/Homo_sapiens.GRCh38.${ENSEMBL_RELEASE}.chr.gtf.gz -O annotations_ensembl.gtf.gz
     gzip -d annotations_ensembl.gtf.gz
 
 ### 2.3. Proteins domains
@@ -152,12 +151,13 @@ and unmaped contigs:
 
     cd ${BANK}/${CURR_DATE}
     buildKnownBNDDb.py \
-      --input-aliases genes-alias_ensembl.txt \
+      --input-aliases genes-alias_ensembl.tsv \
       --input-annotations annotations_ensembl.gtf \
       --inputs-databases \
         babiceanu:2016:${APP_DIR}/config/healthy/Babiceanu-2016.tsv \
         bodymap:v2:${APP_DIR}/config/healthy/BodyMap2.tsv \
-      --output-database healthy_bnd_${CURR_DATE}.tsv
+      --output-database healthy_bnd.tsv \
+      2> healthy_bnd.log
 
     conda deactivate
 
@@ -197,11 +197,10 @@ Extract the URL from the JSON response and make another request to that URL to d
 
 ### 5.3. Mitelman
 
-    cd ${BANK}
-    mkdir mitelman_db
-    cd mitelman_db
+    cd ${BANK}/${CURR_DATE}
     wget https://storage.googleapis.com/mitelman-data-files/prod/mitelman_db.zip
     unzip mitelman_db.zip
+    rm -r __MACOSX mitelman_db.zip
 
 ### 5.4. Create aggregated database
 
@@ -209,14 +208,14 @@ Extract the URL from the JSON response and make another request to that URL to d
 
     cd ${BANK}/${CURR_DATE}
     buildKnownBNDDb.py \
-      --input-aliases genes-alias_ensembl.txt \
+      --input-aliases genes-alias_ensembl.tsv \
       --input-annotations annotations_ensembl.gtf \
       --inputs-databases \
         cosmic:${COSMIC_RELEASE}:CosmicFusionExport.tsv.gz \
         chimerdb:Kb-v4:chimerKb_4.tsv \
         chimerdb:Pub-v4:chimerPub_4.tsv \
         mitelman:${CURR_DATE}:mitelman_db/MBCA.TXT.DATA,mitelman_db/REF.TXT.DATA \
-      --output-database known_bnd_${CURR_DATE}.tsv \
+      --output-database known_bnd.tsv \
     2> known_ensembl.log \
     > known_ensembl_pb.tsv
 
