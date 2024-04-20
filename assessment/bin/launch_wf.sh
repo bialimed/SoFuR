@@ -39,6 +39,7 @@ do
       --max-jobs-per-second 1 \
       --max-status-checks-per-second 1 \
       --set-threads arriba_star=6 manta_star=6 starFusion=6 \
+      --set-resources arriba_star:sort_mem_gb=20 manta_star:sort_mem_gb=20 \
       --cluster "sbatch --partition=normal --mem={resources.mem} --cpus-per-task={threads}" \
       --conda-prefix ${conda_env_dir} \
       --snakefile ${app_dir}/Snakefile \
