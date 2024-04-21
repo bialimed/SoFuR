@@ -207,7 +207,9 @@ Extract the URL from the JSON response and make another request to that URL to d
     source ${CONDA_INSTALL}/bin/activate ${ANACORE_UTILS_ENV}  # Activate AnaCore-utils environment
 
     cd ${BANK}/${CURR_DATE}
-    buildKnownBNDDb.py \
+    wget https://raw.githubusercontent.com/bialimed/AnaCore-utils/dd35ec590066883055cade528be1c6c4e59e4dc0/bin/buildKnownBNDDb.py
+    chmod a+x ./buildKnownBNDDb.py
+    ./buildKnownBNDDb.py \
       --input-aliases genes-alias_ensembl.tsv \
       --input-annotations annotations_ensembl.gtf \
       --inputs-databases \

@@ -84,18 +84,18 @@ R2:
     - /labos/Anapath/analysis/sofur_publi/datasets/heyer/SRR7646966_R2.fastq.gz
     - /labos/Anapath/analysis/sofur_publi/datasets/heyer/SRR7646967_R2.fastq.gz
 reference:
-    assembly: GRCh38.p12
+    assembly: GRCh38.p14
     without_chr: True
-    sequences: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2021-10-04/sequences/Homo_sapiens.fa
-    annotations: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2021-10-04/annotations_ensembl.gtf
-    domains_annotations: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2021-10-04/interpro_ensembl.gff3
-    genes_bed: /labos/Anapath/bank/Homo_sapiens/DNA/GRCh38_Ensembl94/without_contig/annotations/Homo_sapiens_RefSeq_GRCh38_rseqc-2018-11-05.bed
-    known_partners: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2021-10-04/known_ensembl.tsv
+    sequences: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2024-04-20/sequences/Homo_sapiens.fa
+    annotations: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2024-04-20/annotations_ensembl.gtf
+    domains_annotations: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2024-04-20/interpro_ensembl.gff3
+    genes_bed: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/reseqc/genes_RefSeq_ReSeQC_hg38_GENCODE_V44_Basic.bed
+    known_partners: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2024-04-20/known_ensembl.tsv
     healthy_partners:
         paths:
-          - /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2021-10-04/healthy_ensembl.tsv
+          - /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/2024-04-20/healthy_ensembl.tsv
         description:  Illumina Body Map 2 and Babiceanu et al NAR 2016
-    STAR-Fusion: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/starfusion/GRCh38_gencode_v32_CTAT_lib_Dec062019
+    STAR-Fusion: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/starfusion/GRCh38_gencode_v44_CTAT_lib_Oct292023
 cleaning:
     R1_end_adapter: /labos/Anapath/soft/sofur/dev/test/config/adapters/Illumina_3prim_adapter.fasta
     R2_end_adapter: /labos/Anapath/soft/sofur/dev/test/config/adapters/Illumina_5prim_adapter_rvc.fasta
@@ -105,9 +105,8 @@ cleaning:
 fusions_calling:
     is_somatic: True
     STAR_nb_threads: 10
-    arriba_blacklist: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/arriba/arriba_v1.2.0_blacklist_hg38_GRCh38_2018-11-04.tsv.gz
+    arriba_blacklist: /labos/Anapath/bank/Homo_sapiens/fusions/GRCh38/arriba/arriba_v2.4.0/database/blacklist_hg38_GRCh38_v2.4.0.tsv.gz
 filters:
     rules: /labos/Anapath/soft/sofur/dev/config/filters_rules.json
     low_support: 3
-software_pathes:
-    arriba: /labos/Anapath/soft/arriba/v1.2.0/arriba
+software_pathes: {}
