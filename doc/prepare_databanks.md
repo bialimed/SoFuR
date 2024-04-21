@@ -21,7 +21,8 @@ This page details the process to download and format resources required.
     # Virtual environments
     export CONDA_INSTALL=/labos/Anapath/soft/conda/current  # !! Change !!
     export ANACORE_UTILS_ENV=da4490e79900ee245a827b9c18d07aa2  # !! Change: name of AnaCore-utils environment created by snakemake !!
-    export STAR_ENV=6c4bdf640c78f6de187c79cc8dffc17f  # !! Change: name of STAR environment created by snakemake !!
+    export STAR_ENV=020e06700bcaf09114419e12d8b1d9b9  # !! Change: name of STAR environment created by snakemake !!
+    export STARFUSION_ENV=832614794d3df8cd0ff988488382aff3  # !! Change: name of STAR-Fusion environment created by snakemake !!
 
 
 ## 1. Software resources
@@ -124,7 +125,7 @@ and unmaped contigs:
               for record in reader:
                   if record.id in keep:
                       writer.write(record)""" > filter.py
-      python filter.py Homo_sapiens_GRCh38_ensembl-v${ENSEMBL_RELEASE}.fa.gz Homo_sapiens_GRCh38_ensembl-v${ENSEMBL_RELEASE}_chrOnly.fa.gz
+      python filter.py Homo_sapiens_GRCh38_ensembl-v${ENSEMBL_RELEASE}.fa.gz Homo_sapiens_GRCh38_ensembl-v${ENSEMBL_RELEASE}_chrOnly.fa
       rm filter.py Homo_sapiens_GRCh38_ensembl-v${ENSEMBL_RELEASE}.fa.gz
 
       conda deactivate
@@ -137,11 +138,19 @@ and unmaped contigs:
         --runThreadN 8 \
         --runMode genomeGenerate \
         --genomeDir . \
-        --genomeFastaFiles Homo_sapiens_GRCh38_ensembl-v${ENSEMBL_VERSION}_chrOnly.fa.gz \
+        --genomeFastaFiles Homo_sapiens_GRCh38_ensembl-v${ENSEMBL_VERSION}_chrOnly.fa \
         --sjdbGTFfile ../annotations_ensembl.gtf \
         --sjdbOverhang 74 \
         --limitGenomeGenerateRAM 36000000000
 
+      conda deactivate
+
+* Index genome
+
+      source ${CONDA_INSTALL}/bin/activate ${STARFUSION_ENV}  # Activate STAR-Fusion environment
+      
+      samtools faidx Homo_sapiens_GRCh38_ensembl-v111_chrOnly.fa
+      
       conda deactivate
 
 
@@ -156,8 +165,8 @@ and unmaped contigs:
       --inputs-databases \
         babiceanu:2016:${APP_DIR}/config/healthy/Babiceanu-2016.tsv \
         bodymap:v2:${APP_DIR}/config/healthy/BodyMap2.tsv \
-      --output-database healthy_bnd.tsv \
-      2> healthy_bnd.log
+      --output-database healthy_partners_ensembl.tsv \
+      2> healthy_partners_ensembl.log
 
     conda deactivate
 
@@ -217,8 +226,8 @@ Extract the URL from the JSON response and make another request to that URL to d
         chimerdb:Kb-v4:chimerKb_4.tsv \
         chimerdb:Pub-v4:chimerPub_4.tsv \
         mitelman:${CURR_DATE}:mitelman_db/MBCA.TXT.DATA,mitelman_db/REF.TXT.DATA \
-      --output-database known_bnd.tsv \
-    2> known_ensembl.log \
-    > known_ensembl_pb.tsv
+      --output-database known_partners_ensembl.tsv \
+    2> known_partners_ensembl.log \
+    > known_partners_ensembl_pb.tsv
 
     conda deactivate
