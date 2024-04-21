@@ -61,7 +61,7 @@ def arriba(
             " --genomeLoad NoSharedMemory"
             " --outSAMunmapped Within"
             " --outBAMcompression 0"
-            " --outFilterMultimapNmax 50
+            " --outFilterMultimapNmax 50"
             " --peOverlapNbasesMin 10"
             " --alignSplicedMateMapLminOverLmate 0.5"
             " --alignSJstitchMismatchNmax 5 -1 5 5"
