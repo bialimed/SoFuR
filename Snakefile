@@ -93,7 +93,7 @@ arriba(
     in_annotations=config.get("reference")["annotations"],
     in_blacklist=config.get("fusions_calling")["arriba_blacklist"],
     in_reference_seq=config.get("reference")["sequences"],
-    params_disabled_filters=["many_spliced", "mismatches", "internal_tandem_duplication"]
+    params_disabled_filters=["many_spliced", "mismatches"]  # , "internal_tandem_duplication"]
 )
 manta(
     in_annotations=config.get("reference")["annotations"],
