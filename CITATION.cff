@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Escudié"
+  given-names: "Frédéric"
+- family-names: "Ivashchenko"
+  given-names: "Véronique"
+- family-names: "Brousset"
+  given-names: "Pierre"
+title: "SoFuR"
+version: 0.8.0
+doi: 10.5281/zenodo.15376175
+date-released: 2022-03-11
+url: "https://github.com/bialimed/SoFuR"
