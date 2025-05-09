@@ -1,6 +1,7 @@
 # SoFuR: SOmatic FUsions from Rna
 
 ![license](https://img.shields.io/badge/license-GPLv3-blue)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15376175.svg)](https://doi.org/10.5281/zenodo.15376175)
 
 ## Table of Contents
 * [Description](#description)
