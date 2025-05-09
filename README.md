@@ -21,13 +21,8 @@ paired-end RNA-seq from Illumina's instruments.
 
 ## Installation
 ### 1. Download code
-Use one of the following:
 
-* [user way] Downloads the latest released versions from
-`https://github.com/bialimed/sofur/archive/releases`.
-* [developper way] Clones the repository from the latest unreleased version:
-
-      git clone --recurse-submodules git@github.com:bialimed/sofur.git
+      git clone [--branch ${VESRSION}] --recurse-submodules git@github.com:bialimed/sofur.git
 
 ### 2. Install dependencies
 * conda (>=4.6.8):
@@ -44,7 +39,7 @@ Use one of the following:
 
 * snakemake (>=5.4.2):
 
-      mamba create -c conda-forge -c bioconda -n sofur snakemake
+      mamba create -c conda-forge -c bioconda -n sofur snakemake==7.32.4
       conda activate sofur
       pip install drmaa
 
@@ -155,8 +150,4 @@ commands used in evaluation are stored in `assessment`. The results summarized
 in [assessment/report.html](assessment/report.html).
 
 ## Copyright
-2019 Laboratoire d'Anatomo-Cytopathologie de l'Institut Universitaire du Cancer
-Toulouse - Oncopole
-
-## Contact
-escudie.frederic@iuct-oncopole.fr
+2019 Laboratoire d'Anatomo-Cytopathologie du CHU de Toulouse
