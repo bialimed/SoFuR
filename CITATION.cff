@@ -3,10 +3,13 @@ message: "If you use this software, please cite it as below."
 authors:
 - family-names: "Escudié"
   given-names: "Frédéric"
+  affiliation: "Centre Hospitalier Universitaire de Toulouse"
 - family-names: "Ivashchenko"
   given-names: "Véronique"
+  affiliation: "Centre Hospitalier Universitaire de Toulouse"
 - family-names: "Brousset"
   given-names: "Pierre"
+  affiliation: "Centre Hospitalier Universitaire de Toulouse"
 title: "SoFuR"
 version: 0.8.0
 doi: 10.5281/zenodo.15376175
