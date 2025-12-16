@@ -90,10 +90,6 @@ fusions_calling:
     is_somatic: True
     # MANDATORY: yes
     # DESCRIPTION: If True fusions caller with somatic mode use this mode.
-    STAR_nb_threads: 5 # STAR is launched with 5 threads and 6 slots are booked to take into account gzip readers threads
-    # MANDATORY: yes
-    # DESCRIPTION: Number of threads used by STAR in fusions callers. If you
-    # change this value keep in mind to update config/cluster.json.
 filters:
     low_support: 5
     # MANDATORY: yes
