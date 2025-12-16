@@ -15,7 +15,7 @@ This page details the process to download and format resources required.
 
     export CURR_DATE=`date '+%Y-%m-%d'`
     export BANK=/labos/Anapath/bank/Homo_sapiens/fusions/GRCh38  # !! Change !!
-    export ENSEMBL_RELEASE=111
+    export ENSEMBL_RELEASE=104
     export COSMIC_RELEASE=94
     export APP_DIR=/soft/sofur  # !! Change !!
     # Virtual environments
@@ -29,24 +29,27 @@ This page details the process to download and format resources required.
 
 ### 1.1. STAR-Fusion
 
+    export SF_RSC_VERSION=GRCh38_gencode_v37_CTAT_lib_Mar012021
+
     mkdir -p ${BANK}/starfusion
     cd ${BANK}/starfusion
-    wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/GRCh38_gencode_v44_CTAT_lib_Oct292023.source.tar.gz
-    tar -xvf GRCh38_gencode_v44_CTAT_lib_Oct292023.source.tar.gz
-    mv GRCh38_gencode_v44_CTAT_lib_Oct292023.source GRCh38_gencode_v44_CTAT_lib_Oct292023
-    rm GRCh38_gencode_v44_CTAT_lib_Oct292023.source.tar.gz
+    wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/${SF_RSC_VERSION}.plug-n-play.tar.gz
+    tar -xvf ${SF_RSC_VERSION}.plug-n-play.tar.gz
+    rm ${SF_RSC_VERSION}.plug-n-play.tar.gz
+    mv ${SF_RSC_VERSION}.plug-n-play/ctat_genome_lib_build_dir ${SF_RSC_VERSION}
+    # wget https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/AnnotFilterRule.pm -O ${SF_RSC_VERSION}  # Enable annotation-level filtering (ie. removing 'red herrings' like GTEx fusions)
 
 ### 1.2. Arriba
 
-Extract `database/blacklist_hg38_GRCh38_2018-11-04.tsv.gz` from arriba source [archive](https://github.com/suhrig/arriba/releases/tag/v2.4.0) and save as `${BANK}/arriba/blacklist_hg38_GRCh38_2018-11-04.tsv.gz`.
+Extract `database/blacklist_hg38_GRCh38_2018-11-04.tsv.gz` from arriba source [archive](https://github.com/suhrig/arriba/releases/tag/v1.2.0) and save as `${BANK}/arriba/blacklist_hg38_GRCh38_2018-11-04.tsv.gz`.
 
 ### 1.3. RESeQC
 
     mkdir -p ${BANK}/reseqc
     cd ${BANK}/reseqc
-    wget https://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_GENCODE_V44_Basic.bed.gz/download -O hg38_GENCODE_V44_Basic.bed.gz
-    gzip -d hg38_GENCODE_V44_Basic.bed.gz
-    mv hg38_GENCODE_V44_Basic.bed genes_RefSeq_ReSeQC_hg38_GENCODE_V44_Basic.bed
+    wget https://sourceforge.net/projects/rseqc/files/BED/Human_Homo_sapiens/hg38_GENCODE_V28.bed.gz/download -O hg38_GENCODE_V28.bed.gz
+    gzip -d hg38_GENCODE_V28.bed.gz
+    mv hg38_GENCODE_V28.bed genes_RefSeq_ReSeQC_hg38_GENCODE_V28.bed
 
 
 ## 2. Annotations
@@ -149,7 +152,7 @@ and unmaped contigs:
 
       source ${CONDA_INSTALL}/bin/activate ${STARFUSION_ENV}  # Activate STAR-Fusion environment
       
-      samtools faidx Homo_sapiens_GRCh38_ensembl-v111_chrOnly.fa
+      samtools faidx Homo_sapiens_GRCh38_ensembl-v${ENSEMBL_VERSION}_chrOnly.fa
       
       conda deactivate
 

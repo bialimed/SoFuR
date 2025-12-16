@@ -20,13 +20,7 @@ paired-end RNA-seq from short-reads instruments.
 
 ## Installation
 ### 1. Download code
-Use one of the following:
-
-* [user way] Downloads the latest released versions from
-`https://github.com/bialimed/sofur/archive/releases`.
-* [developper way] Clones the repository from the latest unreleased version:
-
-      git clone --recurse-submodules git@github.com:bialimed/sofur.git
+    git clone [--branch ${VESRSION}] --recurse-submodules git@github.com:bialimed/sofur.git
 
 ### 2. Install dependencies
 * conda (>=4.6.8):
@@ -43,19 +37,18 @@ Use one of the following:
 
 * snakemake (>=5.4.2):
 
-      mamba create -c conda-forge -c bioconda -n sofur snakemake==6.15.0
-      # fix bug with snakemake conda
-      conda activate sofur && pip install tabulate==0.8.10 && conda deactivate
+      mamba create -c conda-forge -c bioconda -n sofur snakemake==7.32.4
 
   More details on snakemake install [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html).
 
-* Install rules dependencies (cutadapt, bwa, ...):
+* Install rules dependencies (cutadapt, STAR, ...):
 
       conda activate sofur
       snakemake \
+        --cores 1 \
         --use-conda \
-        --conda-prefix ${application_env_dir} \
-        --conda-create-envs-only
+        --conda-prefix ${CONDA_ENVS_DIR} \
+        --conda-create-envs-only \
         --snakefile ${APP_DIR}/Snakefile \
         --configfile workflow_parameters.yml
 
